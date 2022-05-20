@@ -1,234 +1,505 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
-import {
-  Button,
-  Card,
-  Col,
-  OverlayTrigger,
-  Row,
-  Tooltip
-} from 'react-bootstrap';
+import React, { useState,useEffect } from 'react';
+import { Button } from 'react-bootstrap';
+import PageHeader from 'components/common/PageHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import FalconComponentCard from 'components/common/FalconComponentCard';
 import IconButton from 'components/common/IconButton';
-import FullCalendar from '@fullcalendar/react';
-import dayGridPlugin from '@fullcalendar/daygrid';
-import timeGridPlugin from '@fullcalendar/timegrid';
-import listPlugin from '@fullcalendar/list';
-import interactionPlugin from '@fullcalendar/interaction';
-import events from 'data/calendar/events';
-import AddScheduleModal from './AddScheduleModal';
-import CalendarEventModal from './CalendarEventModal';
-import DropdownFilter from 'components/common/DropdownFilter';
-import AppContext from 'context/Context';
+import AdvanceTable from 'components/common/advance-table/AdvanceTable';
+import AdvanceTableFooter from 'components/common/advance-table/AdvanceTableFooter';
+import AdvanceTableSearchBox from 'components/common/advance-table/AdvanceTableSearchBox';
+import AdvanceTablePagination from 'components/common/advance-table/AdvanceTablePagination';
+import AdvanceTableWrapper from 'components/common/advance-table/AdvanceTableWrapper';
+import Http from '../../security/Http';
+import url from '../../../Development.json';
+import {
+  errorResponse,
+  successResponse,
+  isError,
+  configHeaderAxios
 
-const Calendar = () => {
-  const {
-    config: { isRTL }
-  } = useContext(AppContext);
-  const calendarRef = useRef();
-  const [title, setTitle] = useState('');
-  const [calendarApi, setCalendarApi] = useState({});
-  const [currentFilter, setCurrentFilter] = useState('Month View');
-  const [isOpenScheduleModal, setIsOpenScheduleModal] = useState(false);
-  const [isOpenEventModal, setIsOpenEventModal] = useState(false);
-  const [modalEventContent, setModalEventContent] = useState({});
-  const [scheduleStartDate, setScheduleStartDate] = useState();
-  const [scheduleEndDate, setScheduleEndDate] = useState();
+} from "../../helpers/response";
 
-  const eventList = events.reduce(
-    (acc, event) =>
-      event.schedules
-        ? acc.concat(event.schedules.concat(event))
-        : acc.concat(event),
-    []
+
+const data = `const columns = [
+  {
+    accessor: 'name',
+    Header: 'Name'
+  },
+  {
+    accessor: 'email',
+    Header: 'Email'
+  },
+  {
+    accessor: 'age',
+    Header: 'Age'
+  }
+];
+
+const data = [
+  {
+    name: 'Anna',
+    email: 'anna@example.com',
+    age: 18
+  },
+  {
+    name: 'Homer',
+    email: 'homer@example.com',
+    age: 35
+  },
+  {
+    name: 'Oscar',
+    email: 'oscar@example.com',
+    age: 52
+  },
+  {
+    name: 'Emily',
+    email: 'emily@example.com',
+    age: 30
+  },
+  {
+    name: 'Jara',
+    email: 'jara@example.com',
+    age: 25
+  },
+  {
+    name: 'Clark',
+    email: 'clark@example.com',
+    age: 39
+  },
+  {
+    name: 'Jennifer',
+    email: 'jennifer@example.com',
+    age: 52
+  },
+  {
+    name: 'Tony',
+    email: 'tony@example.com',
+    age: 30
+  },
+  {
+    name: 'Tom',
+    email: 'tom@example.com',
+    age: 25
+  },
+  {
+    name: 'Michael',
+    email: 'michael@example.com',
+    age: 39
+  },
+  {
+    name: 'Antony',
+    email: 'antony@example.com',
+    age: 39
+  },
+  {
+    name: 'Raymond',
+    email: 'raymond@example.com',
+    age: 52
+  },
+  {
+    name: 'Marie',
+    email: 'marie@example.com',
+    age: 30
+  },
+  {
+    name: 'Cohen',
+    email: 'cohen@example.com',
+    age: 25
+  },
+  {
+    name: 'Rowen',
+    email: 'rowen@example.com',
+    age: 39
+  }
+];`;
+
+// const exampleCode = `${data}
+
+// function AdvanceTableExample() {
+
+//   return(
+//     <AdvanceTableWrapper
+//       columns={columns}
+//       data={data}
+//       sortable
+//       pagination
+//       perPage={5}
+//     >
+//       <AdvanceTable
+//         table
+//         headerClassName="bg-200 text-900 text-nowrap align-middle"
+//         rowClassName="align-middle white-space-nowrap"
+//         tableProps={{
+//           bordered: true,
+//           striped: true,
+//           className: 'fs--1 mb-0 overflow-hidden'
+//         }}
+//       />
+//       <div className="mt-3">
+//         <AdvanceTableFooter
+//           rowCount={data.length}
+//           table
+//           rowInfo
+//           navButtons
+//           rowsPerPageSelection
+//         />
+//       </div>
+//     </AdvanceTableWrapper>
+//   )
+// }
+
+// render(<AdvanceTableExample />)
+// `;
+
+// const paginationNumberingCode = `${data}
+
+// function AdvanceTableExample() {
+
+//   return(
+//     <AdvanceTableWrapper
+//       columns={columns}
+//       data={data}
+//       sortable
+//       pagination
+//       perPage={5}
+//     >
+//       <AdvanceTable
+//         table
+//         headerClassName="bg-200 text-900 text-nowrap align-middle"
+//         rowClassName="align-middle white-space-nowrap"
+//         tableProps={{
+//           bordered: true,
+//           striped: true,
+//           className: 'fs--1 mb-0 overflow-hidden'
+//         }}
+//       />
+//       <div className="mt-3">
+//         <AdvanceTablePagination
+//           table
+//         />
+//       </div>
+//     </AdvanceTableWrapper>
+//   )
+// }
+
+// render(<AdvanceTableExample />)
+// `;
+
+// const selectionCode = `const columns = [
+//   {
+//     accessor: 'name',
+//     Header: 'Name'
+//   },
+//   {
+//     accessor: 'email',
+//     Header: 'Email',
+//     Cell: rowData => {
+//       const { email } = rowData.row.original
+//       return(
+//         <a href={'mailto:' + email}>
+//           {email}
+//         </a>
+//       )
+//     }
+//   },
+//   {
+//     accessor: 'age',
+//     Header: 'Age',
+//     cellProps:{
+//       className:'fw-medium'
+//     }
+//   }
+// ];
+
+// const data = [
+//   {
+//     name: 'Anna',
+//     email: 'anna@example.com',
+//     age: 18
+//   },
+//   {
+//     name: 'Homer',
+//     email: 'homer@example.com',
+//     age: 35
+//   },
+//   {
+//     name: 'Oscar',
+//     email: 'oscar@example.com',
+//     age: 52
+//   },
+//   {
+//     name: 'Emily',
+//     email: 'emily@example.com',
+//     age: 30
+//   },
+//   {
+//     name: 'Jara',
+//     email: 'jara@example.com',
+//     age: 25
+//   }
+// ];
+
+// function BulAction({ selectedRowIds }){
+//   return (
+//     <Row className="flex-between-center mb-3">
+//       <Col xs={4} sm="auto" className="d-flex align-items-center pe-0">
+//         <h5 className="fs-0 mb-0 text-nowrap py-2 py-xl-0">
+//           {
+//             Object.keys(selectedRowIds).length > 0 ?
+//             'You have selected ' + Object.keys(selectedRowIds).length + ' rows' 
+//             :
+//             'Selection Example'
+//           }
+//         </h5>
+//       </Col>
+//       <Col xs={8} sm="auto" className="ms-auto text-end ps-0">
+//         {Object.keys(selectedRowIds).length > 0 ? (
+//           <div className="d-flex">
+//             <Form.Select size="sm" aria-label="Bulk actions">
+//               <option>Bulk Actions</option>
+//               <option value="refund">Refund</option>
+//               <option value="delete">Delete</option>
+//               <option value="archive">Archive</option>
+//             </Form.Select>
+//             <Button
+//               type="button"
+//               variant="falcon-default"
+//               size="sm"
+//               className="ms-2"
+//             >
+//               Apply
+//             </Button>
+//           </div>
+//           ) : (
+//             <div id="orders-actions">
+//               <IconButton
+//                 variant="falcon-default"
+//                 size="sm"
+//                 icon="plus"
+//                 transform="shrink-3"
+//                 className='me-2'
+//               >
+//                 <span className="d-none d-sm-inline-block ms-1">New</span>
+//               </IconButton>
+//               <IconButton
+//                 variant="falcon-default"
+//                 size="sm"
+//                 icon="external-link-alt"
+//                 transform="shrink-3"
+//               >
+//                 <span className="d-none d-sm-inline-block ms-1">Export</span>
+//               </IconButton>
+//             </div>
+//           )}
+//       </Col>
+//     </Row>
+//   );
+// };
+
+// function AdvanceTableExample() {
+
+//   return(
+//     <AdvanceTableWrapper
+//       columns={columns}
+//       data={data}
+//       sortable
+//       pagination
+//       perPage={5}
+//       selection
+//       selectionColumnWidth={30}
+//     >
+//       <BulAction table/>
+//       <AdvanceTable
+//         table
+//         headerClassName="bg-200 text-900 text-nowrap align-middle"
+//         rowClassName="align-middle white-space-nowrap"
+//         tableProps={{
+//           striped: true,
+//           className: 'fs--1 mb-0 overflow-hidden'
+//         }}
+//       />
+//     </AdvanceTableWrapper>
+//   )
+// }
+
+// render(<AdvanceTableExample />)
+// `;
+
+// const customCellCode = `const columns = [
+//   {
+//     accessor: 'name',
+//     Header: 'Name'
+//   },
+//   {
+//     accessor: 'email',
+//     Header: 'Email',
+//     Cell: rowData => {
+//       const { email } = rowData.row.original
+//       return(
+//         <a href={'mailto:' + email}>
+//           {email}
+//         </a>
+//       )
+//     }
+//   },
+//   {
+//     accessor: 'age',
+//     Header: 'Age',
+//     cellProps:{
+//       className:'fw-medium'
+//     }
+//   }
+// ];
+
+// const data = [
+//   {
+//     name: 'Anna',
+//     email: 'anna@example.com',
+//     age: 18
+//   },
+//   {
+//     name: 'Homer',
+//     email: 'homer@example.com',
+//     age: 35
+//   },
+//   {
+//     name: 'Oscar',
+//     email: 'oscar@example.com',
+//     age: 52
+//   },
+//   {
+//     name: 'Emily',
+//     email: 'emily@example.com',
+//     age: 30
+//   },
+//   {
+//     name: 'Jara',
+//     email: 'jara@example.com',
+//     age: 25
+//   }
+// ];
+
+// function AdvanceTableExample() {
+
+//   return(
+//     <AdvanceTableWrapper
+//       columns={columns}
+//       data={data}
+//       sortable
+//     >
+//       <AdvanceTable
+//         table
+//         headerClassName="bg-200 text-900 text-nowrap align-middle"
+//         rowClassName="align-middle white-space-nowrap"
+//         tableProps={{
+//           bordered: true,
+//           striped: true,
+//           className: 'fs--1 mb-0 overflow-hidden'
+//         }}
+//       />
+//     </AdvanceTableWrapper>
+//   )
+// }
+
+// render(<AdvanceTableExample />)
+// `;
+
+const searchableTableCode = `${data}
+
+function AdvanceTableExample() {
+
+  return (
+    <AdvanceTableWrapper
+      columns={columns}
+      data={data}
+      sortable
+      pagination
+      perPage={5}
+    >
+      <Row className="flex-end-center mb-3">
+        <Col xs="auto" sm={6} lg={4}>
+          <AdvanceTableSearchBox table/>
+        </Col>
+      </Row>
+      <AdvanceTable
+        table
+        headerClassName="bg-200 text-900 text-nowrap align-middle"
+        rowClassName="align-middle white-space-nowrap"
+        tableProps={{
+          bordered: true,
+          striped: true,
+          className: 'fs--1 mb-0 overflow-hidden'
+        }}
+      />
+      <div className="mt-3">
+        <AdvanceTableFooter
+          rowCount={data.length}
+          table
+          rowInfo
+          navButtons
+          rowsPerPageSelection
+        />
+      </div>
+    </AdvanceTableWrapper>
   );
+}
 
-  const eventTimeFormat = {
-    hour: 'numeric',
-    minute: '2-digit',
-    omitZeroMinute: true,
-    meridiem: true
-  };
+render(<AdvanceTableExample />)`;
 
-  const handleEventClick = info => {
-    if (info.event.url) {
-      window.open(info.event.url);
-      info.jsEvent.preventDefault();
-    } else {
-      setModalEventContent(info);
-      setIsOpenEventModal(true);
-    }
-  };
+const AdvanceTableExamples = () => {
 
-  const [initialEvents, setInitialEvents] = useState(eventList);
-  const viewName = [
-    'Month View',
-    'Week View',
-    'Day View',
-    'List View',
-    'Year View'
-  ];
 
-  const handleFilter = filter => {
-    setCurrentFilter(filter);
-    switch (filter) {
-      case 'Month View':
-        calendarApi.changeView('dayGridMonth');
-        setTitle(calendarApi.getCurrentData().viewTitle);
-        break;
-      case 'Week View':
-        calendarApi.changeView('timeGridWeek');
-        setTitle(calendarApi.getCurrentData().viewTitle);
-        break;
-      case 'Day View':
-        calendarApi.changeView('timeGridDay');
-        setTitle(calendarApi.getCurrentData().viewTitle);
-        break;
-      case 'List View':
-        calendarApi.changeView('listWeek');
-        setTitle(calendarApi.getCurrentData().viewTitle);
-        break;
-      default:
-        calendarApi.changeView('listYear');
-        setTitle(calendarApi.getCurrentData().viewTitle);
-    }
-  };
-
+  const config = configHeaderAxios();
+  const [dataTableData, setDataTableData] = useState([]);
+  
+  const getData = () => {
+ 
+  console.log( Http.callApi(url.get_users,[],[]));
+    Http.callApi(url.get_users,[],[])
+        .then((response) => {
+          console.log(response);
+         
+            setDataTableData(response.data);
+           
+        })
+        .catch((error) => {
+            if (error.response) {
+             
+            }
+        });
+  }
+  
   useEffect(() => {
-    setCalendarApi(calendarRef.current.getApi());
+    getData();
+   
   }, []);
 
   return (
-    <>
-      <Card>
-        <Card.Header>
-          <Row className="align-items-center gx-0">
-            <Col xs="auto" className="d-flex justify-content-end order-md-1">
-              <OverlayTrigger
-                placement="bottom"
-                overlay={<Tooltip id="nextTooltip">Previous</Tooltip>}
-              >
-                <Button
-                  variant="link"
-                  className="icon-item icon-item-sm icon-item-hover shadow-none p-0 me-1 ms-md-2"
-                  onClick={() => {
-                    calendarApi.prev();
-                    setTitle(calendarApi.getCurrentData().viewTitle);
-                  }}
-                >
-                  <FontAwesomeIcon icon="arrow-left" />
-                </Button>
-              </OverlayTrigger>
-              <OverlayTrigger
-                placement="bottom"
-                overlay={<Tooltip id="previousTooltip">Next</Tooltip>}
-              >
-                <Button
-                  variant="link"
-                  className="icon-item icon-item-sm icon-item-hover shadow-none p-0 me-lg-2"
-                  onClick={() => {
-                    calendarApi.next();
-                    setTitle(calendarApi.getCurrentData().viewTitle);
-                  }}
-                >
-                  <FontAwesomeIcon icon="arrow-right" />
-                </Button>
-              </OverlayTrigger>
-            </Col>
-            <Col xs="auto" className="d-flex justify-content-end order-md-2">
-              <h4 className="mb-0 fs-0 fs-sm-1 fs-lg-2">
-                {title || `${calendarApi.currentDataManager?.data?.viewTitle}`}
-              </h4>
-            </Col>
-            <Col xs md="auto" className="d-flex justify-content-end order-md-3">
-              <Button
-                size="sm"
-                variant="falcon-primary"
-                onClick={() => {
-                  calendarApi.today();
-                  setTitle(calendarApi.getCurrentData().viewTitle);
-                }}
-              >
-                Today
-              </Button>
-            </Col>
-            <Col md="auto" className="d-md-none">
-              <hr />
-            </Col>
-            <Col xs="auto" className="d-flex order-md-0">
-              <IconButton
-                variant="primary"
-                iconClassName="me-2"
-                icon="plus"
-                // transform="shrink-3"
-                size="sm"
-                onClick={() => {
-                  setIsOpenScheduleModal(!isOpenScheduleModal);
-                }}
-              >
-                Add Schedule
-              </IconButton>
-            </Col>
-            <Col className="d-flex justify-content-end order-md-2">
-              <DropdownFilter
-                className="me-2"
-                filters={viewName}
-                currentFilter={currentFilter}
-                handleFilter={handleFilter}
-                icon="sort"
-                right
-              />
-            </Col>
-          </Row>
-        </Card.Header>
-        <Card.Body className="p-0">
-          <FullCalendar
-            ref={calendarRef}
-            headerToolbar={false}
-            plugins={[
-              dayGridPlugin,
-              timeGridPlugin,
-              interactionPlugin,
-              listPlugin
-            ]}
-            initialView="dayGridMonth"
-            themeSystem="bootstrap"
-            dayMaxEvents={2}
-            direction={isRTL ? 'rtl' : 'ltr'}
-            height={800}
-            stickyHeaderDates={false}
-            editable
-            selectable
-            selectMirror
-            select={info => {
-              setIsOpenScheduleModal(true);
-              setScheduleStartDate(info.start);
-              setScheduleEndDate(info.end);
-            }}
-            eventTimeFormat={eventTimeFormat}
-            eventClick={handleEventClick}
-            events={initialEvents}
-          />
-        </Card.Body>
-      </Card>
-
-      <AddScheduleModal
-        isOpenScheduleModal={isOpenScheduleModal}
-        setIsOpenScheduleModal={setIsOpenScheduleModal}
-        initialEvents={initialEvents}
-        setInitialEvents={setInitialEvents}
-        scheduleStartDate={scheduleStartDate}
-        scheduleEndDate={scheduleEndDate}
-        setScheduleStartDate={setScheduleStartDate}
-        setScheduleEndDate={setScheduleEndDate}
+  <>
+   
+    <FalconComponentCard>
+      <FalconComponentCard.Header
+        title="Users"
+        light={false}
+        className="border-bottom border-200"
       />
-
-      <CalendarEventModal
-        isOpenEventModal={isOpenEventModal}
-        setIsOpenEventModal={setIsOpenEventModal}
-        modalEventContent={modalEventContent}
+      <FalconComponentCard.Body
+        code={searchableTableCode}
+        // scope={dataTableData}
+        scope={{
+          AdvanceTableWrapper,
+          AdvanceTable,
+          AdvanceTableFooter,
+          AdvanceTableSearchBox
+        }}
+        language="jsx"
+        noInline
+        noLight
       />
-    </>
-  );
-};
+    </FalconComponentCard>
 
-export default Calendar;
+
+  </>
+);
+      }
+export default AdvanceTableExamples;

@@ -9,7 +9,7 @@ function AxiosMiddleware (method, url, data, options) {
     // if (data.env !== 'touring' && url.search("env=touring") === -1) {
     //     data = (new Security()).encrypt(data);
     // }
-    var options = configHeaderAxios();
+    // var options = configHeaderAxios();
 
     switch(method) {
         case 'get':
@@ -57,30 +57,24 @@ axios.interceptors.response.use(
     }
 )
 
-export function get(url, data = [], options = {}) {
-    return AxiosMiddleware('get', url, data, options)
-}
-export function post(url, data = [], options = {}) {
-    return AxiosMiddleware('post', url, data, options)
-}
-export function head(url, data = [], options = {}) {
-    return AxiosMiddleware('head', url, data, options)
-}
-export function patch(url, data = [], options = {}) {
-    return AxiosMiddleware('patch', url, data, options)
-}
-export function put(url, data = [], options = {}) {
-    return AxiosMiddleware('put', url, data, options)
-}
-export function del(url, data = [], options = {}) {
-    return AxiosMiddleware('delete', url, data, options)
-}
 
-export function callApi(url, data = []) {
+export function callApi(url, data = [],dataOption=[]) {
+//  console.log('data');
+//  console.log(data);
+//  console.log('dataOption');
+//  console.log(dataOption);
+ var options = configHeaderAxios();
+ if(data){
+    return AxiosMiddleware(url[0], process.env.REACT_APP_BASE_URL + url[1],data, options)
+}
+return AxiosMiddleware(url[0], process.env.REACT_APP_BASE_URL + url[1], options)
+//  if(dataOption == [] ){
+//     return AxiosMiddleware(url[0], process.env.REACT_APP_BASE_URL + url[1],data, options)
+//     }else{
 
-    var options = configHeaderAxios();
-
-    return AxiosMiddleware(url[0], process.env.REACT_APP_BASE_URL + url[1], data, options)
+//         return AxiosMiddleware(url[0], process.env.REACT_APP_BASE_URL + url[1], options)
+//     }
+   
 }
 
 

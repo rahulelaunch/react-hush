@@ -300,7 +300,7 @@ const Layout = () => {
 
         <Route element={<MainLayout />}>
           {/*Dashboard*/}
-          <Route path="/" element={<Dashboard />} />
+          <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="dashboard/analytics" element={<Analytics />} />
           <Route path="dashboard/crm" element={<Crm />} />
           <Route path="dashboard/saas" element={<Saas />} />
@@ -547,14 +547,14 @@ const Layout = () => {
         {/* //--- MainLayout end  */}
 
         {/* <Navigate to="/errors/404" /> */}
-        <Route path="*" element={<Navigate to="/errors/404" replace />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
       </Routes>
       <SettingsToggle />
       <SettingsPanel />
       <ToastContainer
         closeButton={CloseButton}
         icon={false}
-        position={toast.POSITION.BOTTOM_LEFT}
+        position={toast.POSITION.TOP_RIGHT}
       />
     </>
   );

@@ -37,6 +37,10 @@ const LoginForm = ({ hasLabel, layout }) => {
     setPassword(e.target.value)
   }
 
+//   useEffect(() => {
+//     isError(errors);
+// });
+
 
   const onSubmit = (data) => {
     console.log(data);
@@ -58,7 +62,10 @@ const LoginForm = ({ hasLabel, layout }) => {
 
         // setBtnLoader(false);
         // successResponse(response);
-        navigate('/');
+        navigate('/admin/dashboard');
+        toast.success(`Successfully login as ${data.data.name}`, {
+          theme: 'colored'
+        });
       })
       .catch((error) => {
 
@@ -103,6 +110,7 @@ const LoginForm = ({ hasLabel, layout }) => {
           // value={formData.password}
           name="password"
           // onChange={handleFieldChange}
+          type='password'
           defaultValue={password}
           onChange={(e) => handleChange(e)}
           {...register('password', {

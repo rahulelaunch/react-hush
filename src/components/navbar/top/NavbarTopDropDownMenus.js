@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import NavbarDropdown from './NavbarDropdown';
+import routes from 'routes/routes'
 import {
   dashboardRoutes,
   appRoutes,
@@ -49,27 +50,11 @@ const NavbarTopDropDownMenus = () => {
         <NavbarDropdownApp items={appRoutes.children} />
       </NavbarDropdown>
 
-      <NavbarDropdown title="pages">
-        <NavbarDropdownPages items={pagesRoutes.children} />
-      </NavbarDropdown>
+  
 
-      <NavbarDropdown title="modules">
-        <NavbarDropdownModules items={modulesRoutes.children} />
-      </NavbarDropdown>
+     
 
-      <NavbarDropdown title="documentation">
-        {flatRoutes(documentationRoutes.children).map(route => (
-          <Dropdown.Item
-            key={route.name}
-            as={Link}
-            className={route.active ? 'link-600' : 'text-500'}
-            to={route.to}
-            onClick={handleDropdownItemClick}
-          >
-            {route.name}
-          </Dropdown.Item>
-        ))}
-      </NavbarDropdown>
+     
     </>
   );
 };

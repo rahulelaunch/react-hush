@@ -46,7 +46,7 @@ const Dashboard = () => {
         </Col>
       </Row>
 
-      <Row className="g-3 mb-3">
+      {/* <Row className="g-3 mb-3">
         <Col lg={6}>
           <RunningProjects data={runningProjects} />
         </Col>
@@ -83,7 +83,7 @@ const Dashboard = () => {
         <Col xxl={6}>
           <TopProducts data={topProducts} className="h-100" />
         </Col>
-      </Row>
+      </Row> */}
     </>
   );
 };

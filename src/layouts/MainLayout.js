@@ -36,20 +36,18 @@ const MainLayout = () => {
     window.scrollTo(0, 0);
   }, [pathname]);
 
-//   const AuthRoute = () => {
-//     const isLogin = localStorage.getItem("access_token") || false;
-//     const render = isLogin ? (
-//         navigate('/')
-//     ) : (
-//         navigate('/login')
-//     );
-//     return render;
-// };
+  const AuthRoute = () => {
+    const isLogin = localStorage.getItem("access_token") || false;
+
+    if (isLogin === null || isLogin === false) {
+      navigate('/login');
+  }
+};
 
 
-// useEffect(() => {
-//     AuthRoute();
-// }, []);
+useEffect(() => {
+    AuthRoute();
+}, []);
 
   return (
     <div className={isFluid ? 'container-fluid' : 'container'}>
