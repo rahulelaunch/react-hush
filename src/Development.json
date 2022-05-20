@@ -1,0 +1,5 @@
+{
+    "login": ["post", "admin/login"],
+    "logout": ["patch", "auth/logout"]
+    
+}

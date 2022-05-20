@@ -1,0 +1,126 @@
+M	package.json
+A	src/assets/json/usa.json
+M	src/assets/scss/theme/_dropdown.scss
+M	src/assets/scss/theme/_kanban.scss
+M	src/assets/scss/theme/_mixed.scss
+M	src/assets/scss/theme/_theme.scss
+A	src/assets/scss/theme/_treeview.scss
+M	src/assets/scss/theme/_variables.scss
+M	src/assets/scss/theme/plugins/_full-calendar.scss
+M	src/components/app/e-commerce/ProductProvider.js
+M	src/components/app/e-commerce/QuantityController.js
+M	src/components/app/e-commerce/billing/Billing.js
+M	src/components/app/e-commerce/billing/BillingHeader.js
+M	src/components/app/e-commerce/checkout/Checkout.js
+M	src/components/app/e-commerce/checkout/OrderSummary.js
+M	src/components/app/events/event-detail/EventDetailsGmap.js
+A	src/components/common/CookieNotice.js
+A	src/components/common/Treeview.js
+A	src/components/doc-components/CalendarExample.js
+A	src/components/doc-components/CookieNoticeExample.js
+A	src/components/doc-components/CountUp.js
+A	src/components/doc-components/ReactIcons.js
+A	src/components/doc-components/ReactPlayerExample.js
+A	src/components/doc-components/Scrollbar.js
+A	src/components/doc-components/Scrollspy.js
+
+
+
+M	src/components/app/social/feed/CreatePost.js
+M	src/components/app/social/feed/FeedCard.js
+M	src/components/app/social/feed/FeedContent.js
+M	src/components/common/FalconLink.js
+M	src/components/dashboards/analytics/active-users/ActiveUsers.js
+M	src/components/dashboards/analytics/audience/Audience.js
+M	src/components/dashboards/analytics/bounce-rate/BounceRate.js
+M	src/components/dashboards/analytics/index.js
+M	src/components/dashboards/analytics/top-pages/TopPages.js
+M	src/components/dashboards/default/ActiveUsers.js
+M	src/components/dashboards/default/BandwidthSaved.js
+M	src/components/dashboards/default/index.js
+M	src/components/dashboards/e-commerce/ProductShare/ProductShareChart.js
+M	src/components/dashboards/e-commerce/SalesPosLocation/SalesPosLocation.js
+M	src/components/dashboards/saas/DoMoreCard.js
+M	src/components/dashboards/saas/candle-chart/CandleChart.js
+R100	src/components/bootstrap-components/Accordion.js	src/components/doc-components/Accordion.js
+R100	src/components/bootstrap-components/AdvanceSelect.js	src/components/doc-components/AdvanceSelect.js
+R100	src/components/bootstrap-components/AdvanceTableExamples.js	src/components/doc-components/AdvanceTableExamples.js
+R100	src/components/bootstrap-components/Alerts.js	src/components/doc-components/Alerts.js
+R100	src/components/bootstrap-components/AnimatedIcons.js	src/components/doc-components/AnimatedIcons.js
+R100	src/components/bootstrap-components/Avatar.js	src/components/doc-components/Avatar.js
+R100	src/components/bootstrap-components/Backgrounds.js	src/components/doc-components/Backgrounds.js
+R100	src/components/bootstrap-components/Badges.js	src/components/doc-components/Badges.js
+R100	src/components/bootstrap-components/BootstrapCarousel.js	src/components/doc-components/BootstrapCarousel.js
+R100	src/components/bootstrap-components/Breadcrumb.js	src/components/doc-components/Breadcrumb.js
+R100	src/components/bootstrap-components/ButtonGroup.js	src/components/doc-components/ButtonGroup.js
+R100	src/components/bootstrap-components/Buttons.js	src/components/doc-components/Buttons.js
+R100	src/components/bootstrap-components/Cards.js	src/components/doc-components/Cards.js
+R100	src/components/bootstrap-components/Checks.js	src/components/doc-components/Checks.js
+R100	src/components/bootstrap-components/Collapse.js	src/components/doc-components/Collapse.js
+R100	src/components/bootstrap-components/ComboNavbar.js	src/components/doc-components/ComboNavbar.js
+R100	src/components/bootstrap-components/DatePicker.js	src/components/doc-components/DatePicker.js
+R100	src/components/bootstrap-components/Dropdowns.js	src/components/doc-components/Dropdowns.js
+R100	src/components/bootstrap-components/Editor.js	src/components/doc-components/Editor.js
+R100	src/components/bootstrap-components/Embed.js	src/components/doc-components/Embed.js
+R100	src/components/bootstrap-components/Figures.js	src/components/doc-components/Figures.js
+R100	src/components/bootstrap-components/FileUploader.js	src/components/doc-components/FileUploader.js
+R100	src/components/bootstrap-components/FloatingLabels.js	src/components/doc-components/FloatingLabels.js
+R100	src/components/bootstrap-components/FontAwesome.js	src/components/doc-components/FontAwesome.js
+R100	src/components/bootstrap-components/FormControl.js	src/components/doc-components/FormControl.js
+R100	src/components/bootstrap-components/FormLayout.js	src/components/doc-components/FormLayout.js
+R100	src/components/bootstrap-components/FormValidation.js	src/components/doc-components/FormValidation.js
+R100	src/components/bootstrap-components/Hoverbox.js	src/components/doc-components/Hoverbox.js
+R100	src/components/bootstrap-components/Image.js	src/components/doc-components/Image.js
+R100	src/components/bootstrap-components/InputGroup.js	src/components/doc-components/InputGroup.js
+R100	src/components/bootstrap-components/Lightbox.js	src/components/doc-components/Lightbox.js
+R100	src/components/bootstrap-components/ListGroups.js	src/components/doc-components/ListGroups.js
+R100	src/components/bootstrap-components/Modals.js	src/components/doc-components/Modals.js
+R100	src/components/bootstrap-components/NavBarTop.js	src/components/doc-components/NavBarTop.js
+R100	src/components/bootstrap-components/Navbars.js	src/components/doc-components/Navbars.js
+R100	src/components/bootstrap-components/Navs.js	src/components/doc-components/Navs.js
+R100	src/components/bootstrap-components/Offcanvas.js	src/components/doc-components/Offcanvas.js
+R100	src/components/bootstrap-components/Pagination.js	src/components/doc-components/Pagination.js
+R100	src/components/bootstrap-components/Placeholder.js	src/components/doc-components/Placeholder.js
+R100	src/components/bootstrap-components/Popovers.js	src/components/doc-components/Popovers.js
+R100	src/components/bootstrap-components/ProgressBar.js	src/components/doc-components/ProgressBar.js
+R100	src/components/bootstrap-components/Range.js	src/components/doc-components/Range.js
+R098	src/components/bootstrap-components/Rating.js	src/components/doc-components/Rating.js
+
+R100	src/components/bootstrap-components/Search.js	src/components/doc-components/Search.js
+R100	src/components/bootstrap-components/Select.js	src/components/doc-components/Select.js
+R100	src/components/bootstrap-components/SlickCarousel.js	src/components/doc-components/SlickCarousel.js
+R100	src/components/bootstrap-components/Spinners.js	src/components/doc-components/Spinners.js
+R100	src/components/bootstrap-components/Tables.js	src/components/doc-components/Tables.js
+R100	src/components/bootstrap-components/Tabs.js	src/components/doc-components/Tabs.js
+R100	src/components/bootstrap-components/Toasts.js	src/components/doc-components/Toasts.js
+R100	src/components/bootstrap-components/Tooltips.js	src/components/doc-components/Tooltips.js
+R096	src/components/bootstrap-components/TypedText.js	src/components/doc-components/TypedText.js
+R100	src/components/bootstrap-components/VerticalNavbar.js	src/components/doc-components/VerticalNavbar.js
+R100	src/components/bootstrap-components/WizardForms.js	src/components/doc-components/WizardForms.js
+M	src/components/documentation/DarkMode.js
+R062	src/components/map/Googlemap.js	src/components/map/GoogleMap.js
+M	src/components/navbar/top/NavbarTop.js
+M	src/components/navbar/vertical/NavbarVertical.js
+M	src/components/navbar/vertical/ToggleButton.js
+M	src/components/pages/asscociations/Associations.js
+M	src/components/pages/miscellaneous/privacy-policy/Account.js
+M	src/components/pages/miscellaneous/privacy-policy/Instructions.js
+M	src/components/pages/miscellaneous/privacy-policy/Liability.js
+M	src/components/pages/miscellaneous/privacy-policy/PrivacyPolicy.js
+M	src/components/pages/miscellaneous/privacy-policy/Rights.js
+M	src/components/pages/miscellaneous/privacy-policy/Rules.js
+M	src/components/pages/miscellaneous/privacy-policy/Subscription.js
+M	src/components/pages/miscellaneous/privacy-policy/Termination.js
+M	src/components/pages/user/profile/ActivityLog.js
+M	src/components/pages/user/profile/Events.js
+M	src/components/pages/user/profile/Followers.js
+M	src/components/pages/user/profile/Profile.js
+M	src/components/pages/user/settings/ExperienceForm.js
+M	src/components/pages/user/settings/ExperiencesSettings.js
+M	src/components/wizard/PersonalForm.js
+M	src/helpers/echart-utils.js
+M	src/helpers/initFA.js
+M	src/helpers/utils.js
+M	src/layouts/MainLayout.js
+M	src/layouts/MainRoutes.js
+M	src/routes/routes.js
