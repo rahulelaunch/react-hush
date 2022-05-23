@@ -9,7 +9,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-brands-svg-icons": "^5.15.3",
     "@fortawesome/free-regular-svg-icons": "^5.15.3",
-    "@fortawesome/free-solid-svg-icons": "^5.15.3",
+    "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@fullcalendar/bootstrap": "^5.10.1",
     "@fullcalendar/daygrid": "^5.10.1",
@@ -71,6 +71,7 @@
     "react-use-scrollspy": "^3.0.1",
     "simplebar-react": "^2.3.5",
     "slick-carousel": "^1.8.1",
+    "sweetalert2": "^11.4.16",
     "uuid": "^8.3.2",
     "video.js": "^7.14.3",
     "web-vitals": "^1.1.2"
@@ -95,6 +96,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@babel/plugin-transform-runtime": "^7.18.0",
     "clean-webpack-plugin": "^4.0.0-alpha.0",
     "css-loader": "^4.3.0",
     "eslint": "^7.32.0",

@@ -155,8 +155,8 @@ function errorResponse(error) {
             var errors = Object.values(errorData);
             if (errors) {
                 errors.forEach((err) => {
-                    toast.error((err.name));
-                    // toast.error(humanize(err));
+                    // toast.error((err.name));
+                    toast.error(humanize(err));
                 });
             }
         }

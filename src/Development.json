@@ -1,5 +1,7 @@
 {
     "login": ["post", "admin/login"],
     "logout": ["patch", "auth/logout"],
-    "get_users":  ["get","admin/getUser"]
+    "get_users":  ["get","admin/getUser"],
+    "users_change_status":  ["patch", "admin/getUser"],
+    "user_delete":  ["delete","admin/getUser"]
 }

@@ -37,9 +37,9 @@ const LoginForm = ({ hasLabel, layout }) => {
     setPassword(e.target.value)
   }
 
-//   useEffect(() => {
-//     isError(errors);
-// });
+  useEffect(() => {
+    isError(errors);
+});
 
 
   const onSubmit = (data) => {
@@ -51,6 +51,7 @@ const LoginForm = ({ hasLabel, layout }) => {
 
     Http.callApi(url.login, JSON.stringify(data))
       .then((response) => {
+        console.log(response);
         let data = response.data;
 
         localStorage.setItem(
@@ -61,17 +62,15 @@ const LoginForm = ({ hasLabel, layout }) => {
 
 
         // setBtnLoader(false);
-        // successResponse(response);
         navigate('/admin/dashboard');
-        toast.success(`Successfully login as ${data.data.name}`, {
-          theme: 'colored'
-        });
+        successResponse(response);
+       
       })
       .catch((error) => {
 
         // setBtnLoader(false);
         if (error.response) {
-          // errorResponse(error);
+          errorResponse(error);
         }
       });
   };
@@ -84,6 +83,7 @@ const LoginForm = ({ hasLabel, layout }) => {
           placeholder={!hasLabel ? 'Email address' : ''}
           // value={formData.email}
           name="email"
+          id="email"
           // onChange={handleFieldChange}
           type="email"
           {...register('email', {
@@ -109,6 +109,7 @@ const LoginForm = ({ hasLabel, layout }) => {
           placeholder={!hasLabel ? 'Password' : ''}
           // value={formData.password}
           name="password"
+          id="password"
           // onChange={handleFieldChange}
           type='password'
           defaultValue={password}

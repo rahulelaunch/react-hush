@@ -32,9 +32,6 @@ export const appRoutes = {
 };
 
 
-
-
-
 export default [
   dashboardRoutes,
   appRoutes,
