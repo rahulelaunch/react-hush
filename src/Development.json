@@ -1,7 +1,73 @@
 {
     "login": ["post", "admin/login"],
     "logout": ["patch", "auth/logout"],
+
     "get_users":  ["get","admin/getUser"],
     "users_change_status":  ["patch", "admin/getUser"],
-    "user_delete":  ["delete","admin/getUser"]
+    "user_delete":  ["delete","admin/getUser"],
+
+    "get_profile":  ["get","admin/profile"],
+    "admin_update_profile": ["patch", "admin/profile"],
+    "change_password": ["post", "admin/changePassword"],
+            
+    "get_dashboard":  ["get","admin/dashboard"],
+        
+    "get_education":  ["get","admin/education"],
+    "education_store":  ["post", "admin/education"],
+    "education_update":  ["patch", "admin/education"],
+    "education_delete":  ["delete","admin/education"],
+    "education_change_status":  ["post", "admin/educationStatus"],
+            
+    "get_body":  ["get","admin/body"],
+    "body_store":  ["post", "admin/body"],
+    "body_update":  ["patch", "admin/body"],
+    "body_delete":  ["delete","admin/body"],
+    "body_change_status":  ["post", "admin/bodyStatus"],
+            
+    "get_income":  ["get","admin/income"],
+    "income_store":  ["post", "admin/income"],
+    "income_update":  ["patch", "admin/income"],
+    "income_delete":  ["delete","admin/income"],
+    "income_change_status":  ["post", "admin/incomeStatus"],
+            
+    "get_hair": ["get","admin/hair"],
+    "hair_store":  ["post", "admin/hair"],
+    "hair_update":  ["patch", "admin/hair"],
+    "hair_delete":  ["delete","admin/hair"],
+    "hair_change_status":  ["post", "admin/hairStatus"],
+            
+    "get_eye":  ["get","admin/eye"],
+    "eye_store":  ["post", "admin/eye"],
+    "eye_update":  ["patch", "admin/eye"],
+    "eye_delete":  ["delete","admin/eye"],
+    "eye_change_status":  ["post", "admin/eyeStatus"],
+            
+    "get_desire":  ["get","admin/desire"],
+    "desire_store":  ["post", "admin/desire"],
+    "desire_update":  ["patch", "admin/desire"],
+    "desire_delete":  ["delete","admin/desire"],
+    "desire_change_status":  ["post", "admin/desireStatus"],
+            
+    "get_fashion":  ["get","admin/fashion"],
+    "fashion_store":  ["post", "admin/fashion"],
+    "fashion_update":  ["patch", "admin/fashion"],
+    "fashion_delete":  ["delete","admin/fashion"],
+    "fashion_change_status":  ["post", "admin/fashionStatus"],
+            
+    "get_mobilePlan":  ["get","admin/mobilePlan"],
+    "mobilePlan_store":  ["post", "admin/mobilePlan"],
+    "mobilePlan_update":  ["patch", "admin/mobilePlan"],
+    "mobilePlan_delete": ["delete","admin/mobilePlan"],
+    "mobilePlan_change_status":  ["post", "admin/planStatus"],
+            
+    "get_terms":  ["get","admin/terms"],
+    "terms_store":  ["post", "admin/terms"],
+    "terms_update":  ["patch", "admin/terms"],
+    "terms_delete":  ["delete","admin/terms"],
+            
+    "get_country":  ["get","user/country"],
+    "get_location":  ["get","user/state"],
+            
+    "image_upload":  ["post", "admin/uploadImage"]
+    
 }

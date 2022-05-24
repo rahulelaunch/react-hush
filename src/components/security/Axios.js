@@ -30,8 +30,6 @@ axios.defaults.headers.common['X-CSRF-TOKEN'] = "token.content";
 axios.interceptors.response.use(
 
     (response) => {
-        console.log('response');
-        console.log(response);
         if (response.data.mac !== undefined) {
             response.data = (new Security).decrypt(response.data);
         }

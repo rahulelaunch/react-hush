@@ -40,8 +40,10 @@ const MainLayout = () => {
     const isLogin = localStorage.getItem("access_token") || false;
 
     if (isLogin === null || isLogin === false) {
-      navigate('/login');
-  }
+      navigate('/admin/login');
+    } else  {
+      navigate('/admin/dashboard');
+    }
 };
 
 

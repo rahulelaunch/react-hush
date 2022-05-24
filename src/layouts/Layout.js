@@ -184,6 +184,17 @@ import Dashboard from 'components/dashboards/default';
 import AppContext from 'context/Context';
 import Faq from 'components/documentation/Faq';
 
+import User from 'components/app/users/User';
+import Body from 'components/app/body_type/Body';
+import BodyForm from 'components/app/body_type/PageForm';
+import Fashion from 'components/app/fashion/Fashion';
+import FashionForm from 'components/app/fashion/PageForm';
+import Desire from 'components/app/desires/Desire';
+import DesireForm from 'components/app/desires/PageForm';
+import AdminProfile from 'components/app/admin/Profile';
+import ChangePassword from 'components/app/admin/ChangePassword';
+
+
 const Layout = () => {
   const HTMLClassList = document.getElementsByTagName('html')[0].classList;
   useContext(AppContext);
@@ -212,7 +223,7 @@ const Layout = () => {
 
         {/*- ------------- simple ---------------------------  */}
         <Route element={<AuthSimpleLayout />}>
-          <Route path="login" element={<SimpleLogin />} />
+          <Route path="/admin/login" element={<SimpleLogin />} />
           {/* <Route path="/" element={<SimpleLogin />} /> */}
           <Route
             path="authentication/simple/register"
@@ -331,7 +342,7 @@ const Layout = () => {
           />
           <Route
             path="e-commerce/product/product-details/:productId"
-            element={<ProductDetails />}
+            element={<ProductDetails />}calendar
           />
 
           <Route
@@ -350,6 +361,18 @@ const Layout = () => {
           <Route path="maps/leaflet-map" element={<LeafletMapExample />} />
 
           {/*App*/}
+          <Route path="/admin/users" element={<User />} />
+          <Route path="/admin/profile" element={<AdminProfile />} />
+          <Route path="/admin/change_password" element={<ChangePassword />} />
+          <Route path="/admin/body/list" element={<Body />} />
+          <Route path="/admin/body/form" element={<BodyForm />} />  
+          <Route path="/admin/fashion/list" element={<Fashion />} />
+          <Route path="/admin/fashion/form" element={<FashionForm />} />  
+          <Route path="/admin/desire/list" element={<Desire />} />
+          <Route path="/admin/desire/form" element={<DesireForm />} /> 
+
+
+
           <Route path="app/calendar" element={<Calendar />} />
           <Route path="app/chat" element={<Chat />} />
           <Route path="app/kanban" element={<Kanban />} />
@@ -547,7 +570,7 @@ const Layout = () => {
         {/* //--- MainLayout end  */}
 
         {/* <Navigate to="/errors/404" /> */}
-        <Route path="*" element={<Navigate to="/login" replace />} />
+        <Route path="*" element={<Navigate to="/admin/dashboard" replace />} />
       </Routes>
       <SettingsToggle />
       <SettingsPanel />

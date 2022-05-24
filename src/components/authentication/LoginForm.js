@@ -52,6 +52,7 @@ const LoginForm = ({ hasLabel, layout }) => {
     Http.callApi(url.login, JSON.stringify(data))
       .then((response) => {
         console.log(response);
+        console.log('response');
         let data = response.data;
 
         localStorage.setItem(

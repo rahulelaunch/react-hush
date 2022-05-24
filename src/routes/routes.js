@@ -18,16 +18,28 @@ export const appRoutes = {
     {
       name: 'Users',
       icon: 'users',
-      to: '/app/calendar',
-      active: true
-    },
-    {
-      name: 'Chat',
-      icon: 'comments',
-      to: '/app/chat',
+      to: '/admin/users',
       active: true
     },
 
+    {
+      name: 'Body Type',
+      icon: 'user',
+      to: '/admin/body/list',
+      active: true
+    },
+    {
+      name: 'Fashion Type',
+      icon: 'users',
+      to: '/admin/fashion/list',
+      active: true
+    },
+    {
+      name: 'Desire',
+      icon: 'comments',
+      to: '/admin/desire/list',
+      active: true
+    },
   ]
 };
 
