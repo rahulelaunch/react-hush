@@ -2,7 +2,6 @@ import React, { useEffect, useState, Fragment } from "react";
 import { useForm } from "react-hook-form";
 import Http from '../../security/Http';
 import url from '../../../Development.json';
-import { toast } from "react-toastify";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -73,19 +72,7 @@ const PageForm = () => {
                 })
                 .catch((error) => {
                     setBtnLoader(false);
-                    if (error.response.status === 422) {
-        
-                        let errorData = error.response.data;
-                        if (errorData) {
-                            var errors = Object.values(errorData);
-                            if (errors) {
-                                errors.forEach((err) => {
-                                    toast.error((err.desire_name));
-                                });
-                            }
-                        }
-                    }else{
-
+                    if (error) {
                         errorResponse(error);
                     }
                 });

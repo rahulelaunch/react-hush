@@ -193,6 +193,8 @@ import Desire from 'components/app/desires/Desire';
 import DesireForm from 'components/app/desires/PageForm';
 import AdminProfile from 'components/app/admin/Profile';
 import ChangePassword from 'components/app/admin/ChangePassword';
+import Education from 'components/app/educations/Education';
+import EducationForm from 'components/app/educations/PageForm';
 
 
 const Layout = () => {
@@ -369,7 +371,9 @@ const Layout = () => {
           <Route path="/admin/fashion/list" element={<Fashion />} />
           <Route path="/admin/fashion/form" element={<FashionForm />} />  
           <Route path="/admin/desire/list" element={<Desire />} />
-          <Route path="/admin/desire/form" element={<DesireForm />} /> 
+          <Route path="/admin/desire/form" element={<DesireForm />} />
+          <Route path="/admin/education/list" element={<Education />} />
+          <Route path="/admin/education/form" element={<EducationForm />} />  
 
 
 

@@ -40,6 +40,12 @@ export const appRoutes = {
       to: '/admin/desire/list',
       active: true
     },
+    {
+      name: 'Education',
+      icon: 'comments',
+      to: '/admin/education/list',
+      active: true
+    },
   ]
 };
 
