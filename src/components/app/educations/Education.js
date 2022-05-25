@@ -39,7 +39,7 @@ const AdvanceTableExamples = () => {
 
   const getData = () => {
 
-    Http.callApi(url.get_desire)
+    Http.callApi(url.get_education)
       .then((response) => {
         // setLoading(false);
         setDataTableData(response.data);
@@ -63,7 +63,7 @@ const AdvanceTableExamples = () => {
       id: id,
     };
 
-    Http.callApi(url.desire_change_status, obj)
+    Http.callApi(url.education_change_status, obj)
       .then((response) => {
         getData();
         successResponse(response);
@@ -84,7 +84,7 @@ const AdvanceTableExamples = () => {
           <tbody>
             <tr>
               <th>Name</th>
-              <td>{data.desire_name}</td>
+              <td>{data.name}</td>
             </tr>
           </tbody>
         </TableModal>
@@ -95,7 +95,7 @@ const AdvanceTableExamples = () => {
 
 
   const editButtonClick = (row) => {
-    navigate('/admin/desire/form', { state: { row } });
+    navigate('/admin/education/form', { state: { row } });
 };
 
   const deleteButtonClick = (id) => {
@@ -113,7 +113,7 @@ const AdvanceTableExamples = () => {
           id: id,
         }
 
-        Http.callApi(url.desire_delete, data)
+        Http.callApi(url.education_delete, data)
           .then((response) => {
             getData();
             successResponse(response);
@@ -131,7 +131,7 @@ const AdvanceTableExamples = () => {
 
   const columns = [
     {
-      accessor: 'desire_name',
+      accessor: 'name',
       Header: 'Name'
     },
     {
@@ -198,7 +198,7 @@ const AdvanceTableExamples = () => {
     >
       <div style={{ borderRadius: "0.375rem" }} className='py-4 bg-white mb-3 d-flex align-items-center px-3'>
         <h5 className="hover-actions-trigger mb-0">
-         Desire List
+         Education List
         </h5>
       </div>
       <Card className='mb-3'>
@@ -208,7 +208,7 @@ const AdvanceTableExamples = () => {
           <Row className="flex-between-center mb-3">
             <Col xs={8} sm="auto" className="ms-3 mt-2 text-end ps-0">
               <div id="orders-actions">
-                <Link to="/admin/desire/form" className="btn btn-sm btn-success">
+                <Link to="/admin/education/form" className="btn btn-sm btn-success">
                   <FontAwesomeIcon icon={faPlus} /> Add
                 </Link>
               </div>

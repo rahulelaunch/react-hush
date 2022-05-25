@@ -33,7 +33,7 @@ const PageForm = () => {
     useEffect(() => {
         if (state && state.row._id) {
             const data = state.row;
-            setValue("desire_name", data.desire_name);
+            setValue("name", data.name);
        
         }
     }, []);
@@ -49,11 +49,11 @@ const PageForm = () => {
         if (state && state.row._id) {
             data["id"] = state.row._id;
 
-            Http.callApi(url.desire_update, data)
+            Http.callApi(url.education_update, data)
                 .then((response) => {
                     setBtnLoader(false);
                     successResponse(response);
-                    navigate('/admin/desire/list');
+                    navigate('/admin/education/list');
                 })
                 .catch((error) => {
                     setBtnLoader(false);
@@ -64,11 +64,11 @@ const PageForm = () => {
 
         } else {
            
-            Http.callApi(url.desire_store, data)
+            Http.callApi(url.education_store, data)
                 .then((response) => {
                     setBtnLoader(false);
                     successResponse(response);
-                    navigate('/admin/desire/list');
+                    navigate('/admin/education/list');
                 })
                 .catch((error) => {
                     setBtnLoader(false);
@@ -83,7 +83,7 @@ const PageForm = () => {
         <>
             <div style={{ borderRadius: "0.375rem" }} className='py-4 bg-white mb-3 d-flex align-items-center px-3'>
                 <h5 className="hover-actions-trigger mb-0">
-                    Desire
+                    Eduaction
                 </h5>
             </div>
             <Card className='mb-3'>
@@ -104,11 +104,11 @@ const PageForm = () => {
                             <FormLabel htmlFor="desire_name">Desire Name</FormLabel>
                             <input type="text"
                                 className="form-control"
-                                id="desire_name"
-                                name='desire_name'
-                                placeholder="Enter Desire Name"
-                                {...register('desire_name', {
-                                    required: "Desire Name is required",
+                                id="name"
+                                name='name'
+                                placeholder="Enter Education Name"
+                                {...register('name', {
+                                    required: "Education Name is required",
                                     maxLength: {
                                         value: 30,
                                         message: "maximum length is 30"
