@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button,Form,FormLabel, Card, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
+import { Button, Form, FormLabel, Card, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import { modal } from "bootstrap"
 import PageHeader from 'components/common/PageHeader';
@@ -24,9 +24,9 @@ import {
 import Flex from 'components/common/Flex';
 import Typography from 'components/utilities/Typography';
 import ButtonSubmitReset from '../../layout/ButtonSubmitReset';
-import { faEye, faPlus, faToggleOff, faToggleOn, faTrashAlt,faPencilAlt} from '@fortawesome/free-solid-svg-icons';
+import { faEye, faPlus, faToggleOff, faToggleOn, faTrashAlt, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
 import ActionButton from 'components/common/ActionButton';
-import { Link, useNavigate} from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import FalconCloseButton from 'components/common/FalconCloseButton';
 
 
@@ -40,7 +40,7 @@ const AdvanceTableExamples = () => {
   const navigate = useNavigate();
   const handleClose = () => setShow(false);
   const [btnloader, setBtnLoader] = useState(false);
-  const [icon, setIcon] = useState(dummy);
+  const [icon, setIcon] = useState('');
   const [iconAlt, setIconAlt] = useState('');
   const [fileName, setFileName] = useState('');
   const [id, setId] = useState('');
@@ -51,7 +51,7 @@ const AdvanceTableExamples = () => {
     reset,
     handleSubmit,
     formState: { errors },
-} = useForm();
+  } = useForm();
 
 
   const getData = () => {
@@ -69,44 +69,48 @@ const AdvanceTableExamples = () => {
       });
   }
 
-  useEffect(() => {
-    getData();
-
-  }, []);
-
   const handleShow = (data) => {
-console.log(data);
-		setShow(true)
+    setShow(true)
     setValue("name", '');
     setValue("name_id", '');
     setIcon('')
-    if(data){
+    if (data) {
       setValue("name", data.name);
       setValue("name_id", data._id);
       setId("name_id", data._id);
       setIcon(data.body_image);
     }
-	};
+  };
+
+  useEffect(() => {
+    getData();
+  }, []);
+
+  useEffect(() => {
+    isError(errors);
+});
+
+
 
   const onFileChange = (e) => {
     onFileUpload(e.target.files[0]);
-};
-const onFileUpload = (image) => {
+  };
+  const onFileUpload = (image) => {
 
     const formData = new FormData();
     formData.append('image', image);
 
     Http.callApi(url.image_upload, formData)
-        .then(response => {
-            setIcon(response.data.path);
-            setFileName(response.data.image[0]);
-        })
-        .catch(error => {
-            if (error.response) {
-                errorResponse(error);
-            }
-        });
-};
+      .then(response => {
+        setIcon(response.data.path);
+        setFileName(response.data.image[0]);
+      })
+      .catch(error => {
+        if (error.response) {
+          errorResponse(error);
+        }
+      });
+  };
 
   const changeStatusButtonClick = (id) => {
     const obj = {
@@ -126,50 +130,58 @@ const onFileUpload = (image) => {
   };
 
   const onSubmit = (data) => {
-    console.log(data);
     setBtnLoader(true);
-    if (data.name_id) {
-      if (fileName) {
-        data["body_image"] = fileName;
-      }
-      // }else{
-      //   console.log(1);
-      //   data["body_image"] = icon.slice(34);
-      // }
-          data["id"] = data.name_id;
  
-          
-        Http.callApi(url.body_update, data)
-            .then((response) => {
-                setBtnLoader(false);
-                successResponse(response);
-                getData();
-                setShow(false)
-            })
-            .catch((error) => {
-                setBtnLoader(false);
-                if (error.response) {
-                    errorResponse(error);
-                }
-            });
+    // if(fileName){
+    //   console.log(1);
+    //   data["body_image"] = icon.slice(34);
+    //  }else  {
+    //   console.log(2);
+    //  data["body_image"] = icon.slice(34);
+    // }
+
+    if (data.name_id) {
+
+      if(fileName){
+        data["body_image"] = icon.slice(34);
+       }else  {
+      console.log(2);
+     data["body_image"] = icon.slice(34);
+    }
+
+      data["id"] = data.name_id;
+
+      Http.callApi(url.body_update, data)
+        .then((response) => {
+          setBtnLoader(false);
+          successResponse(response);
+          getData();
+          setShow(false)
+        })
+        .catch((error) => {
+          setBtnLoader(false);
+          if (error.response) {
+            errorResponse(error);
+          }
+        });
 
     } else {
-        data["body_image"] = fileName;
-        Http.callApi(url.body_store, data)
-            .then((response) => {
-                setBtnLoader(false);
-                successResponse(response);
-                getData();
-                setShow(false)
-            })
-            .catch((error) => {
-                setBtnLoader(false);
-                if (error) {
-                    errorResponse(error);
-                }
-            });
+      data["body_image"] = fileName;
+      Http.callApi(url.body_store, data)
+        .then((response) => {
+          setBtnLoader(false);
+          successResponse(response);
+          getData();
+          setShow(false)
+        })
+        .catch((error) => {
+          setBtnLoader(false);
+          if (error) {
+            errorResponse(error);
+          }
+        });
     }
-};
+  };
 
 
   const showModal = (data) => {
@@ -177,19 +189,19 @@ const onFileUpload = (image) => {
     let TableModaldata = (
       <>
         <TableModal striped bordered hover className="cr-table">
-                    <tbody>
-                        <tr>
-                            <th>Name</th>
-                            <td>{data.name}</td>
-                        </tr>
-                        <tr>
-                            <th>Image</th>
-                            <td>
-                                <img src={(data.body_image) ? data.body_image : dummy} alt={data.name} className="profile_pic_img" style={{ "height": "70px", "width": "70px" }} />
-                            </td>
-                        </tr>
-                    </tbody>
-                </TableModal>
+          <tbody>
+            <tr>
+              <th>Name</th>
+              <td>{data.name}</td>
+            </tr>
+            <tr>
+              <th>Image</th>
+              <td>
+                <img src={(data.body_image) ? data.body_image : dummy} alt={data.name} className="profile_pic_img" style={{ "height": "70px", "width": "70px" }} />
+              </td>
+            </tr>
+          </tbody>
+        </TableModal>
       </>
     )
     setModalText(TableModaldata);
@@ -197,48 +209,51 @@ const onFileUpload = (image) => {
 
   const openImageInNewTab = (path) => {
     window.open(path);
-};
+  };
 
-const editButtonClick = (data) => {
-  setShow(true)
-  setValue("name", data.name);
-  setIcon(data.body_image)
-  // navigate('/admin/body/form', { state: { row } });
-};
+
 
   const deleteButtonClick = (id) => {
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
-        if (result.isConfirmed) {
-            // let obj = `?id=${id}`;
-            let data = {
-              id: id,
-            }
-          
-            Http.callApi(url.body_delete, data)
-                .then((response) => {
-                    getData();
-                    successResponse(response);
-                })
-                .catch((error) => {
-                    if (error.response) {
-                        errorResponse(error);
-                    }
-                });
+      if (result.isConfirmed) {
+        // let obj = `?id=${id}`;
+        let data = {
+          id: id,
         }
+
+        Http.callApi(url.body_delete, data)
+          .then((response) => {
+            getData();
+            successResponse(response);
+          })
+          .catch((error) => {
+            if (error.response) {
+              errorResponse(error);
+            }
+          });
+      }
     })
-};
+  };
 
 
 
   const columns = [
+    {
+      accessor: 'no',
+      Header: 'NO',
+      Cell: rowData => {
+          return (parseInt(rowData.row.id)+1) 
+      }
+    },
+
     {
       accessor: 'name',
       Header: 'Name'
@@ -250,12 +265,12 @@ const editButtonClick = (data) => {
       Cell: rowData => {
         const data = rowData.row.original
         return (
-          <img src={(data.body_image) ? data.body_image : dummy} onClick={(id) => { openImageInNewTab(data.body_image) }}  className="profile_pic_img"  style={{ "height": "100px", "width": "100px", "borderRadius": "50" }} />
+          <img src={(data.body_image) ? data.body_image : dummy} onClick={(id) => { openImageInNewTab(data.body_image) }} className="profile_pic_img" style={{ "height": "100px", "width": "100px", "borderRadius": "50" }} />
         )
       }
 
     },
-  
+
     {
       accessor: 'status',
       Header: 'Status',
@@ -311,197 +326,151 @@ const editButtonClick = (data) => {
 
 
   return (
-<>
-   <AdvanceTableWrapper
-			columns={columns}
-			data={dataTableData}
-			
-			pagination
-			perPage={10}
-		> 
-			<div style={{borderRadius: "0.375rem"}} className='py-4 bg-white mb-3 d-flex align-items-center px-3'>
-			<h5 className="hover-actions-trigger mb-0">
-									Body Type List
-								</h5>
-			</div>
-			<Card className='mb-3'>
+    <>
+      <AdvanceTableWrapper
+        columns={columns}
+        data={dataTableData}
 
-				<Card.Header className="border-bottom border-200">
-			
-					<Row className="flex-between-center mb-3">
-						<Col xs={8} sm="auto" className="ms-3 mt-2 text-end ps-0">
-							<div id="orders-actions">
-              <button className="btn btn-sm btn-success" onClick={(e) => handleShow()}>
-                <FontAwesomeIcon icon={faPlus} />
-              </button>
-                      {/* <Link to="/admin/body/form" className="btn btn-sm btn-success">
+        pagination
+        perPage={10}
+      >
+        <div style={{ borderRadius: "0.375rem" }} className='py-4 bg-white mb-3 d-flex align-items-center px-3'>
+          <h5 className="hover-actions-trigger mb-0">
+            Body Type List
+          </h5>
+        </div>
+        <Card className='mb-3'>
+
+          <Card.Header className="border-bottom border-200">
+
+            <Row className="flex-between-center mb-3">
+              <Col xs={8} sm="auto" className="ms-3 mt-2 text-end ps-0">
+                <div id="orders-actions">
+                  <button className="btn btn-sm btn-success" onClick={(e) => handleShow()}>
+                    <FontAwesomeIcon icon={faPlus} />
+                  </button>
+                  {/* <Link to="/admin/body/form" className="btn btn-sm btn-success">
                            <FontAwesomeIcon icon={faPlus} /> Add
               </Link> */}
-							</div>
-							
-						</Col>
-						<Col xs="auto" sm={2} lg={3}>
-								<AdvanceTableSearchBox table />
-							</Col>
-					</Row>
+                </div>
 
-				</Card.Header>
-				<Row className="flex-end-center mb-3">
+              </Col>
+              <Col xs="auto" sm={2} lg={3}>
+                <AdvanceTableSearchBox table />
+              </Col>
+            </Row>
 
-					<AdvanceTable
-						table
-						headerClassName="bg-200 text-900 text-nowrap align-middle"
-						rowClassName="align-middle white-space-nowrap"
-						tableProps={{
-							bordered: true,
-							striped: true,
-							className: 'fs--1 mb-0 overflow-hidden'
-						}}
-					/>
-				</Row>
-        <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div className="modal-dialog ">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">Body Details</h5>
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </Card.Header>
+          <Row className="flex-end-center mb-3">
+
+            <AdvanceTable
+              table
+              headerClassName="bg-200 text-900 text-nowrap align-middle"
+              rowClassName="align-middle white-space-nowrap"
+              tableProps={{
+                bordered: true,
+                striped: true,
+                className: 'fs--1 mb-0 overflow-hidden'
+              }}
+            />
+          </Row>
+          <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog ">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">Body Details</h5>
+                  <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div className="modal-body">
+                  {modalText}
+                </div>
+
               </div>
-              <div className="modal-body">
-                {modalText}
-              </div>
-
             </div>
           </div>
+        </Card>
+
+        <div className="mt-3">
+          <AdvanceTableFooter
+            rowCount={totalRows}
+            table
+            rowInfo
+            navButtons
+            rowsPerPageSelection
+          />
         </div>
-			</Card>
+      </AdvanceTableWrapper>
+      <Modal show={show} onHide={handleClose} keyboard={false}>
+        <Modal.Header>
+          <Modal.Title>Body Type Add</Modal.Title>
+          <FalconCloseButton onClick={handleClose} />
+        </Modal.Header>
+        <Form onSubmit={handleSubmit(onSubmit)}>
 
-			<div className="mt-3">
-				<AdvanceTableFooter
-					rowCount={totalRows}
-					table
-					rowInfo
-					navButtons
-					rowsPerPageSelection
-				/>
-			</div>
-		</AdvanceTableWrapper> 
-    <Modal show={show} onHide={handleClose} keyboard={false}>
-				<Modal.Header>
-					<Modal.Title>Body Type Add</Modal.Title>
-					<FalconCloseButton onClick={handleClose} />
-				</Modal.Header>
-        <Form  onSubmit={handleSubmit(onSubmit)}>
-        {/* <Modal.Body>
-						<Form.Group className="mb-3" >
-            <Form.Control
-								type="hidden"
-								id="name_id"
-								name="name_id"
-								{...register('name_id', {
-									required: true,
-								})} />
-               <Form.Label>Name</Form.Label>
-							<Form.Control
-								type="text"
-								id="name"
-								name="name"
-								placeholder="Enter name"
-								{...register('name', {
-									required: true,
-								})} />
-						</Form.Group> 
+          <Modal.Body>
+            <div className="form-row">
+              <Col md="12 mb-3">
+                <FormLabel htmlFor="name">Body Type Name</FormLabel>
+                <input type="hidden"
+                  className="form-control"
+                  id="name_id"
+                  name='name_id'
+                  {...register('name_id')}
+                />
+                <input type="text"
+                  className="form-control"
+                  id="name"
+                  name='name'
+                  placeholder="Enter Body Name"
+                  {...register('name', {
+                    required: "Body Name is required",
+                    maxLength: {
+                      value: 30,
+                      message: "maximum length is 30"
+                    },
+                    minLength: {
+                      value: 2,
+                      message: "minimum length is 2"
+                    },
+                  })}
+                />
+              </Col>
 
-            <Form.Group className="mb-3" >
-							<Form.Label>Image</Form.Label>
-							<Form.Control
-								type="file"
-								id="body_image"
-								name="body_image"
-								{...register('body_image', {
-									required: true,
-								})}
-								onChange={(ev) => onFileChange(ev)}
-							/>
-						</Form.Group>
+            </div>
+            <div className="form-row">
+              <Col md="12 mb-3">
+                <div className="form-group">
+                  <FormLabel htmlFor="body_image">Image Upload</FormLabel>
+                  <input
+                    {...register('body_image', (id == null) ? { required: "image is required" } : '')}
+                    type="file"
+                    className="form-control"
+                    id="body_image"
+                    name="body_image"
+                    placeholder="Select body image"
+                    onChange={onFileChange}
+                    accept="image/png,image/jpeg"
+                  />
+                </div>
+                {icon ?   <div className="form-group">
+                  <img
+                    src={icon}
+                    alt={iconAlt} width="150px" height="150px"
+                    className="imgBox"
+                  />
+                </div> : ''}
+              
+              </Col>  
 
-            <div className="form-group">
-							<img
-								src={icon}
-								alt={iconAlt} width="150px" height="150px"
-								className="imgBox"
-							/>
-						</div>
-					</Modal.Body> */}
-<Modal.Body>
- <div className="form-row">
-    <Col md="12 mb-3">
-        <FormLabel htmlFor="name">Body Type Name</FormLabel>
-        <input type="hidden"
-            className="form-control"
-            id="id"
-            name='id'
-            {...register('id')}
-        />
-        <input type="text"
-            className="form-control"
-            id="name"
-            name='name'
-            placeholder="Enter Body Name"
-            {...register('name', {
-                required: "Body Name is required",
-                maxLength: {
-                    value: 30,
-                    message: "maximum length is 30"
-                },
-                minLength: {
-                    value: 2,
-                    message: "minimum length is 2"
-                },
-            })}
-        />
-    </Col>
+            </div>
+            <ButtonSubmitReset btnloader={btnloader} onsubmitFun={() => {
+              reset(setIconAlt(''), setIcon(dummy));
+            }} />
+          </Modal.Body>
+        </Form>
 
-</div>
-<div className="form-row">
-    <Col md="12 mb-3">
-        <div className="form-group">
-            <FormLabel htmlFor="body_image">Image Upload</FormLabel>
-            <input
-                {...register('body_image', (id == null) ? { required: "image is required" } : '')}
-                type="file"
-                className="form-control"
-                id="body_image"
-                name="body_image"
-                placeholder="Select body image"
-                onChange={onFileChange}
-                accept="image/png,image/jpeg"
-            />
-        </div>
-        <div className="form-group">
-        
-            <img
-                src={icon}
-                alt={iconAlt} width="150px" height="150px"
-                className="imgBox"
-            />
-        </div>
-    </Col>
-
-</div> 
-<ButtonSubmitReset btnloader={btnloader} onsubmitFun={() => {
-    reset(setIconAlt(''), setIcon(dummy));
-}} />
-</Modal.Body>
-	{/* <Modal.Footer>
-						<Button variant="secondary" onClick={handleClose}>
-							Close
-						</Button>
-						<Button type="submit" variant="primary">Submit</Button>
-					</Modal.Footer> */}
-</Form>
-
-			</Modal>
-      </>
+      </Modal>
+    </>
 
   );
 }
