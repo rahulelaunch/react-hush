@@ -186,7 +186,6 @@ import Faq from 'components/documentation/Faq';
 
 import User from 'components/app/users/User';
 import Body from 'components/app/body_type/Body';
-import BodyForm from 'components/app/body_type/PageForm';
 import Fashion from 'components/app/fashion/Fashion';
 import FashionForm from 'components/app/fashion/PageForm';
 import Desire from 'components/app/desires/Desire';
@@ -376,7 +375,6 @@ const Layout = () => {
           <Route path="/admin/profile" element={<AdminProfile />} />
           <Route path="/admin/change_password" element={<ChangePassword />} />
           <Route path="/admin/body/list" element={<Body />} />
-          <Route path="/admin/body/form" element={<BodyForm />} />  
           <Route path="/admin/fashion/list" element={<Fashion />} />
           <Route path="/admin/fashion/form" element={<FashionForm />} />  
           <Route path="/admin/desire/list" element={<Desire />} />

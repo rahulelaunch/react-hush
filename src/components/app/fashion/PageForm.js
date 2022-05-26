@@ -181,7 +181,7 @@ const PageForm = () => {
 
                     </div>
                     <ButtonSubmitReset btnloader={btnloader} onsubmitFun={() => {
-                        reset(setIconAlt(''), setIcon(dummy));
+                        reset(setIcon(dummy));
                     }} />
                 </Form>
 

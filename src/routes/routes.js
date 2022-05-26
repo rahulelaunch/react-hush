@@ -16,66 +16,73 @@ export const appRoutes = {
   label: 'app',
   children: [
     {
-      name: 'Users',
+      name: 'User Profile',
       icon: 'users',
-      to: '/admin/users',
-      active: true
-    },
-
-    {
-      name: 'Body Type',
-      icon: 'user',
-      to: '/admin/body/list',
-      active: true
-    },
-    {
-      name: 'Hair',
-      icon: 'comments',
-      to: '/admin/hair/list',
-      active: true
-    },
-    {
-      name: 'Eye',
-      icon: 'comments',
-      to: '/admin/eye/list',
-      active: true
-    },
-    {
-      name: 'Fashion Type',
-      icon: 'users',
-      to: '/admin/fashion/list',
-      active: true
-    },
-    {
-      name: 'Desire',
-      icon: 'comments',
-      to: '/admin/desire/list',
-      active: true
-    },
-    {
-      name: 'Education',
-      icon: 'comments',
-      to: '/admin/education/list',
-      active: true
-    },
-    {
-      name: 'Annul Income',
-      icon: 'comments',
-      to: '/admin/income/list',
-      active: true
-    },
-    {
-      name: 'Country',
-      icon: 'comments',
-      to: '/admin/country/list',
-      active: true
+      active: true,
+      children: [
+        {
+          name: 'Users',
+          to: '/admin/users',
+          active: true
+        },
+    
+        {
+          name: 'Body Type',
+          to: '/admin/body/list',
+          active: true
+        },
+        {
+          name: 'Hair',
+          to: '/admin/hair/list',
+          active: true
+        },
+        {
+          name: 'Eye',
+          to: '/admin/eye/list',
+          active: true
+        },
+        {
+          name: 'Fashion Type',
+          to: '/admin/fashion/list',
+          active: true
+        },
+        {
+          name: 'Desire',
+          to: '/admin/desire/list',
+          active: true
+        },
+        {
+          name: 'Education',
+          to: '/admin/education/list',
+          active: true
+        },
+        {
+          name: 'Annul Income',
+          to: '/admin/income/list',
+          active: true
+        },
+      ]
     },
     {
-      name: 'State',
-      icon: 'comments',
-      to: '/admin/state/list',
-      active: true
+      name: 'Location',
+      icon: 'map',
+      active: true,
+      children: [
+        {
+          name: 'Country',
+          icon: 'comments',
+          to: '/admin/country/list',
+          active: true
+        },
+        {
+          name: 'State',
+          icon: 'comments',
+          to: '/admin/state/list',
+          active: true
+        },
+      ]
     },
+ 
     {
       name: 'Mobile Plan',
       icon: 'comments',
@@ -88,6 +95,7 @@ export const appRoutes = {
       to: '/admin/terms_conditions/list',
       active: true
     },
+ 
   ]
 };
 
