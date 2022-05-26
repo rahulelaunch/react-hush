@@ -64,6 +64,30 @@ export const appRoutes = {
       to: '/admin/income/list',
       active: true
     },
+    {
+      name: 'Country',
+      icon: 'comments',
+      to: '/admin/country/list',
+      active: true
+    },
+    {
+      name: 'State',
+      icon: 'comments',
+      to: '/admin/state/list',
+      active: true
+    },
+    {
+      name: 'Mobile Plan',
+      icon: 'comments',
+      to: '/admin/plan/list',
+      active: true
+    },
+    {
+      name: 'Terms & Conditions',
+      icon: 'comments',
+      to: '/admin/terms_conditions/list',
+      active: true
+    },
   ]
 };
 

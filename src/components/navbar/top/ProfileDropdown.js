@@ -9,7 +9,7 @@ import url from '../../../Development.json';
 
 
 const Logout = () => {
-  
+    console.log(23232);
     const isLogin = localStorage.getItem("access_token") || false;
    
       if (isLogin) {

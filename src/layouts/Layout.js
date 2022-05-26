@@ -199,6 +199,10 @@ import Income from 'components/app/incomes/Income';
 import IncomeForm from 'components/app/incomes/PageForm';
 import Hair from 'components/app/hair/Hair';
 import Eye from 'components/app/eye/Eye';
+import Country from 'components/app/country/Country';
+import State from 'components/app/state/State';
+import Plan from 'components/app/mobile_plan/Plan';
+import TermsConditions from 'components/app/terms_conditions/TermsConditions';
 
 
 
@@ -382,9 +386,12 @@ const Layout = () => {
           <Route path="/admin/income/list" element={<Income />} />
           <Route path="/admin/income/form" element={<IncomeForm />} />   
           <Route path="/admin/hair/list" element={<Hair />} />   
-          <Route path="/admin/eye/list" element={<Eye />} />   
-
-
+          <Route path="/admin/eye/list" element={<Eye />} /> 
+          <Route path="/admin/country/list" element={<Country />} />   
+          <Route path="/admin/state/list" element={<State />} /> 
+          <Route path="/admin/plan/list" element={<Plan />} />   
+          <Route path="/admin/terms_conditions/list" element={<TermsConditions />} />   
+          
 
 
           <Route path="app/calendar" element={<Calendar />} />
