@@ -46,6 +46,12 @@ export const appRoutes = {
       to: '/admin/education/list',
       active: true
     },
+    {
+      name: 'Annul Income',
+      icon: 'comments',
+      to: '/admin/income/list',
+      active: true
+    },
   ]
 };
 

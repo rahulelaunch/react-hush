@@ -195,6 +195,8 @@ import AdminProfile from 'components/app/admin/Profile';
 import ChangePassword from 'components/app/admin/ChangePassword';
 import Education from 'components/app/educations/Education';
 import EducationForm from 'components/app/educations/PageForm';
+import Income from 'components/app/incomes/Income';
+import IncomeForm from 'components/app/incomes/PageForm';
 
 
 const Layout = () => {
@@ -373,7 +375,9 @@ const Layout = () => {
           <Route path="/admin/desire/list" element={<Desire />} />
           <Route path="/admin/desire/form" element={<DesireForm />} />
           <Route path="/admin/education/list" element={<Education />} />
-          <Route path="/admin/education/form" element={<EducationForm />} />  
+          <Route path="/admin/education/form" element={<EducationForm />} />
+          <Route path="/admin/income/list" element={<Income />} />
+          <Route path="/admin/income/form" element={<IncomeForm />} />   
 
 
 

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
+import { Button,Form,FormLabel, Card, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
+import { useForm } from "react-hook-form";
 import { modal } from "bootstrap"
 import PageHeader from 'components/common/PageHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -22,9 +23,11 @@ import {
 } from "../../helpers/response";
 import Flex from 'components/common/Flex';
 import Typography from 'components/utilities/Typography';
+import ButtonSubmitReset from '../../layout/ButtonSubmitReset';
 import { faEye, faPlus, faToggleOff, faToggleOn, faTrashAlt,faPencilAlt} from '@fortawesome/free-solid-svg-icons';
 import ActionButton from 'components/common/ActionButton';
 import { Link, useNavigate} from 'react-router-dom';
+import FalconCloseButton from 'components/common/FalconCloseButton';
 
 
 
@@ -33,7 +36,22 @@ const AdvanceTableExamples = () => {
   const [dataTableData, setDataTableData] = useState([]);
   const [modalText, setModalText] = useState();
   const [totalRows, setTotalRows] = useState(0);
+  const [show, setShow] = useState(false);
   const navigate = useNavigate();
+  const handleClose = () => setShow(false);
+  const [btnloader, setBtnLoader] = useState(false);
+  const [icon, setIcon] = useState(dummy);
+  const [iconAlt, setIconAlt] = useState('');
+  const [fileName, setFileName] = useState('');
+  const [id, setId] = useState('');
+
+  const {
+    register,
+    setValue,
+    reset,
+    handleSubmit,
+    formState: { errors },
+} = useForm();
 
 
   const getData = () => {
@@ -56,6 +74,39 @@ const AdvanceTableExamples = () => {
 
   }, []);
 
+  const handleShow = (data) => {
+console.log(data);
+		setShow(true)
+    setValue("name", '');
+    setValue("name_id", '');
+    setIcon('')
+    if(data){
+      setValue("name", data.name);
+      setValue("name_id", data._id);
+      setId("name_id", data._id);
+      setIcon(data.body_image);
+    }
+	};
+
+  const onFileChange = (e) => {
+    onFileUpload(e.target.files[0]);
+};
+const onFileUpload = (image) => {
+
+    const formData = new FormData();
+    formData.append('image', image);
+
+    Http.callApi(url.image_upload, formData)
+        .then(response => {
+            setIcon(response.data.path);
+            setFileName(response.data.image[0]);
+        })
+        .catch(error => {
+            if (error.response) {
+                errorResponse(error);
+            }
+        });
+};
 
   const changeStatusButtonClick = (id) => {
     const obj = {
@@ -73,6 +124,52 @@ const AdvanceTableExamples = () => {
         }
       });
   };
+
+  const onSubmit = (data) => {
+    console.log(data);
+    setBtnLoader(true);
+    if (data.name_id) {
+      if (fileName) {
+        data["body_image"] = fileName;
+      }
+      // }else{
+      //   console.log(1);
+      //   data["body_image"] = icon.slice(34);
+      // }
+          data["id"] = data.name_id;
+ 
+          
+        Http.callApi(url.body_update, data)
+            .then((response) => {
+                setBtnLoader(false);
+                successResponse(response);
+                getData();
+                setShow(false)
+            })
+            .catch((error) => {
+                setBtnLoader(false);
+                if (error.response) {
+                    errorResponse(error);
+                }
+            });
+
+    } else {
+        data["body_image"] = fileName;
+        Http.callApi(url.body_store, data)
+            .then((response) => {
+                setBtnLoader(false);
+                successResponse(response);
+                getData();
+                setShow(false)
+            })
+            .catch((error) => {
+                setBtnLoader(false);
+                if (error) {
+                    errorResponse(error);
+                }
+            });
+    }
+};
 
 
   const showModal = (data) => {
@@ -102,8 +199,11 @@ const AdvanceTableExamples = () => {
     window.open(path);
 };
 
-const editButtonClick = (row) => {
-  navigate('/admin/body/form', { state: { row } });
+const editButtonClick = (data) => {
+  setShow(true)
+  setValue("name", data.name);
+  setIcon(data.body_image)
+  // navigate('/admin/body/form', { state: { row } });
 };
 
   const deleteButtonClick = (id) => {
@@ -193,7 +293,7 @@ const editButtonClick = (row) => {
                 <FontAwesomeIcon icon={faEye} title="View" />
               </button>
 
-              <button className="btn btn-sm btn-primary ml-2 btn-xs" onClick={(e) => editButtonClick(data)}>
+              <button className="btn btn-sm btn-primary ml-2 btn-xs" onClick={(e) => handleShow(data)}>
                 <FontAwesomeIcon icon={faPencilAlt} />
               </button>
 
@@ -211,7 +311,7 @@ const editButtonClick = (row) => {
 
 
   return (
-
+<>
    <AdvanceTableWrapper
 			columns={columns}
 			data={dataTableData}
@@ -231,9 +331,12 @@ const editButtonClick = (row) => {
 					<Row className="flex-between-center mb-3">
 						<Col xs={8} sm="auto" className="ms-3 mt-2 text-end ps-0">
 							<div id="orders-actions">
-                      <Link to="/admin/body/form" className="btn btn-sm btn-success">
+              <button className="btn btn-sm btn-success" onClick={(e) => handleShow()}>
+                <FontAwesomeIcon icon={faPlus} />
+              </button>
+                      {/* <Link to="/admin/body/form" className="btn btn-sm btn-success">
                            <FontAwesomeIcon icon={faPlus} /> Add
-              </Link>
+              </Link> */}
 							</div>
 							
 						</Col>
@@ -282,6 +385,124 @@ const editButtonClick = (row) => {
 				/>
 			</div>
 		</AdvanceTableWrapper> 
+    <Modal show={show} onHide={handleClose} keyboard={false}>
+				<Modal.Header>
+					<Modal.Title>Body Type Add</Modal.Title>
+					<FalconCloseButton onClick={handleClose} />
+				</Modal.Header>
+        <Form  onSubmit={handleSubmit(onSubmit)}>
+        {/* <Modal.Body>
+						<Form.Group className="mb-3" >
+            <Form.Control
+								type="hidden"
+								id="name_id"
+								name="name_id"
+								{...register('name_id', {
+									required: true,
+								})} />
+               <Form.Label>Name</Form.Label>
+							<Form.Control
+								type="text"
+								id="name"
+								name="name"
+								placeholder="Enter name"
+								{...register('name', {
+									required: true,
+								})} />
+						</Form.Group> 
+
+            <Form.Group className="mb-3" >
+							<Form.Label>Image</Form.Label>
+							<Form.Control
+								type="file"
+								id="body_image"
+								name="body_image"
+								{...register('body_image', {
+									required: true,
+								})}
+								onChange={(ev) => onFileChange(ev)}
+							/>
+						</Form.Group>
+
+            <div className="form-group">
+							<img
+								src={icon}
+								alt={iconAlt} width="150px" height="150px"
+								className="imgBox"
+							/>
+						</div>
+					</Modal.Body> */}
+<Modal.Body>
+ <div className="form-row">
+    <Col md="12 mb-3">
+        <FormLabel htmlFor="name">Body Type Name</FormLabel>
+        <input type="hidden"
+            className="form-control"
+            id="id"
+            name='id'
+            {...register('id')}
+        />
+        <input type="text"
+            className="form-control"
+            id="name"
+            name='name'
+            placeholder="Enter Body Name"
+            {...register('name', {
+                required: "Body Name is required",
+                maxLength: {
+                    value: 30,
+                    message: "maximum length is 30"
+                },
+                minLength: {
+                    value: 2,
+                    message: "minimum length is 2"
+                },
+            })}
+        />
+    </Col>
+
+</div>
+<div className="form-row">
+    <Col md="12 mb-3">
+        <div className="form-group">
+            <FormLabel htmlFor="body_image">Image Upload</FormLabel>
+            <input
+                {...register('body_image', (id == null) ? { required: "image is required" } : '')}
+                type="file"
+                className="form-control"
+                id="body_image"
+                name="body_image"
+                placeholder="Select body image"
+                onChange={onFileChange}
+                accept="image/png,image/jpeg"
+            />
+        </div>
+        <div className="form-group">
+        
+            <img
+                src={icon}
+                alt={iconAlt} width="150px" height="150px"
+                className="imgBox"
+            />
+        </div>
+    </Col>
+
+</div> 
+<ButtonSubmitReset btnloader={btnloader} onsubmitFun={() => {
+    reset(setIconAlt(''), setIcon(dummy));
+}} />
+</Modal.Body>
+	{/* <Modal.Footer>
+						<Button variant="secondary" onClick={handleClose}>
+							Close
+						</Button>
+						<Button type="submit" variant="primary">Submit</Button>
+					</Modal.Footer> */}
+</Form>
+
+			</Modal>
+      </>
+
   );
 }
 export default AdvanceTableExamples;

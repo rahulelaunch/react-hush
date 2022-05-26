@@ -74,12 +74,14 @@ const PageForm = () => {
             if (fileName) {
                 data["fashion_image"] = fileName;
             } else {
-                var str = state.row.body_image;
+                var str = state.row.fashion_image;
+                console.log(str);
                 data["fashion_image"] = str.slice(34);
+                console.log(data);
             }
             data["id"] = state.row._id;
 
-            Http.callApi(url.body_update, data)
+            Http.callApi(url.fashion_update, data)
                 .then((response) => {
                     setBtnLoader(false);
                     successResponse(response);

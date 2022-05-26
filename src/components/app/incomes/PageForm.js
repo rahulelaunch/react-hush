@@ -2,6 +2,7 @@ import React, { useEffect, useState, Fragment } from "react";
 import { useForm } from "react-hook-form";
 import Http from '../../security/Http';
 import url from '../../../Development.json';
+import { toast } from "react-toastify";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import {
@@ -33,8 +34,8 @@ const PageForm = () => {
     useEffect(() => {
         if (state && state.row._id) {
             const data = state.row;
-            setValue("name", data.name);
-
+            setValue("annual_income", data.annual_income);
+       
         }
     }, []);
 
@@ -42,16 +43,18 @@ const PageForm = () => {
         isError(errors);
     });
 
+
+
     const onSubmit = (data) => {
         setBtnLoader(true);
         if (state && state.row._id) {
             data["id"] = state.row._id;
 
-            Http.callApi(url.education_update, data)
+            Http.callApi(url.income_update, data)
                 .then((response) => {
                     setBtnLoader(false);
                     successResponse(response);
-                    navigate('/admin/education/list');
+                    navigate('/admin/income/list');
                 })
                 .catch((error) => {
                     setBtnLoader(false);
@@ -61,16 +64,28 @@ const PageForm = () => {
                 });
 
         } else {
-
-            Http.callApi(url.education_store, data)
+           
+            Http.callApi(url.income_store, data)
                 .then((response) => {
                     setBtnLoader(false);
                     successResponse(response);
-                    navigate('/admin/education/list');
+                    navigate('/admin/income/list');
                 })
                 .catch((error) => {
                     setBtnLoader(false);
-                    if (error) {
+                    if (error.response.status === 422) {
+        
+                        let errorData = error.response.data;
+                        if (errorData) {
+                            var errors = Object.values(errorData);
+                            if (errors) {
+                                errors.forEach((err) => {
+                                    toast.error((err.annual_income));
+                                });
+                            }
+                        }
+                    }else{
+
                         errorResponse(error);
                     }
                 });
@@ -81,7 +96,7 @@ const PageForm = () => {
         <>
             <div style={{ borderRadius: "0.375rem" }} className='py-4 bg-white mb-3 d-flex align-items-center px-3'>
                 <h5 className="hover-actions-trigger mb-0">
-                    Eduaction
+                    income
                 </h5>
             </div>
             <Card className='mb-3'>
@@ -99,14 +114,14 @@ const PageForm = () => {
                 <Form className="needs-validation" noValidate="" onSubmit={handleSubmit(onSubmit)}>
                     <div className="form-row">
                         <Col md="6 mb-3">
-                            <FormLabel htmlFor="name">Education Name</FormLabel>
+                            <FormLabel htmlFor="annual_income">income Name</FormLabel>
                             <input type="text"
                                 className="form-control"
-                                id="name"
-                                name='name'
-                                placeholder="Enter Education Name"
-                                {...register('name', {
-                                    required: "Education Name is required",
+                                id="annual_income"
+                                name='annual_income'
+                                placeholder="Enter income Name"
+                                {...register('annual_income', {
+                                    required: "income Name is required",
                                     maxLength: {
                                         value: 30,
                                         message: "maximum length is 30"
