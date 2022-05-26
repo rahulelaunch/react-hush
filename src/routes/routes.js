@@ -29,6 +29,18 @@ export const appRoutes = {
       active: true
     },
     {
+      name: 'Hair',
+      icon: 'comments',
+      to: '/admin/hair/list',
+      active: true
+    },
+    {
+      name: 'Eye',
+      icon: 'comments',
+      to: '/admin/eye/list',
+      active: true
+    },
+    {
       name: 'Fashion Type',
       icon: 'users',
       to: '/admin/fashion/list',

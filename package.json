@@ -38,6 +38,7 @@
     "is_js": "^0.9.0",
     "leaflet": "^1.7.1",
     "leaflet.tilelayer.colorfilter": "^1.2.5",
+    "or": "^0.2.0",
     "php-serialize": "^4.0.2",
     "plyr": "^3.6.8",
     "prism-react-renderer": "^1.2.1",
@@ -74,7 +75,8 @@
     "sweetalert2": "^11.4.16",
     "uuid": "^8.3.2",
     "video.js": "^7.14.3",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "yarn": "^1.22.18"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -107,10 +109,6 @@
     "mini-css-extract-plugin": "^0.11.3",
     "prettier": "^2.3.2",
     "sass": "^1.38.0",
-    "sass-loader": "^10.1.1",
-    "webpack": "^4.44.2",
-    "webpack-cli": "^4.6.0",
-    "webpack-fix-style-only-entries": "^0.6.1",
-    "webpack-rtl-plugin": "^2.0.0"
+    "sass-loader": "^10.1.1"
   }
 }

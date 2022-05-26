@@ -197,6 +197,9 @@ import Education from 'components/app/educations/Education';
 import EducationForm from 'components/app/educations/PageForm';
 import Income from 'components/app/incomes/Income';
 import IncomeForm from 'components/app/incomes/PageForm';
+import Hair from 'components/app/hair/Hair';
+import Eye from 'components/app/eye/Eye';
+
 
 
 const Layout = () => {
@@ -378,6 +381,9 @@ const Layout = () => {
           <Route path="/admin/education/form" element={<EducationForm />} />
           <Route path="/admin/income/list" element={<Income />} />
           <Route path="/admin/income/form" element={<IncomeForm />} />   
+          <Route path="/admin/hair/list" element={<Hair />} />   
+          <Route path="/admin/eye/list" element={<Eye />} />   
+
 
 
 
