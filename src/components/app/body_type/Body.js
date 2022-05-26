@@ -88,9 +88,7 @@ const AdvanceTableExamples = () => {
 
   useEffect(() => {
     isError(errors);
-});
-
-
+  });
 
   const onFileChange = (e) => {
     onFileUpload(e.target.files[0]);
@@ -131,23 +129,14 @@ const AdvanceTableExamples = () => {
 
   const onSubmit = (data) => {
     setBtnLoader(true);
- 
-    // if(fileName){
-    //   console.log(1);
-    //   data["body_image"] = icon.slice(34);
-    //  }else  {
-    //   console.log(2);
-    //  data["body_image"] = icon.slice(34);
-    // }
 
     if (data.name_id) {
 
-      if(fileName){
+      if (fileName) {
         data["body_image"] = icon.slice(34);
-       }else  {
-      console.log(2);
-     data["body_image"] = icon.slice(34);
-    }
+      } else {
+        data["body_image"] = icon.slice(34);
+      }
 
       data["id"] = data.name_id;
 
@@ -211,8 +200,6 @@ const AdvanceTableExamples = () => {
     window.open(path);
   };
 
-
-
   const deleteButtonClick = (id) => {
     Swal.fire({
       title: 'Are you sure?',
@@ -224,7 +211,6 @@ const AdvanceTableExamples = () => {
       confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
       if (result.isConfirmed) {
-        // let obj = `?id=${id}`;
         let data = {
           id: id,
         }
@@ -250,15 +236,13 @@ const AdvanceTableExamples = () => {
       accessor: 'no',
       Header: 'NO',
       Cell: rowData => {
-          return (parseInt(rowData.row.id)+1) 
+        return (parseInt(rowData.row.id) + 1)
       }
     },
-
     {
       accessor: 'name',
       Header: 'Name'
     },
-
     {
       accessor: 'body_image',
       Header: 'Image',
@@ -268,9 +252,7 @@ const AdvanceTableExamples = () => {
           <img src={(data.body_image) ? data.body_image : dummy} onClick={(id) => { openImageInNewTab(data.body_image) }} className="profile_pic_img" style={{ "height": "100px", "width": "100px", "borderRadius": "50" }} />
         )
       }
-
     },
-
     {
       accessor: 'status',
       Header: 'Status',
@@ -285,9 +267,7 @@ const AdvanceTableExamples = () => {
           </span>
         );
       },
-
     },
-
     {
       accessor: '_id',
       Header: 'Action',
@@ -349,9 +329,6 @@ const AdvanceTableExamples = () => {
                   <button className="btn btn-sm btn-success" onClick={(e) => handleShow()}>
                     <FontAwesomeIcon icon={faPlus} />
                   </button>
-                  {/* <Link to="/admin/body/form" className="btn btn-sm btn-success">
-                           <FontAwesomeIcon icon={faPlus} /> Add
-              </Link> */}
                 </div>
 
               </Col>
@@ -452,15 +429,15 @@ const AdvanceTableExamples = () => {
                     accept="image/png,image/jpeg"
                   />
                 </div>
-                {icon ?   <div className="form-group">
+                {icon ? <div className="form-group">
                   <img
                     src={icon}
                     alt={iconAlt} width="150px" height="150px"
                     className="imgBox"
                   />
                 </div> : ''}
-              
-              </Col>  
+
+              </Col>
 
             </div>
             <ButtonSubmitReset btnloader={btnloader} onsubmitFun={() => {
@@ -468,7 +445,6 @@ const AdvanceTableExamples = () => {
             }} />
           </Modal.Body>
         </Form>
-
       </Modal>
     </>
 
