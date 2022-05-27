@@ -133,7 +133,7 @@ const AdvanceTableExamples = () => {
     if (data.name_id) {
 
       if (fileName) {
-        data["body_image"] = fileName;
+        data["body_image"] = icon.slice(34);
       } else {
         data["body_image"] = icon.slice(34);
       }
