@@ -181,21 +181,21 @@ const AdvanceTableExamples = () => {
           <>
             <td className="text-end">
 
-              <button className={`btn btn-sm ${data.status === 1 ? "btn-warning" : "btn-danger"} `} onClick={(id) => { changeStatusButtonClick(data._id) }} >
+              <button className={`btn btn-sm me-2 ${data.status === 1 ? "btn-warning" : "btn-danger"} `} onClick={(id) => { changeStatusButtonClick(data._id) }} >
                 {
                   data.status === 1 ? <FontAwesomeIcon icon={faToggleOff} title="Change Status" /> : <FontAwesomeIcon icon={faToggleOn} title="Change Status" />
                 }
               </button>
 
-              <button className="btn btn-sm btn-info ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={(e) => showModal(data)}>
+              <button className="btn btn-sm btn-info me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={(e) => showModal(data)}>
                 <FontAwesomeIcon icon={faEye} title="View" />
               </button>
 
-              <button className="btn btn-sm btn-primary ml-2 btn-xs" onClick={(e) => editButtonClick(data)}>
+              <button className="btn btn-sm btn-primary me-2 btn-xs" onClick={(e) => editButtonClick(data)}>
                 <FontAwesomeIcon icon={faPencilAlt} />
               </button>
 
-              <button className="btn btn-sm btn-danger ml-2" >
+              <button className="btn btn-sm btn-danger me-2" >
                 <FontAwesomeIcon icon={faTrashAlt} onClick={(id) => { deleteButtonClick(data._id) }} />
               </button>
 
