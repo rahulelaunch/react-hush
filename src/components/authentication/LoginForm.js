@@ -81,7 +81,7 @@ const LoginForm = ({ hasLabel, layout }) => {
       <Form.Group className="mb-3">
         {hasLabel && <Form.Label>Email address</Form.Label>}
         <Form.Control
-          placeholder={!hasLabel ? 'Email address' : ''}
+          placeholder={!hasLabel ? 'Email  address' : ''}
           // value={formData.email}
           name="email"
           id="email"

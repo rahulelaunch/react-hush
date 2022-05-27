@@ -254,7 +254,7 @@ const onSubmit = (data) => {
                 <FontAwesomeIcon icon={faEye} title="View" />
               </button>
 
-              <button className="btn btn-sm btn-primary ml-2 btn-xs" onClick={(e) => handleShow(data)}>
+              <button className="btn btn-sm btn-primary me-2 btn-xs" onClick={(e) => handleShow(data)}>
                 <FontAwesomeIcon icon={faPencilAlt} />
               </button>
 

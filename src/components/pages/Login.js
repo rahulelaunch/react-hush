@@ -1,7 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import Flex from 'components/common/Flex';
-import LoginForm from 'components/authentication/LoginForm';
+import LoginForm from 'components/app/LoginForm';
 
 const Login = () => (
   <>

@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import PropTypes from 'prop-types';
-import { Eye, EyeOff } from 'react-feather';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
-import { toast } from 'react-toastify';
 import { Button, Form, Row, Col } from 'react-bootstrap';
-import Divider from 'components/common/Divider';
-import SocialAuthButtons from './SocialAuthButtons';
 import { useNavigate } from "react-router-dom";
-import { useLocation } from 'react-router-dom';
 import Http from '../security/Http';
-// import { errorResponse } from 'components/helpers/response';
 import url from '../../Development.json';
+import ButtonSubmitReset from '../layout/ButtonSubmitReset';
+
 import {
   errorResponse,
   successResponse,
@@ -20,9 +14,10 @@ import {
 } from "../helpers/response";
 
 
-const LoginForm = ({ hasLabel, layout }) => {
+const LoginForm = () => {
 
   const navigate = useNavigate();
+  const [btnloader, setBtnLoader] = useState(false);
 
   const {
     register,
@@ -39,34 +34,26 @@ const LoginForm = ({ hasLabel, layout }) => {
 
   useEffect(() => {
     isError(errors);
-});
+  });
 
 
   const onSubmit = (data) => {
-    console.log(data);
-
 
     Http.callApi(url.login, JSON.stringify(data))
       .then((response) => {
-        console.log(response);
-        console.log('response');
         let data = response.data;
-
         localStorage.setItem(
           "access_token",
           data.data.token
 
         );
-
-
-        // setBtnLoader(false);
+        setBtnLoader(false);
         navigate('/admin/dashboard');
         successResponse(response);
-       
+
       })
       .catch((error) => {
-
-        // setBtnLoader(false);
+        setBtnLoader(false);
         if (error.response) {
           errorResponse(error);
         }
@@ -76,13 +63,10 @@ const LoginForm = ({ hasLabel, layout }) => {
   return (
     <Form onSubmit={handleSubmit(onSubmit)}>
       <Form.Group className="mb-3">
-        {hasLabel && <Form.Label>Email address</Form.Label>}
         <Form.Control
-          placeholder={!hasLabel ? 'Email address' : ''}
-          // value={formData.email}
+          placeholder='Email address'
           name="email"
           id="email"
-          // onChange={handleFieldChange}
           type="email"
           {...register('email', {
             required: true,
@@ -96,19 +80,13 @@ const LoginForm = ({ hasLabel, layout }) => {
             },
           })}
         />
-
-
-
       </Form.Group>
 
       <Form.Group className="mb-3">
-        {hasLabel && <Form.Label>Password</Form.Label>}
         <Form.Control
-          placeholder={!hasLabel ? 'Password' : ''}
-          // value={formData.password}
+          placeholder='Password'
           name="password"
           id="password"
-          // onChange={handleFieldChange}
           type='password'
           defaultValue={password}
           onChange={(e) => handleChange(e)}
@@ -122,17 +100,9 @@ const LoginForm = ({ hasLabel, layout }) => {
         />
       </Form.Group>
 
-
-      <Form.Group>
-        <Button
-          type="submit"
-          color="primary"
-          className="mt-3 w-100"
-        // disabled={!formData.email || !formData.password}
-        >
-          Log in
-        </Button>
-      </Form.Group>
+      <ButtonSubmitReset btnloader={btnloader} onsubmitFun={() => {
+        reset();
+      }} />
 
     </Form>
   );
