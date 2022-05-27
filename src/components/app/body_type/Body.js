@@ -38,12 +38,20 @@ const AdvanceTableExamples = () => {
   const [totalRows, setTotalRows] = useState(0);
   const [show, setShow] = useState(false);
   const navigate = useNavigate();
-  const handleClose = () => setShow(false);
+  // const handleClose = () => setShow(false);
   const [btnloader, setBtnLoader] = useState(false);
   const [icon, setIcon] = useState('');
   const [iconAlt, setIconAlt] = useState('');
   const [fileName, setFileName] = useState('');
   const [id, setId] = useState('');
+
+  const handleClose = () => {
+		reset(
+			  { keepDirtyValues: true },
+			  { keepIsValid: true }
+		);
+		setShow(false)
+	};
 
   const {
     register,
@@ -58,6 +66,7 @@ const AdvanceTableExamples = () => {
 
     Http.callApi(url.get_body)
       .then((response) => {
+        console.log(response);
         // setLoading(false);
         setDataTableData(response.data);
         setTotalRows(response.data.length);

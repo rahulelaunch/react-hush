@@ -87,6 +87,7 @@ const AdvanceTableExamples = () => {
     setShow(true)
     setValue("name", '');
     setValue("hair_id", '');
+    setId('');
 
     if (data) {
       setValue("name", data.name);
@@ -135,9 +136,9 @@ const AdvanceTableExamples = () => {
   const onSubmit = (data) => {
     setBtnLoader(true);
 
-    if (data.name_id) {
+    if (data.hair_id) {
 
-      data["id"] = data.name_id;
+      data["id"] = data.hair_id;
 
       Http.callApi(url.hair_update, data)
         .then((response) => {
@@ -336,7 +337,11 @@ const AdvanceTableExamples = () => {
       </AdvanceTableWrapper>
       <Modal show={show} onHide={handleClose} keyboard={false}>
         <Modal.Header>
-          <Modal.Title>Hair Color Add</Modal.Title>
+          {/* <Modal.Title>Hair Color Add</Modal.Title>
+           */}
+            {id ? <div className="form-group">
+            <Modal.Title>Hair Color Update</Modal.Title>
+        </div> :  <Modal.Title>Hair Color Add</Modal.Title>}
           <FalconCloseButton onClick={handleClose} />
         </Modal.Header>
         <Form onSubmit={handleSubmit(onSubmit)}>
@@ -348,7 +353,12 @@ const AdvanceTableExamples = () => {
                   onChangeComplete={(colors) => { setColor(colors.hex) }}
                 />
                 <FormLabel htmlFor="name">Hair Color</FormLabel>
-
+                <input type="hidden"
+                  className="form-control"
+                  id="hair_id"
+                  name='hair_id'
+                  {...register('hair_id')}
+                />
                 <input type="text"
                   disabled
                   className="form-control"

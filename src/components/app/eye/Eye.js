@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
+import { Button, Card,Form, FormLabel, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
 import { modal } from "bootstrap"
 import PageHeader from 'components/common/PageHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -21,11 +21,17 @@ import {
   configHeaderAxios
 
 } from "../../helpers/response";
+import { SketchPicker } from 'react-color'
+import { useForm } from "react-hook-form";
+
 import Flex from 'components/common/Flex';
 import Typography from 'components/utilities/Typography';
 import { faEye, faPencilAlt, faPlus, faToggleOff, faToggleOn, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import ActionButton from 'components/common/ActionButton';
 import { Link,useNavigate } from 'react-router-dom';
+import FalconCloseButton from 'components/common/FalconCloseButton';
+import ButtonSubmitReset from '../../layout/ButtonSubmitReset';
+
 
 
 
@@ -35,7 +41,19 @@ const AdvanceTableExamples = () => {
   const [modalText, setModalText] = useState();
   const [totalRows, setTotalRows] = useState(0);
   const navigate = useNavigate();
+  const [id, setId] = useState('');
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const [btnloader, setBtnLoader] = useState(false);
+  const [color, setColor] = useState();
 
+  const {
+    register,
+    setValue,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
 
   const getData = () => {
 
@@ -56,6 +74,26 @@ const AdvanceTableExamples = () => {
     getData();
 
   }, []);
+
+  if (color) {
+    setValue("name", color);
+  }
+
+
+  const handleShow = (data) => {
+    setShow(true)
+    setValue("name", '');
+    setValue("name_id", '');
+    setId('');
+
+    if (data) {
+      console.log(data);
+      setValue("name", data.name);
+      setValue("name_id", data._id);
+      setId("name_id", data._id);
+      // setId(data.name_id);
+    }
+  };
 
 
   const changeStatusButtonClick = (id) => {
@@ -92,6 +130,45 @@ const AdvanceTableExamples = () => {
       </>
     )
     setModalText(TableModaldata);
+  };
+
+  const onSubmit = (data) => {
+    setBtnLoader(true);
+
+    if (data.name_id) {
+
+      data["id"] = data.name_id;
+
+      Http.callApi(url.eye_update, data)
+        .then((response) => {
+          setBtnLoader(false);
+          successResponse(response);
+          getData();
+          setShow(false)
+        })
+        .catch((error) => {
+          setBtnLoader(false);
+          if (error.response) {
+            errorResponse(error);
+          }
+        });
+
+    } else {
+
+      Http.callApi(url.eye_store, data)
+        .then((response) => {
+          setBtnLoader(false);
+          successResponse(response);
+          getData();
+          setShow(false)
+        })
+        .catch((error) => {
+          setBtnLoader(false);
+          if (error) {
+            errorResponse(error);
+          }
+        });
+    }
   };
 
   const openImageInNewTab = (path) => {
@@ -176,7 +253,7 @@ const AdvanceTableExamples = () => {
                 <FontAwesomeIcon icon={faEye} title="View" />
               </button>
 
-              <button className="btn btn-sm btn-primary ml-2 btn-xs" onClick={(e) => editButtonClick(data)}>
+              <button className="btn btn-sm btn-primary ml-2 btn-xs" onClick={(e) => handleShow(data)}>
                 <FontAwesomeIcon icon={faPencilAlt} />
               </button>
 
@@ -194,7 +271,7 @@ const AdvanceTableExamples = () => {
 
 
   return (
-
+<>
     <AdvanceTableWrapper
       columns={columns}
       data={dataTableData}
@@ -203,7 +280,7 @@ const AdvanceTableExamples = () => {
     >
       <div style={{ borderRadius: "0.375rem" }} className='py-4 bg-white mb-3 d-flex align-items-center px-3'>
         <h5 className="hover-actions-trigger mb-0">
-         Hair List
+         Eye List
         </h5>
       </div>
       <Card className='mb-3'>
@@ -213,9 +290,9 @@ const AdvanceTableExamples = () => {
           <Row className="flex-between-center mb-3">
             <Col xs={8} sm="auto" className="ms-3 mt-2 text-end ps-0">
               <div id="orders-actions">
-                <Link to="/admin/fashion/form" className="btn btn-sm btn-success">
-                  <FontAwesomeIcon icon={faPlus} /> Add
-                </Link>
+              <button className="btn btn-sm btn-success" onClick={(e) => handleShow()}>
+                    <FontAwesomeIcon icon={faPlus} />
+                </button>
               </div>
 
             </Col>
@@ -264,6 +341,55 @@ const AdvanceTableExamples = () => {
         />
       </div>
     </AdvanceTableWrapper>
+
+            
+
+<Modal show={show} onHide={handleClose} keyboard={false}>
+  <Modal.Header>
+    {/* <Modal.Title>Eye Color Add</Modal.Title> */}
+    {id ? <div className="form-group">
+            <Modal.Title>Eye Color Update</Modal.Title>
+        </div> :  <Modal.Title>Eye Color Add</Modal.Title>}
+    <FalconCloseButton onClick={handleClose} />
+  </Modal.Header>
+  <Form onSubmit={handleSubmit(onSubmit)}>
+
+    <Modal.Body>
+        <Col md="12 mb-3">
+          <SketchPicker
+            color={color}
+            onChangeComplete={(colors) => { setColor(colors.hex) }}
+          />
+          <FormLabel htmlFor="name">Eye Color</FormLabel>
+          <input type="hidden"
+                  className="form-control"
+                  id="name_id"
+                  name='name_id'
+                  {...register('name_id')}
+                />
+          <input type="text"
+            disabled
+            className="form-control"
+            id="name"
+            name="name"
+            placeholder="Enter Hair Color Name"
+            {...register('name', {
+              required: "Hair Color Name is required",
+            })}
+          />
+        </Col>
+
+
+
+      <ButtonSubmitReset btnloader={btnloader} onsubmitFun={() => {
+        reset();
+      }} />
+    </Modal.Body>
+  </Form>
+  </Modal>     
+              
+  </>
+    
   );
 }
 export default AdvanceTableExamples;

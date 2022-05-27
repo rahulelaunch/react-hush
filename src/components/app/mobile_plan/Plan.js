@@ -155,11 +155,6 @@ const AdvanceTableExamples = () => {
         Header: 'Days'
     },
     {
-        accessor: 'plan_descreption',
-        Header: 'Descreption'
-    },
-
-    {
       accessor: 'status',
       Header: 'Status',
 
