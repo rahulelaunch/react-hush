@@ -82,6 +82,7 @@ const AdvanceTableExamples = () => {
     setShow(true)
     setValue("name", '');
     setValue("name_id", '');
+    setId('');
     setIcon('')
     if (data) {
       setValue("name", data.name);
@@ -142,7 +143,7 @@ const AdvanceTableExamples = () => {
     if (data.name_id) {
 
       if (fileName) {
-        data["body_image"] = icon.slice(34);
+        data["body_image"] = fileName;
       } else {
         data["body_image"] = icon.slice(34);
       }
@@ -388,7 +389,10 @@ const AdvanceTableExamples = () => {
       </AdvanceTableWrapper>
       <Modal show={show} onHide={handleClose} keyboard={false}>
         <Modal.Header>
-          <Modal.Title>Body Type Add</Modal.Title>
+          {/* <Modal.Title>Body Type Add</Modal.Title> */}
+          {id ? <div className="form-group">
+            <Modal.Title>Body Type Update</Modal.Title>
+        </div> :  <Modal.Title>Body Type Add</Modal.Title>}
           <FalconCloseButton onClick={handleClose} />
         </Modal.Header>
         <Form onSubmit={handleSubmit(onSubmit)}>

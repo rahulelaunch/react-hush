@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
+import { Button, Card,Form, FormLabel, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
 import { modal } from "bootstrap"
 import PageHeader from 'components/common/PageHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -26,6 +26,10 @@ import Typography from 'components/utilities/Typography';
 import { faEye, faPencilAlt, faPlus, faToggleOff, faToggleOn, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import ActionButton from 'components/common/ActionButton';
 import { Link,useNavigate } from 'react-router-dom';
+import { useForm } from "react-hook-form";
+import FalconCloseButton from 'components/common/FalconCloseButton';
+import { SketchPicker } from 'react-color'
+import ButtonSubmitReset from '../../layout/ButtonSubmitReset';
 
 
 
@@ -35,7 +39,27 @@ const AdvanceTableExamples = () => {
   const [modalText, setModalText] = useState();
   const [totalRows, setTotalRows] = useState(0);
   const navigate = useNavigate();
+  const [id, setId] = useState('');
+  const [show, setShow] = useState(false);
+  // const handleClose = () => setShow(false);
+  const [btnloader, setBtnLoader] = useState(false);
+  const [color, setColor] = useState();
 
+  const {
+    register,
+    setValue,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const handleClose = () => {
+		reset(
+			  { keepDirtyValues: true },
+			  { keepIsValid: true }
+		);
+		setShow(false)
+	};
 
   const getData = () => {
 
@@ -57,6 +81,18 @@ const AdvanceTableExamples = () => {
 
   }, []);
 
+  const handleShow = (data) => {
+    setShow(true)
+    setValue("name", '');
+    setValue("education_id", '');
+    setId('');
+
+    if (data) {
+      setValue("name", data.name);
+      setValue("education_id", data._id);
+      setId("education_id", data._id);
+    }
+  };
 
   const changeStatusButtonClick = (id) => {
     const obj = {
@@ -96,6 +132,45 @@ const AdvanceTableExamples = () => {
 
   const editButtonClick = (row) => {
     navigate('/admin/education/form', { state: { row } });
+};
+
+const onSubmit = (data) => {
+  setBtnLoader(true);
+
+  if (data.education_id) {
+
+    data["id"] = data.education_id;
+
+    Http.callApi(url.education_update, data)
+      .then((response) => {
+        setBtnLoader(false);
+        successResponse(response);
+        getData();
+        setShow(false)
+      })
+      .catch((error) => {
+        setBtnLoader(false);
+        if (error.response) {
+          errorResponse(error);
+        }
+      });
+
+  } else {
+
+    Http.callApi(url.education_store, data)
+      .then((response) => {
+        setBtnLoader(false);
+        successResponse(response);
+        getData();
+        setShow(false)
+      })
+      .catch((error) => {
+        setBtnLoader(false);
+        if (error) {
+          errorResponse(error);
+        }
+      });
+  }
 };
 
   const deleteButtonClick = (id) => {
@@ -171,7 +246,7 @@ const AdvanceTableExamples = () => {
                 <FontAwesomeIcon icon={faEye} title="View" />
               </button>
 
-              <button className="btn btn-sm btn-primary ml-2 btn-xs" onClick={(e) => editButtonClick(data)}>
+              <button className="btn btn-sm btn-primary ml-2 btn-xs" onClick={(e) => handleShow(data)}>
                 <FontAwesomeIcon icon={faPencilAlt} />
               </button>
 
@@ -189,7 +264,7 @@ const AdvanceTableExamples = () => {
 
 
   return (
-
+<>
     <AdvanceTableWrapper
       columns={columns}
       data={dataTableData}
@@ -208,9 +283,9 @@ const AdvanceTableExamples = () => {
           <Row className="flex-between-center mb-3">
             <Col xs={8} sm="auto" className="ms-3 mt-2 text-end ps-0">
               <div id="orders-actions">
-                <Link to="/admin/education/form" className="btn btn-sm btn-success">
-                  <FontAwesomeIcon icon={faPlus} /> Add
-                </Link>
+              <button className="btn btn-sm btn-success" onClick={(e) => handleShow()}>
+                    <FontAwesomeIcon icon={faPlus} />
+                  </button>
               </div>
 
             </Col>
@@ -259,6 +334,46 @@ const AdvanceTableExamples = () => {
         />
       </div>
     </AdvanceTableWrapper>
+
+    <Modal show={show} onHide={handleClose} keyboard={false}>
+    <Modal.Header>
+      {/* <Modal.Title>Hair Color Add</Modal.Title>
+      */}
+        {id ? <div className="form-group">
+        <Modal.Title>Education  Update</Modal.Title>
+    </div> :  <Modal.Title>Education Add</Modal.Title>}
+      <FalconCloseButton onClick={handleClose} />
+    </Modal.Header>
+    <Form onSubmit={handleSubmit(onSubmit)}>
+
+      <Modal.Body>
+          <Col md="12 mb-3">
+            
+            <FormLabel htmlFor="name">Education</FormLabel>
+            <input type="hidden"
+              className="form-control"
+              id="education_id"
+              name='education_id'
+              {...register('education_id')}
+            />
+            <input type="text"
+              className="form-control"
+              id="name"
+              name="name"
+              placeholder="Enter education  Name"
+              {...register('name', {
+                required: "Hair Color Name is required",
+              })}
+            />
+          </Col>
+
+        <ButtonSubmitReset btnloader={btnloader} onsubmitFun={() => {
+          reset();
+        }} />
+      </Modal.Body>
+    </Form>
+    </Modal>
+</>
   );
 }
 export default AdvanceTableExamples;
