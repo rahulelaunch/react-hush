@@ -2,10 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Button, Form, FormLabel, Card, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import { modal } from "bootstrap"
-import PageHeader from 'components/common/PageHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import FalconComponentCard from 'components/common/FalconComponentCard';
-import IconButton from 'components/common/IconButton';
 import AdvanceTable from 'components/common/advance-table/AdvanceTable';
 import AdvanceTableFooter from 'components/common/advance-table/AdvanceTableFooter';
 import AdvanceTableSearchBox from 'components/common/advance-table/AdvanceTableSearchBox';
@@ -15,20 +12,14 @@ import Http from '../../security/Http';
 import url from '../../../Development.json';
 import dummy from '../../../assets/img/team/User.jpg';
 import Swal from 'sweetalert2';
+import ButtonSubmitReset from '../../layout/ButtonSubmitReset';
+import { faEye, faPlus, faToggleOff, faToggleOn, faTrashAlt, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
+import FalconCloseButton from 'components/common/FalconCloseButton';
 import {
   errorResponse,
   successResponse,
   isError,
-
 } from "../../helpers/response";
-import Flex from 'components/common/Flex';
-import Typography from 'components/utilities/Typography';
-import ButtonSubmitReset from '../../layout/ButtonSubmitReset';
-import { faEye, faPlus, faToggleOff, faToggleOn, faTrashAlt, faPencilAlt } from '@fortawesome/free-solid-svg-icons';
-import ActionButton from 'components/common/ActionButton';
-import { Link, useNavigate } from 'react-router-dom';
-import FalconCloseButton from 'components/common/FalconCloseButton';
-
 
 
 const AdvanceTableExamples = () => {
@@ -37,21 +28,11 @@ const AdvanceTableExamples = () => {
   const [modalText, setModalText] = useState();
   const [totalRows, setTotalRows] = useState(0);
   const [show, setShow] = useState(false);
-  const navigate = useNavigate();
-  // const handleClose = () => setShow(false);
   const [btnloader, setBtnLoader] = useState(false);
   const [icon, setIcon] = useState('');
   const [iconAlt, setIconAlt] = useState('');
   const [fileName, setFileName] = useState('');
   const [id, setId] = useState('');
-
-  const handleClose = () => {
-		reset(
-			  { keepDirtyValues: true },
-			  { keepIsValid: true }
-		);
-		setShow(false)
-	};
 
   const {
     register,
@@ -61,12 +42,19 @@ const AdvanceTableExamples = () => {
     formState: { errors },
   } = useForm();
 
+  const handleClose = () => {
+    reset(
+      { keepDirtyValues: true },
+      { keepIsValid: true }
+    );
+    setShow(false)
+  };
+
 
   const getData = () => {
 
     Http.callApi(url.get_body)
       .then((response) => {
-        console.log(response);
         // setLoading(false);
         setDataTableData(response.data);
         setTotalRows(response.data.length);
@@ -83,6 +71,7 @@ const AdvanceTableExamples = () => {
     setValue("name", '');
     setValue("name_id", '');
     setIcon('')
+    setId('');
     if (data) {
       setValue("name", data.name);
       setValue("name_id", data._id);
@@ -238,8 +227,6 @@ const AdvanceTableExamples = () => {
     })
   };
 
-
-
   const columns = [
     {
       accessor: 'no',
@@ -287,21 +274,21 @@ const AdvanceTableExamples = () => {
           <>
             <td className="text-end">
 
-              <button className={`btn btn-sm ${data.status === 1 ? "btn-warning" : "btn-danger"} `} onClick={(id) => { changeStatusButtonClick(data._id) }} >
+              <button className={`btn me-2 btn-sm ${data.status === 1 ? "btn-warning" : "btn-danger"} `} onClick={(id) => { changeStatusButtonClick(data._id) }} >
                 {
                   data.status === 1 ? <FontAwesomeIcon icon={faToggleOff} title="Change Status" /> : <FontAwesomeIcon icon={faToggleOn} title="Change Status" />
                 }
               </button>
 
-              <button className="btn btn-sm btn-info ml-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={(e) => showModal(data)}>
+              <button className="btn btn-sm btn-info  me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={(e) => showModal(data)}>
                 <FontAwesomeIcon icon={faEye} title="View" />
               </button>
 
-              <button className="btn btn-sm btn-primary ml-2 btn-xs" onClick={(e) => handleShow(data)}>
+              <button className="btn btn-sm btn-primary  me-2 btn-xs" onClick={(e) => handleShow(data)}>
                 <FontAwesomeIcon icon={faPencilAlt} />
               </button>
 
-              <button className="btn btn-sm btn-danger ml-2" >
+              <button className="btn btn-sm btn-danger  me-2" >
                 <FontAwesomeIcon icon={faTrashAlt} onClick={(id) => { deleteButtonClick(data._id) }} />
               </button>
 
@@ -310,7 +297,6 @@ const AdvanceTableExamples = () => {
         );
       },
     },
-
   ];
 
 
@@ -331,7 +317,6 @@ const AdvanceTableExamples = () => {
         <Card className='mb-3'>
 
           <Card.Header className="border-bottom border-200">
-
             <Row className="flex-between-center mb-3">
               <Col xs={8} sm="auto" className="ms-3 mt-2 text-end ps-0">
                 <div id="orders-actions">
@@ -339,16 +324,13 @@ const AdvanceTableExamples = () => {
                     <FontAwesomeIcon icon={faPlus} />
                   </button>
                 </div>
-
               </Col>
               <Col xs="auto" sm={2} lg={3}>
                 <AdvanceTableSearchBox table />
               </Col>
             </Row>
-
           </Card.Header>
           <Row className="flex-end-center mb-3">
-
             <AdvanceTable
               table
               headerClassName="bg-200 text-900 text-nowrap align-middle"
@@ -370,12 +352,10 @@ const AdvanceTableExamples = () => {
                 <div className="modal-body">
                   {modalText}
                 </div>
-
               </div>
             </div>
           </div>
         </Card>
-
         <div className="mt-3">
           <AdvanceTableFooter
             rowCount={totalRows}
@@ -388,11 +368,13 @@ const AdvanceTableExamples = () => {
       </AdvanceTableWrapper>
       <Modal show={show} onHide={handleClose} keyboard={false}>
         <Modal.Header>
-          <Modal.Title>Body Type Add</Modal.Title>
+          {id ? <div className="form-group">
+            <Modal.Title>Body Type  Update</Modal.Title>
+          </div> : <Modal.Title>Body Type  Add</Modal.Title>}
+
           <FalconCloseButton onClick={handleClose} />
         </Modal.Header>
         <Form onSubmit={handleSubmit(onSubmit)}>
-
           <Modal.Body>
             <div className="form-row">
               <Col md="12 mb-3">
@@ -421,7 +403,6 @@ const AdvanceTableExamples = () => {
                   })}
                 />
               </Col>
-
             </div>
             <div className="form-row">
               <Col md="12 mb-3">
@@ -445,9 +426,7 @@ const AdvanceTableExamples = () => {
                     className="imgBox"
                   />
                 </div> : ''}
-
               </Col>
-
             </div>
             <ButtonSubmitReset btnloader={btnloader} onsubmitFun={() => {
               reset(setIconAlt(''), setIcon(dummy));
@@ -456,7 +435,6 @@ const AdvanceTableExamples = () => {
         </Form>
       </Modal>
     </>
-
   );
 }
 export default AdvanceTableExamples;

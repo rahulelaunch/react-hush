@@ -337,8 +337,6 @@ const AdvanceTableExamples = () => {
       </AdvanceTableWrapper>
       <Modal show={show} onHide={handleClose} keyboard={false}>
         <Modal.Header>
-          {/* <Modal.Title>Hair Color Add</Modal.Title>
-           */}
             {id ? <div className="form-group">
             <Modal.Title>Hair Color Update</Modal.Title>
         </div> :  <Modal.Title>Hair Color Add</Modal.Title>}
