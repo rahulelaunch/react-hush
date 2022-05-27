@@ -115,7 +115,6 @@ const AdvanceTableExamples = () => {
       });
   };
 
-
   const showModal = (data) => {
     let TableModaldata = (
       <>
@@ -144,7 +143,7 @@ const AdvanceTableExamples = () => {
 
     data["id"] = data.income_id;
 
-    Http.callApi(url.income_update, data)
+    Http.callApi(url.mobilePlan_update, data)
       .then((response) => {
         setBtnLoader(false);
         successResponse(response);
@@ -160,7 +159,7 @@ const AdvanceTableExamples = () => {
 
   } else {
 
-    Http.callApi(url.income_store, data)
+    Http.callApi(url.mobilePlan_store, data)
       .then((response) => {
         setBtnLoader(false);
         successResponse(response);
