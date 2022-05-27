@@ -281,15 +281,15 @@ const AdvanceTableExamples = () => {
                 }
               </button>
 
-              <button className="btn btn-sm btn-info  me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={(e) => showModal(data)}>
+              <button className="btn btn-sm btn-info me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={(e) => showModal(data)}>
                 <FontAwesomeIcon icon={faEye} title="View" />
               </button>
 
-              <button className="btn btn-sm btn-primary  me-2 btn-xs" onClick={(e) => handleShow(data)}>
+              <button className="btn btn-sm btn-primary me-2 btn-xs" onClick={(e) => handleShow(data)}>
                 <FontAwesomeIcon icon={faPencilAlt} />
               </button>
 
-              <button className="btn btn-sm btn-danger  me-2" >
+              <button className="btn btn-sm btn-danger me-2" >
                 <FontAwesomeIcon icon={faTrashAlt} onClick={(id) => { deleteButtonClick(data._id) }} />
               </button>
 
