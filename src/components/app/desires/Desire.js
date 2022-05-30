@@ -90,7 +90,7 @@ const AdvanceTableExamples = () => {
 
   const handleShow = (data) => {
     setShow(true)
-    setValue("name", '');
+    setValue("desire_name", '');
     setValue("desire_id", '');
     setId('');
 

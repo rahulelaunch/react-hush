@@ -69,29 +69,18 @@ import VerticalAlign from 'components/utilities/VerticalAlign';
 import Flex from 'components/utilities/Flex';
 import Grid from 'components/utilities/Grid';
 import WizardForms from 'components/doc-components/WizardForms';
-import GettingStarted from 'components/documentation/GettingStarted';
-import Configuration from 'components/documentation/Configuration';
-import DarkMode from 'components/documentation/DarkMode';
-import Plugins from 'components/documentation/Plugins';
-import Styling from 'components/documentation/Styling';
-import DesignFile from 'components/documentation/DesignFile';
 
 import AnimatedIcons from 'components/doc-components/AnimatedIcons';
 import DatePicker from 'components/doc-components/DatePicker';
 import FontAwesome from 'components/doc-components/FontAwesome';
-import Changelog from 'components/documentation/change-log/ChangeLog';
-
 
 import Placeholder from 'components/doc-components/Placeholder';
 import Lightbox from 'components/doc-components/Lightbox';
 import AdvanceTableExamples from 'components/doc-components/AdvanceTableExamples';
 
-
-
 import Rating from 'components/doc-components/Rating';
 import AdvanceSelect from 'components/doc-components/AdvanceSelect';
 import Editor from 'components/doc-components/Editor';
-
 
 import DraggableExample from 'components/doc-components/DraggableExample';
 import LeafletMapExample from 'components/doc-components/LeafletMapExample';
@@ -99,15 +88,12 @@ import Scrollbar from 'components/doc-components/Scrollbar';
 import Scrollspy from 'components/doc-components/Scrollspy';
 import ReactIcons from 'components/doc-components/ReactIcons';
 
-
-
 import Error404 from 'components/errors/Error404';
 import Error500 from 'components/errors/Error500';
 
 import SimpleLogin from 'components/pages/Login';
 
-
-import Dashboard from 'components/dashboards/default';
+import Dashboard from 'components/dashboards';
 import AppContext from 'context/Context';
 
 import User from 'components/app/users/User';
@@ -128,8 +114,6 @@ import State from 'components/app/state/State';
 import Plan from 'components/app/mobile_plan/Plan';
 import TermsConditions from 'components/app/terms_conditions/TermsConditions';
 
-
-
 const Layout = () => {
   const HTMLClassList = document.getElementsByTagName('html')[0].classList;
   useContext(AppContext);
@@ -149,7 +133,7 @@ const Layout = () => {
   return (
     <>
       <Routes>
-  
+
         <Route element={<ErrorLayout />}>
           <Route path="errors/404" element={<Error404 />} />
           <Route path="errors/500" element={<Error500 />} />
@@ -159,10 +143,8 @@ const Layout = () => {
         {/*- ------------- simple ---------------------------  */}
         <Route element={<AuthSimpleLayout />}>
           <Route path="/admin/login" element={<SimpleLogin />} />
-         
+
         </Route>
-
-
 
         {/* //--- MainLayout Starts  */}
 
@@ -183,23 +165,23 @@ const Layout = () => {
           <Route path="/admin/change_password" element={<ChangePassword />} />
           <Route path="/admin/body/list" element={<Body />} />
           <Route path="/admin/fashion/list" element={<Fashion />} />
-          <Route path="/admin/fashion/form" element={<FashionForm />} />  
+          <Route path="/admin/fashion/form" element={<FashionForm />} />
           <Route path="/admin/desire/list" element={<Desire />} />
           <Route path="/admin/education/list" element={<Education />} />
           <Route path="/admin/education/form" element={<EducationForm />} />
           <Route path="/admin/income/list" element={<Income />} />
-          <Route path="/admin/income/form" element={<IncomeForm />} />   
-          <Route path="/admin/hair/list" element={<Hair />} />   
-          <Route path="/admin/eye/list" element={<Eye />} /> 
-          <Route path="/admin/country/list" element={<Country />} />   
-          <Route path="/admin/state/list" element={<State />} /> 
-          <Route path="/admin/plan/list" element={<Plan />} />   
-          <Route path="/admin/terms_conditions/list" element={<TermsConditions />} />   
-          
+          <Route path="/admin/income/form" element={<IncomeForm />} />
+          <Route path="/admin/hair/list" element={<Hair />} />
+          <Route path="/admin/eye/list" element={<Eye />} />
+          <Route path="/admin/country/list" element={<Country />} />
+          <Route path="/admin/state/list" element={<State />} />
+          <Route path="/admin/plan/list" element={<Plan />} />
+          <Route path="/admin/terms_conditions/list" element={<TermsConditions />} />
+
 
 
           {/*Components*/}
-   
+
           <Route path="components/animated-icons" element={<AnimatedIcons />} />
           <Route path="components/badges" element={<Badges />} />
           <Route path="components/breadcrumb" element={<Breadcrumbs />} />
@@ -244,7 +226,7 @@ const Layout = () => {
           <Route path="forms/basic/layout" element={<FormLayout />} />
           <Route path="forms/advance/date-picker" element={<DatePicker />} />
           <Route path="forms/advance/editor" element={<Editor />} />
-       
+
           <Route
             path="forms/advance/advance-select"
             element={<AdvanceSelect />}
@@ -260,10 +242,10 @@ const Layout = () => {
           <Route path="components/navs-and-tabs/navbar" element={<Navbars />} />
           <Route path="components/navs-and-tabs/tabs" element={<Tabs />} />
           <Route path="components/collapse" element={<Collapse />} />
-     
+
           <Route path="components/countup" element={<CountUp />} />
           <Route path="components/videos/embed" element={<Embed />} />
-      
+
           <Route path="components/background" element={<Background />} />
           <Route path="components/search" element={<Search />} />
           <Route path="components/typed-text" element={<TypedText />} />
@@ -302,23 +284,6 @@ const Layout = () => {
           <Route path="utilities/grid" element={<Grid />} />
           <Route path="utilities/scroll-bar" element={<Scrollbar />} />
 
-        
-
-          {/*Documentation*/}
-          <Route
-            path="documentation/getting-started"
-            element={<GettingStarted />}
-          />
-          <Route
-            path="documentation/configuration"
-            element={<Configuration />}
-          />
-          <Route path="documentation/styling" element={<Styling />} />
-          <Route path="documentation/dark-mode" element={<DarkMode />} />
-          <Route path="documentation/plugin" element={<Plugins />} />
-          <Route path="documentation/design-file" element={<DesignFile />} />
-          <Route path="changelog" element={<Changelog />} />
-       
         </Route>
 
         {/* //--- MainLayout end  */}

@@ -6,13 +6,13 @@ import bg2 from 'assets/img/icons/spot-illustrations/corner-2.png';
 import bg3 from 'assets/img/icons/spot-illustrations/corner-3.png';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CountUp from 'react-countup';
-import Http from '../../../security/Http';
-import url from '../../../../Development.json';
+import Http from '../../security/Http';
+import url from '../../../Development.json';
 import {
   errorResponse,
   successResponse,
   isError,
-} from "../../../helpers/response";
+} from "../../helpers/response";
 import { Link } from 'react-router-dom';
 
 const StatisticsCards = () => {
