@@ -80,12 +80,6 @@ import AnimatedIcons from 'components/doc-components/AnimatedIcons';
 import DatePicker from 'components/doc-components/DatePicker';
 import FontAwesome from 'components/doc-components/FontAwesome';
 import Changelog from 'components/documentation/change-log/ChangeLog';
-import Analytics from 'components/dashboards/analytics';
-import Crm from 'components/dashboards/crm';
-import Saas from 'components/dashboards/saas';
-
-
-
 
 
 import Placeholder from 'components/doc-components/Placeholder';
@@ -175,23 +169,7 @@ const Layout = () => {
         <Route element={<MainLayout />}>
           {/*Dashboard*/}
           <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route path="dashboard/analytics" element={<Analytics />} />
-          <Route path="dashboard/crm" element={<Crm />} />
-          <Route path="dashboard/saas" element={<Saas />} />
-        
-          {/* E Commerce */}
-  
-      
-      
 
-      
-     
-
-       
-
-       
-
-  
           {/*icons*/}
           <Route path="icons/font-awesome" element={<FontAwesome />} />
           <Route path="icons/react-icons" element={<ReactIcons />} />

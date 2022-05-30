@@ -9,7 +9,7 @@ import 'leaflet/dist/leaflet.css';
 import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet';
 import AppContext from 'context/Context';
 import MarkerClusterGroup from 'react-leaflet-markercluster';
-import { markers } from 'data/dashboard/projectManagement';
+
 
 const exampleCode = `
 function LayerComponent() {
@@ -132,7 +132,7 @@ const LeafletMapExample = () => {
             Popup,
             useMap,
             MarkerClusterGroup,
-            markers,
+         
             AppContext
           }}
         />

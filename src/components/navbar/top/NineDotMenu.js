@@ -6,7 +6,7 @@ import { Card, Col, Dropdown, Row } from 'react-bootstrap';
 import SimpleBarReact from 'simplebar-react';
 import Avatar from 'components/common/Avatar';
 import { useEffect } from 'react';
-import { quickLinks } from 'data/quickLinks';
+
 
 const NineDotMenu = () => {
   const [show, setShow] = useState(null);
@@ -53,9 +53,9 @@ const NineDotMenu = () => {
           <SimpleBarReact className="nav-quick-links">
             <Card.Body>
               <Row className="text-center g-0">
-                {quickLinks.map((item, index) => (
-                  <QuickLinkItem key={index} {...item} {...index} />
-                ))}
+            
+                
+             
                 <Col xs={12}>
                   <Link to="#!" className="btn btn-outline-primary btn-sm mt-4">
                     Show more

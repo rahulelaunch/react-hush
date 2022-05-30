@@ -1,19 +1,6 @@
 import React from 'react';
 import WeeklySales from './WeeklySales';
 import { Row, Col } from 'react-bootstrap';
-import {
-  marketShare,
-  totalOrder,
-  totalSales,
-  weeklySalesData,
-  weather,
-  products,
-  storageStatus,
-  files,
-  users,
-  topProducts,
-  runningProjects
-} from 'data/dashboard/default';
 
 import StatisticsCards from '../saas/stats-cards/StatisticsCards';
 import TotalOrder from './TotalOrder';
@@ -48,7 +35,7 @@ const Dashboard = () => {
       </Row> */}
 
       <Row className="g-3 mb-3">
-        <Col xxl={9}>
+        <Col xxl={12}>
           <StatisticsCards />
           </Col>
       </Row>

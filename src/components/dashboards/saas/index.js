@@ -13,7 +13,7 @@ import SaasRevenue from './SaasRevenue';
 import SaasConversion from './SaasConversion';
 import DepositeStatus from './DepositeStatus';
 import StatisticsCards from './stats-cards/StatisticsCards';
-import { users, files } from 'data/dashboard/default';
+
 import ActiveUsers from '../default/ActiveUsers';
 import SharedFiles from '../default/SharedFiles';
 import BandwidthSaved from '../default/BandwidthSaved';
@@ -51,9 +51,7 @@ const Saas = () => {
             <Col xs={12}>
               <CandleChart data={candleChartData} />
             </Col>
-            <Col lg={4}>
-              <ActiveUsers users={users} end={7} />
-            </Col>
+          
             <Col lg={8}>
               <GrossRevenue data={grossRevenue} />
             </Col>
@@ -61,12 +59,7 @@ const Saas = () => {
         </Col>
         <Col xxl={3}>
           <Row className="g-3">
-            <Col xxl={12}>
-              <SharedFiles
-                files={files}
-                className="h-100 h-xxl-auto mt-xxl-3"
-              />
-            </Col>
+     
             <Col md xxl={12}>
               <BandwidthSaved />
             </Col>

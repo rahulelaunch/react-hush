@@ -4,15 +4,8 @@ import RealTimeUsers from './real-time-users/RealTimeUsers';
 import Audience from './audience/Audience';
 import ConnectCard from './ConnectCard';
 import SessionByBrowser from './session-by-browser/SessionByBrowser';
-import {
-  audienceChart,
-  intelligence,
-  realTimeUsers,
-  sessionByBrowser,
-  sessionByCountry,
-  topPagesTableData
-} from 'data/dashboard/analytics';
-import { countryData } from 'data/countryData';
+
+
 import UsersByCountry from './users-by-country/UsersByCountry';
 import Intelligence from './Intelligence';
 import ActiveUsers from './active-users/ActiveUsers';
@@ -28,20 +21,20 @@ const Analytics = () => {
     <>
       <Row className="g-3 mb-3">
         <Col xxl={8}>
-          <Audience chartData={audienceChart} className="mb-3" />
+          <Audience  className="mb-3" />
           <ConnectCard />
         </Col>
         <Col md={6} xxl={4}>
-          <RealTimeUsers data={realTimeUsers} />
+          <RealTimeUsers />
         </Col>
         <Col md={6} xxl={4}>
-          <SessionByBrowser data={sessionByBrowser} />
+          <SessionByBrowser />
         </Col>
         <Col md={6} xxl={4}>
-          <UsersByCountry chartData={sessionByCountry} mapData={countryData} />
+          <UsersByCountry />
         </Col>
         <Col md={6} xxl={4}>
-          <Intelligence data={intelligence} />
+          <Intelligence/>
         </Col>
       </Row>
 

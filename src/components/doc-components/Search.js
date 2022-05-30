@@ -4,7 +4,7 @@ import PageHeader from 'components/common/PageHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import FalconComponentCard from 'components/common/FalconComponentCard';
 import SearchBox from 'components/navbar/top/SearchBox';
-import autoCompleteInitialItem from 'data/autocomplete/autocomplete';
+
 
 const Search = () => (
   <>
@@ -33,7 +33,7 @@ const Search = () => (
         </p>
       </FalconComponentCard.Header>
       <FalconComponentCard.Body>
-        <SearchBox autoCompleteItem={autoCompleteInitialItem} />
+        <SearchBox />
       </FalconComponentCard.Body>
     </FalconComponentCard>
   </>

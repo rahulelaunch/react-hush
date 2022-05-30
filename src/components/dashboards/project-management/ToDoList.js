@@ -7,7 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import IconItem from 'components/common/icon/IconItem';
 import classNames from 'classnames';
 import { Link } from 'react-router-dom';
-import { todoList } from 'data/dashboard/projectManagement';
 import FalconCardHeader from 'components/common/FalconCardHeader';
 
 const ToDoListItem = ({ item, index, length, handleChange }) => {

@@ -4,8 +4,8 @@ import FalconCardHeader from 'components/common/FalconCardHeader';
 import { Button, Card } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Flex from 'components/common/Flex';
-import { countryData } from 'data/countryData';
-import { locationBySessionTableData } from 'data/dashboard/crm';
+
+
 import WorldMap from 'components/dashboards/analytics/users-by-country/WorldMap';
 import LocationBySessionTable from './LocationBySessionTable';
 
@@ -66,13 +66,7 @@ const LocationBySession = () => {
         }
       />
       <Card.Body className="position-relative pb-0">
-        <WorldMap
-          data={countryData}
-          ref={chartRef}
-          style={{ height: '18.875rem' }}
-          maxZoomLevel={maxZoomLevel}
-          minZoomLevel={minZoomLevel}
-        />
+     
         <div className="position-absolute top-0 border mt-3 border-200 rounded-3 bg-light">
           <Button
             variant="link"
@@ -92,7 +86,7 @@ const LocationBySession = () => {
             <FontAwesomeIcon icon="minus" className="fs--1" />
           </Button>
         </div>
-        <LocationBySessionTable data={locationBySessionTableData} />
+      
       </Card.Body>
 
       <Card.Footer className="text-end py-1 px-card">
