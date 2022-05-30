@@ -105,7 +105,7 @@ import Scrollbar from 'components/doc-components/Scrollbar';
 import Scrollspy from 'components/doc-components/Scrollspy';
 import ReactIcons from 'components/doc-components/ReactIcons';
 
-import Widgets from 'widgets/Widgets';
+
 
 import Error404 from 'components/errors/Error404';
 import Error500 from 'components/errors/Error500';
@@ -324,7 +324,7 @@ const Layout = () => {
           <Route path="utilities/grid" element={<Grid />} />
           <Route path="utilities/scroll-bar" element={<Scrollbar />} />
 
-          <Route path="widgets" element={<Widgets />} />
+        
 
           {/*Documentation*/}
           <Route
