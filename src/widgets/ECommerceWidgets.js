@@ -1,7 +1,5 @@
 import React from 'react';
-import BillingCard from 'components/app/e-commerce/billing/BillingCard';
-import ShoppingCart from 'components/app/e-commerce/cart/ShoppingCart';
-import OrderSummary from 'components/app/e-commerce/checkout/OrderSummary';
+
 import BestSellingProducts from 'components/dashboards/e-commerce/BestSellingProducts';
 import { Card, Col, Row } from 'react-bootstrap';
 import WidgetSectionTitle from './WidgetSectionTitle';
@@ -20,7 +18,7 @@ const ECommerceWidgets = () => {
 
       <Row className="g-3 mb-3">
         <Col xs={12}>
-          <ShoppingCart />
+  
         </Col>
         <Col lg={6}>
           <Card className="h-100">
@@ -28,17 +26,12 @@ const ECommerceWidgets = () => {
               <h5 className="mb-0">Billing</h5>
             </Card.Header>
             <Card.Body className="bg-light">
-              <BillingCard />
+             
             </Card.Body>
           </Card>
         </Col>
         <Col lg={6}>
-          <OrderSummary
-            shippingCost={162}
-            subTotal={31044}
-            total={31206}
-            payableTotal={31206}
-          />
+   
         </Col>
         <Col>
           <BestSellingProducts products={products} />

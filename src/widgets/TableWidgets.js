@@ -2,7 +2,7 @@ import React from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import WidgetSectionTitle from './WidgetSectionTitle';
 import RecentPurchases from 'components/dashboards/e-commerce/recent-purchases/RecentPurchases';
-import Customers from 'components/app/e-commerce/customers/Customers';
+
 import SharedFiles from 'components/dashboards/default/SharedFiles';
 import TopPages from 'components/dashboards/analytics/top-pages/TopPages';
 import { topPagesTableData, intelligence } from 'data/dashboard/analytics';
@@ -39,9 +39,7 @@ const TableWidgets = () => {
       <div className="mb-3">
         <RecentPurchases />
       </div>
-      <div className="mb-3">
-        <Customers />
-      </div>
+   
 
       <Row className="g-3 mb-3">
         <Col lg={6}>

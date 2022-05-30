@@ -2,9 +2,8 @@
 // import Registration from 'components/authentication/simple/Registration';
 import LoginForm from 'components/authentication/LoginForm';
 import ExperienceForm from 'components/pages/user/settings/ExperienceForm';
-import CreatePost from 'components/app/social/feed/CreatePost';
-import Compose from 'components/app/email/compose/Compose';
-import EventUpload from 'components/app/events/create-an-event/EventUpload';
+
+
 import React, { useState } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import WidgetSectionTitle from './WidgetSectionTitle';
@@ -117,15 +116,10 @@ const Forms = () => {
             </Card.Body>
           </Card>
         </Col>
-        <Col lg={7}>
-          <CreatePost className="h-100" />
-        </Col>
+   
       </Row>
-      <div className="mb-3">
-        <Compose />
-      </div>
+   
 
-      <EventUpload />
     </>
   );
 };

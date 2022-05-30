@@ -6,12 +6,11 @@ import associations from 'data/associations';
 import Associations from 'components/pages/asscociations/Associations';
 import people from 'data/people';
 import activities from 'data/activities';
-import Followers from './Followers';
+
 import ActivityLog from './ActivityLog';
 import Experiences from './Experiences';
 import Education from './Education';
-import Events from './Events';
-import events from 'data/events/events';
+
 import Photos from './Photos';
 
 const Profile = () => {
@@ -32,18 +31,11 @@ const Profile = () => {
           <div className="sticky-sidebar">
             <Experiences />
             <Education />
-            <Events
-              className="mb-3"
-              cardTitle="Events"
-              events={events.slice(2, 5)}
-            />
+        
           </div>
         </Col>
       </Row>
-      <Followers
-        totalFollowers={people.length}
-        followers={people.slice(0, 12)}
-      />
+
     </>
   );
 };

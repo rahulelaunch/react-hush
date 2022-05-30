@@ -85,11 +85,9 @@ import Crm from 'components/dashboards/crm';
 import Saas from 'components/dashboards/saas';
 import Profile from 'components/pages/user/profile/Profile';
 import Associations from 'components/pages/asscociations/Associations';
-import Followers from 'components/app/social/followers/Followers';
-import Notifications from 'components/app/social/notifications/Notifications';
-import ActivityLog from 'components/app/social/activity-log/ActivityLog';
+
+
 import Settings from 'components/pages/user/settings/Settings';
-import Feed from 'components/app/social/feed/Feed';
 import Placeholder from 'components/doc-components/Placeholder';
 import Lightbox from 'components/doc-components/Lightbox';
 import AdvanceTableExamples from 'components/doc-components/AdvanceTableExamples';
@@ -101,22 +99,13 @@ import PrivacyPolicy from 'components/pages/miscellaneous/privacy-policy/Privacy
 import InvitePeople from 'components/pages/miscellaneous/invite-people/InvitePeople';
 import PricingDefault from 'components/pages/pricing/pricing-default/PricingDefault';
 import PricingAlt from 'components/pages/pricing/pricing-alt/PricingAlt';
-import Invoice from 'components/app/e-commerce/Invoice';
-import Billing from 'components/app/e-commerce/billing/Billing';
-import Checkout from 'components/app/e-commerce/checkout/Checkout';
-import ShoppingCart from 'components/app/e-commerce/cart/ShoppingCart';
-import CustomersDetails from 'components/app/e-commerce/customers-details/CustomersDetails';
-import OrderDetails from 'components/app/e-commerce/orders/order-details/OrderDetails';
-import Products from 'components/app/e-commerce/product/Products';
-import ProductDetails from 'components/app/e-commerce/product/product-details/ProductDetails';
-import Orders from 'components/app/e-commerce/orders/order-list/Orders';
-import Customers from 'components/app/e-commerce/customers/Customers';
-import CreateEvent from 'components/app/events/create-an-event/CreateEvent';
-import EventList from 'components/app/events/event-list/EventList';
-import EventDetail from 'components/app/events/event-detail/EventDetail';
-import EmailDetail from 'components/app/email/email-detail/EmailDetail';
-import Compose from 'components/app/email/compose/Compose';
-import Inbox from 'components/app/email/inbox/Inbox';
+
+
+
+
+
+
+
 import Rating from 'components/doc-components/Rating';
 import AdvanceSelect from 'components/doc-components/AdvanceSelect';
 import Editor from 'components/doc-components/Editor';
@@ -203,37 +192,18 @@ const Layout = () => {
           <Route path="dashboard/saas" element={<Saas />} />
         
           {/* E Commerce */}
-          <Route
-            path="e-commerce/orders/order-details"
-            element={<OrderDetails />}
-          />
-          <Route path="e-commerce/orders/order-list" element={<Orders />} />
-          <Route path="e-commerce/invoice" element={<Invoice />} />
-          <Route path="e-commerce/billing" element={<Billing />} />
-          <Route path="e-commerce/checkout" element={<Checkout />} />
-          <Route path="e-commerce/shopping-cart" element={<ShoppingCart />} />
-          <Route path="e-commerce/customers" element={<Customers />} />
-          <Route
-            path="e-commerce/customer-details"
-            element={<CustomersDetails />}
-          />
+  
+      
+      
 
-          <Route
-            path="e-commerce/product/product-details"
-            element={<ProductDetails />}
-          />
-          <Route
-            path="e-commerce/product/product-details/:productId"
-            element={<ProductDetails />}calendar
-          />
+      
+     
 
-          <Route
-            path="e-commerce/product/:productLayout"
-            element={<Products />}
-          />
+       
 
-          <Route path="e-commerce/invoice" element={<Invoice />} />
+       
 
+  
           {/*icons*/}
           <Route path="icons/font-awesome" element={<FontAwesome />} />
           <Route path="icons/react-icons" element={<ReactIcons />} />
@@ -265,18 +235,8 @@ const Layout = () => {
         
         
           <Route path="app/kanban" element={<Kanban />} />
-          <Route path="social/feed" element={<Feed />} />
-          <Route path="social/activity-log" element={<ActivityLog />} />
-          <Route path="social/notifications" element={<Notifications />} />
-          <Route path="social/followers" element={<Followers />} />
-          <Route path="events/event-detail" element={<EventDetail />} />
-          <Route path="events/create-an-event" element={<CreateEvent />} />
-          <Route path="events/event-list" element={<EventList />} />
 
-          {/* Email */}
-          <Route path="email/email-detail" element={<EmailDetail />} />
-          <Route path="email/inbox" element={<Inbox />} />
-          <Route path="email/compose" element={<Compose />} />
+    
 
           {/*Pages*/}
           <Route path="pages/starter" element={<Starter />} />

@@ -56,7 +56,7 @@ import UsersAtTime from 'components/dashboards/analytics/users-at-a-time/UsersAt
 import TrafficSource from 'components/dashboards/analytics/traffic-source/TrafficSource';
 import ReturningCustomer from 'components/dashboards/e-commerce/ReturningCustomer/ReturningCustomer';
 import SalesPosLocation from 'components/dashboards/e-commerce/SalesPosLocation/SalesPosLocation';
-import ShoppingCart from 'components/dashboards/e-commerce/ShoppingCart';
+
 import GrossRevenue from 'components/dashboards/saas/gross-revenue/GrossRevenue';
 import ProjectStatistics from 'components/dashboards/project-management/project-statistics/ProjectStatistics';
 import CandleChart from 'components/dashboards/saas/candle-chart/CandleChart';
@@ -157,7 +157,7 @@ const NumberStatsAndChart = () => {
           <TotalSalesEcommerce data={totalSale} />
         </Col>
         <Col xxl={4} md={6}>
-          <ShoppingCart />
+       
         </Col>
         <Col xxl={4} md={6}>
           <GrossRevenue data={grossRevenue} />

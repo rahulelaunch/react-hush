@@ -1,10 +1,10 @@
 import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import WidgetSectionTitle from './WidgetSectionTitle';
-import BillingHeader from 'components/app/e-commerce/billing/BillingHeader';
+
 import DepositeStatus from 'components/dashboards/saas/DepositeStatus';
-import EventFooter from 'components/app/events/create-an-event/EventFooter';
-import BirthdayNotice from 'components/app/social/feed/BirthdatNotice';
+
+
 import DangerZone from 'components/pages/user/settings/DangerZone';
 import GreetingCard from 'components/dashboards/e-commerce/greetings/GreetingCard';
 import { Card, Col, Row } from 'react-bootstrap';
@@ -41,9 +41,9 @@ const OthersWidgets = () => {
       />
       <Row className="g-3 mb-3">
         <Col xxl={8} className="d-flex flex-column align-items-stretched ">
-          <BillingHeader />
+   
           <DepositeStatus />
-          <EventFooter />
+   
           <BirthdayNotice name="Emma Watson" profileLink="/user/profile" />
         </Col>
         <Col xxl={4}>
