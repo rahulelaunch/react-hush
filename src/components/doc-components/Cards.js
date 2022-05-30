@@ -11,7 +11,7 @@ import generic11 from 'assets/img/generic/11.jpg';
 import generic12 from 'assets/img/generic/12.jpg';
 import { Link } from 'react-router-dom';
 import team1 from 'assets/img/team/1.jpg';
-import Notification from 'components/notification/Notification';
+
 
 const exampleCode = `
 <Card style={{width: '20rem'}}>
@@ -258,7 +258,7 @@ const Card = () => {
         <FalconComponentCard.Body
           code={notificationCode}
           language="jsx"
-          scope={{ team1, Notification }}
+          scope={{ team1 }}
         />
       </FalconComponentCard>
 

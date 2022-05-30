@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
 import Flex from 'components/common/Flex';
-import Notification from './Notification';
 import Background from 'components/common/Background';
 import ecomBg from 'assets/img/illustrations/ecommerce-bg.png';
 
@@ -38,13 +37,7 @@ const GreetingCard = ({ notifications }) => {
       </Card.Header>
       <Card.Body className="p-0">
         <ul className="mb-0 list-unstyled">
-          {notifications.map((notification, index) => (
-            <Notification
-              key={notification.id}
-              notification={notification}
-              isLast={notifications.length - 1 === index}
-            />
-          ))}
+       
         </ul>
       </Card.Body>
     </Card>

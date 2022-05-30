@@ -7,7 +7,7 @@ import SettingsToggle from 'components/settings-panel/SettingsToggle';
 import SettingsPanel from 'components/settings-panel/SettingsPanel';
 
 import ErrorLayout from './ErrorLayout';
-import Landing from 'components/pages/landing/Landing';
+
 import { toast, ToastContainer } from 'react-toastify';
 import { CloseButton } from 'components/common/Toast';
 
@@ -75,7 +75,7 @@ import DarkMode from 'components/documentation/DarkMode';
 import Plugins from 'components/documentation/Plugins';
 import Styling from 'components/documentation/Styling';
 import DesignFile from 'components/documentation/DesignFile';
-import Starter from 'components/pages/Starter';
+
 import AnimatedIcons from 'components/doc-components/AnimatedIcons';
 import DatePicker from 'components/doc-components/DatePicker';
 import FontAwesome from 'components/doc-components/FontAwesome';
@@ -83,26 +83,14 @@ import Changelog from 'components/documentation/change-log/ChangeLog';
 import Analytics from 'components/dashboards/analytics';
 import Crm from 'components/dashboards/crm';
 import Saas from 'components/dashboards/saas';
-import Profile from 'components/pages/user/profile/Profile';
-import Associations from 'components/pages/asscociations/Associations';
 
 
-import Settings from 'components/pages/user/settings/Settings';
+
+
+
 import Placeholder from 'components/doc-components/Placeholder';
 import Lightbox from 'components/doc-components/Lightbox';
 import AdvanceTableExamples from 'components/doc-components/AdvanceTableExamples';
-import ModalAuth from 'components/authentication/modal/ModalAuth';
-import FaqAlt from 'components/pages/faq/faq-alt/FaqAlt';
-import FaqBasic from 'components/pages/faq/faq-basic/FaqBasic';
-import FaqAccordion from 'components/pages/faq/faq-accordion/FaqAccordion';
-import PrivacyPolicy from 'components/pages/miscellaneous/privacy-policy/PrivacyPolicy';
-import InvitePeople from 'components/pages/miscellaneous/invite-people/InvitePeople';
-import PricingDefault from 'components/pages/pricing/pricing-default/PricingDefault';
-import PricingAlt from 'components/pages/pricing/pricing-alt/PricingAlt';
-
-
-
-
 
 
 
@@ -167,7 +155,7 @@ const Layout = () => {
   return (
     <>
       <Routes>
-        <Route path="landing" element={<Landing />} />
+  
         <Route element={<ErrorLayout />}>
           <Route path="errors/404" element={<Error404 />} />
           <Route path="errors/500" element={<Error500 />} />
@@ -231,30 +219,6 @@ const Layout = () => {
           <Route path="/admin/terms_conditions/list" element={<TermsConditions />} />   
           
 
-          {/*Pages*/}
-          <Route path="pages/starter" element={<Starter />} />
-          <Route path="user/profile" element={<Profile />} />
-          <Route path="user/settings" element={<Settings />} />
-          <Route path="miscellaneous/associations" element={<Associations />} />
-          <Route path="faq/faq-alt" element={<FaqAlt />} />
-          <Route path="faq/faq-basic" element={<FaqBasic />} />
-          <Route path="faq/faq-accordion" element={<FaqAccordion />} />
-          <Route path="pricing/pricing-default" element={<PricingDefault />} />
-          <Route path="pricing/pricing-alt" element={<PricingAlt />} />
-          <Route
-            path="miscellaneous/privacy-policy"
-            element={<PrivacyPolicy />}
-          />
-          <Route
-            path="miscellaneous/invite-people"
-            element={<InvitePeople />}
-          />
-          {/* charts-example */}
-
-     
-     
-       
-      
 
           {/*Components*/}
    
@@ -376,7 +340,7 @@ const Layout = () => {
           <Route path="documentation/plugin" element={<Plugins />} />
           <Route path="documentation/design-file" element={<DesignFile />} />
           <Route path="changelog" element={<Changelog />} />
-          <Route path="authentication-modal" element={<ModalAuth />} />
+       
         </Route>
 
         {/* //--- MainLayout end  */}

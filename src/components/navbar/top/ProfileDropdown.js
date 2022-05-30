@@ -70,7 +70,7 @@ const ProfileDropdown = () => {
         to="/admin/dashboard"
         className="pe-0 ps-2 nav-link"
       >
-        <Avatar src={profile} />{name}
+        <div className='d-flex align-items-center'><Avatar src={profile} /> <span className='ms-2'>{name}</span></div>
      
       </Dropdown.Toggle>
 

@@ -1,8 +1,6 @@
 import React, { useContext } from 'react';
 import { Nav, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import ProfileDropdown from 'components/navbar/top/ProfileDropdown';
-import NotificationDropdown from 'components/navbar/top/NotificationDropdown';
-import CartNotification from 'components/navbar/top/CartNotification';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AppContext from 'context/Context';
 import NineDotMenu from './NineDotMenu';
@@ -41,10 +39,6 @@ const TopNavRightSideNavItem = () => {
           </OverlayTrigger>
         </Nav.Link>
       </Nav.Item>
-
-      {/* <CartNotification /> */}
-      {/* <NotificationDropdown /> */}
-      {/* <NineDotMenu /> */}
       <ProfileDropdown />
     </Nav>
   );

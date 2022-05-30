@@ -14,8 +14,7 @@ import {
   runningProjects
 } from 'data/dashboard/projectManagement';
 import { transactionSummary } from 'data/dashboard/saas';
-import Experience from 'components/pages/user/Experience';
-import experiences from 'data/experiences';
+
 import ToDoList from 'components/dashboards/project-management/ToDoList';
 import MemberInfo from 'components/dashboards/project-management/MemberInfo';
 import MembersActivity from 'components/dashboards/project-management/MembersActivity';
@@ -46,20 +45,8 @@ const TableWidgets = () => {
           <SharedFiles files={files} />
         </Col>
         <Col lg={6}>
-          <Card className="h-100">
-            <Card.Header className="bg-light">
-              <h5 className="mb-0">Experience</h5>
-            </Card.Header>
-            <Card.Body className="fs--1">
-              {experiences.map((experience, index) => (
-                <Experience
-                  key={experience.id}
-                  experience={experience}
-                  isLast={index === experiences.length - 1}
-                />
-              ))}
-            </Card.Body>
-          </Card>
+       
+        
         </Col>
         <Col lg={7} xxl={8}>
           <TopPages tableData={topPagesTableData} perPage={6} />

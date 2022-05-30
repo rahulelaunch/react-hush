@@ -1,7 +1,3 @@
-// import ForgetPassword from 'components/authentication/simple/ForgetPassword';
-// import Registration from 'components/authentication/simple/Registration';
-import LoginForm from 'components/authentication/LoginForm';
-import ExperienceForm from 'components/pages/user/settings/ExperienceForm';
 
 
 import React, { useState } from 'react';
@@ -69,7 +65,7 @@ const Forms = () => {
                       </Link>
                     </p>
                   </Flex>
-                  <LoginForm layout="split" hasLabel />
+                 
                 </Card.Body>
               </Card>
             </Col>
@@ -82,12 +78,7 @@ const Forms = () => {
                 <Card.Header>
                   <h5 className="mb-0">Experiences</h5>
                 </Card.Header>
-                <Card.Body className="bg-light pb-0">
-                  <ExperienceForm
-                    collapsed={experienceFormCollapsed}
-                    setCollapsed={setExperienceFormCollapsed}
-                  />
-                </Card.Body>
+            
               </Card>
             </Col>
             <Col lg={12}>

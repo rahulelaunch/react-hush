@@ -5,10 +5,10 @@ import WidgetSectionTitle from './WidgetSectionTitle';
 import DepositeStatus from 'components/dashboards/saas/DepositeStatus';
 
 
-import DangerZone from 'components/pages/user/settings/DangerZone';
+
 import GreetingCard from 'components/dashboards/e-commerce/greetings/GreetingCard';
 import { Card, Col, Row } from 'react-bootstrap';
-import { notifications } from 'data/dashboard/ecom';
+
 import {
   greetingItems,
   markers,
@@ -46,14 +46,12 @@ const OthersWidgets = () => {
    
           <BirthdayNotice name="Emma Watson" profileLink="/user/profile" />
         </Col>
-        <Col xxl={4}>
-          <DangerZone />
-        </Col>
+  
       </Row>
 
       <Row className="g-3 mb-3">
         <Col xl={7}>
-          <GreetingCard notifications={notifications} />
+          <GreetingCard />
         </Col>
         <Col xl={5}>
           <Greetings data={greetingItems} />

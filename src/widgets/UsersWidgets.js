@@ -1,22 +1,19 @@
 import React from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
-import { notifications } from 'data/notification/notification';
-import associations from 'data/associations';
+
+
 
 import WidgetSectionTitle from './WidgetSectionTitle';
 
-import Notification from 'components/notification/Notification';
+
 
 import rawFeeds from 'data/feed';
 import FalconCardFooterLink from 'components/common/FalconCardFooterLink';
-import ProfileBanner from 'components/pages/user/profile/Banner';
 
-import Associations from 'components/pages/asscociations/Associations';
-import InvitePeople from 'components/pages/miscellaneous/invite-people/InvitePeople';
+
 import people from 'data/people';
 
-import ActivityLog from 'components/pages/user/profile/ActivityLog';
-import activities from 'data/activities';
+
 
 import ActiveUsers from 'components/dashboards/default/ActiveUsers';
 import { users } from 'data/dashboard/default';
@@ -40,9 +37,7 @@ const UsersWidgets = () => {
               <h5 className="mb-1 mb-md-0">Notifications</h5>
             </Card.Header>
             <Card.Body className="p-0">
-              {notifications.slice(0, 4).map(notification => (
-                <Notification {...notification} key={notification.id} />
-              ))}
+        
             </Card.Body>
             <FalconCardFooterLink
               title="All Notifications"
@@ -57,17 +52,9 @@ const UsersWidgets = () => {
         <Col lg={6}>
     
         </Col>
-        <Col lg={6}>
-          <Associations
-            className="mb-3 h-100"
-            associations={associations.slice(0, 8)}
-            colBreakpoints={{ sm: 6 }}
-          />
-        </Col>
+       
       </Row>
-      <div className="mb-3">
-        <InvitePeople />
-      </div>
+  
 
       <Row className="g-3 mb-3">
         <Col lg={8}>
@@ -82,7 +69,7 @@ const UsersWidgets = () => {
         </Col>
 
         <Col lg={4}>
-          <ActivityLog activities={activities.slice(0, 6)} />
+         
           <div className="mt-3">
        
           </div>
@@ -90,7 +77,7 @@ const UsersWidgets = () => {
         </Col>
       </Row>
 
-      <ProfileBanner />
+
  
     </>
   );
