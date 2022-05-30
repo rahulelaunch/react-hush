@@ -110,7 +110,7 @@ import Rating from 'components/doc-components/Rating';
 import AdvanceSelect from 'components/doc-components/AdvanceSelect';
 import Editor from 'components/doc-components/Editor';
 
-import Kanban from 'components/app/kanban/Kanban';
+
 import DraggableExample from 'components/doc-components/DraggableExample';
 import LeafletMapExample from 'components/doc-components/LeafletMapExample';
 import Scrollbar from 'components/doc-components/Scrollbar';
@@ -230,13 +230,6 @@ const Layout = () => {
           <Route path="/admin/plan/list" element={<Plan />} />   
           <Route path="/admin/terms_conditions/list" element={<TermsConditions />} />   
           
-
-
-        
-        
-          <Route path="app/kanban" element={<Kanban />} />
-
-    
 
           {/*Pages*/}
           <Route path="pages/starter" element={<Starter />} />
