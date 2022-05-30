@@ -94,7 +94,6 @@ import Placeholder from 'components/doc-components/Placeholder';
 import Lightbox from 'components/doc-components/Lightbox';
 import AdvanceTableExamples from 'components/doc-components/AdvanceTableExamples';
 import ModalAuth from 'components/authentication/modal/ModalAuth';
-import Calendar from 'components/app/calendar/Calendar';
 import FaqAlt from 'components/pages/faq/faq-alt/FaqAlt';
 import FaqBasic from 'components/pages/faq/faq-basic/FaqBasic';
 import FaqAccordion from 'components/pages/faq/faq-accordion/FaqAccordion';
@@ -121,22 +120,10 @@ import Inbox from 'components/app/email/inbox/Inbox';
 import Rating from 'components/doc-components/Rating';
 import AdvanceSelect from 'components/doc-components/AdvanceSelect';
 import Editor from 'components/doc-components/Editor';
-import Chat from 'components/app/chat/Chat';
+
 import Kanban from 'components/app/kanban/Kanban';
 import DraggableExample from 'components/doc-components/DraggableExample';
-import LineCharts from 'components/doc-components/charts-example/echarts/line-charts';
-import BarCharts from 'components/doc-components/charts-example/echarts/bar-charts';
-import CandlestickCharts from 'components/doc-components/charts-example/echarts/candlestick-charts';
-import GeoMaps from 'components/doc-components/charts-example/echarts/geo-map';
-import ScatterCharts from 'components/doc-components/charts-example/echarts/scatter-charts';
-import PieCharts from 'components/doc-components/charts-example/echarts/pie-charts';
-import RadarCharts from 'components/doc-components/charts-example/echarts/radar-charts/Index';
-import HeatmapCharts from 'components/doc-components/charts-example/echarts/heatmap-chart';
-import Chartjs from 'components/doc-components/charts-example/chartjs';
-import HowToUse from 'components/doc-components/charts-example/echarts/HowToUse';
-import GoogleMapExample from 'components/doc-components/GoogleMapExample';
 import LeafletMapExample from 'components/doc-components/LeafletMapExample';
-import CookieNoticeExample from 'components/doc-components/CookieNoticeExample';
 import Scrollbar from 'components/doc-components/Scrollbar';
 import Scrollspy from 'components/doc-components/Scrollspy';
 import ReactIcons from 'components/doc-components/ReactIcons';
@@ -252,7 +239,6 @@ const Layout = () => {
           <Route path="icons/react-icons" element={<ReactIcons />} />
 
           {/* maps */}
-          <Route path="maps/google-map" element={<GoogleMapExample />} />
           <Route path="maps/leaflet-map" element={<LeafletMapExample />} />
 
           {/*App*/}
@@ -276,8 +262,8 @@ const Layout = () => {
           
 
 
-          <Route path="app/calendar" element={<Calendar />} />
-          <Route path="app/chat" element={<Chat />} />
+        
+        
           <Route path="app/kanban" element={<Kanban />} />
           <Route path="social/feed" element={<Feed />} />
           <Route path="social/activity-log" element={<ActivityLog />} />
@@ -312,25 +298,10 @@ const Layout = () => {
           />
           {/* charts-example */}
 
-          <Route path="charts/chartjs" element={<Chartjs />} />
-          <Route path="charts/echarts/line-charts" element={<LineCharts />} />
-          <Route path="charts/echarts/bar-charts" element={<BarCharts />} />
-          <Route
-            path="charts/echarts/candlestick-charts"
-            element={<CandlestickCharts />}
-          />
-          <Route path="charts/echarts/geo-map" element={<GeoMaps />} />
-          <Route
-            path="charts/echarts/scatter-charts"
-            element={<ScatterCharts />}
-          />
-          <Route path="charts/echarts/pie-charts" element={<PieCharts />} />
-          <Route path="charts/echarts/radar-charts" element={<RadarCharts />} />
-          <Route
-            path="charts/echarts/heatmap-charts"
-            element={<HeatmapCharts />}
-          />
-          <Route path="charts/echarts/how-to-use" element={<HowToUse />} />
+     
+     
+       
+      
 
           {/*Components*/}
    
@@ -394,10 +365,7 @@ const Layout = () => {
           <Route path="components/navs-and-tabs/navbar" element={<Navbars />} />
           <Route path="components/navs-and-tabs/tabs" element={<Tabs />} />
           <Route path="components/collapse" element={<Collapse />} />
-          <Route
-            path="components/cookie-notice"
-            element={<CookieNoticeExample />}
-          />
+     
           <Route path="components/countup" element={<CountUp />} />
           <Route path="components/videos/embed" element={<Embed />} />
       

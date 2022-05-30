@@ -22,7 +22,7 @@ import SpaceWarning from 'components/dashboards/default/SpaceWarning';
 import PageHeader from 'components/common/PageHeader';
 import SoftBadge from 'components/common/SoftBadge';
 import ProjectLocation from 'components/dashboards/project-management/project-location/ProjectLocation';
-import CalendarManagement from 'components/dashboards/project-management/calendar/CalendarManagement';
+// import CalendarManagement from 'components/dashboards/project-management/calendar/CalendarManagement';
 import DoMoreCard from 'components/dashboards/saas/DoMoreCard';
 import TeamProgress from 'components/dashboards/project-management/TeamProgress';
 import Discussion from 'components/dashboards/project-management/Discussion';
@@ -96,7 +96,7 @@ const OthersWidgets = () => {
 
       <Row className="g-3 mb-3">
         <Col lg={8}>
-          <CalendarManagement data={managementEvents} />
+       
         </Col>
         <Col lg={4}>
           <DoMoreCard className="h-100" />
