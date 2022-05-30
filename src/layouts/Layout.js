@@ -7,22 +7,18 @@ import SettingsToggle from 'components/settings-panel/SettingsToggle';
 import SettingsPanel from 'components/settings-panel/SettingsPanel';
 
 import ErrorLayout from './ErrorLayout';
-import WizardAuth from 'components/authentication/wizard/WizardAuth';
 import Landing from 'components/pages/landing/Landing';
 import { toast, ToastContainer } from 'react-toastify';
 import { CloseButton } from 'components/common/Toast';
 
-import Accordion from 'components/doc-components/Accordion';
-import Alerts from 'components/doc-components/Alerts';
+
 import Badges from 'components/doc-components/Badges';
 import Breadcrumbs from 'components/doc-components/Breadcrumb';
 import Buttons from 'components/doc-components/Buttons';
-import CalendarExample from 'components/doc-components/CalendarExample';
 import Cards from 'components/doc-components/Cards';
 import Dropdowns from 'components/doc-components/Dropdowns';
 import ListGroups from 'components/doc-components/ListGroups';
 import Modals from 'components/doc-components/Modals';
-import Offcanvas from 'components/doc-components/Offcanvas';
 import Pagination from 'components/doc-components/Pagination';
 import BasicProgressBar from 'components/doc-components/ProgressBar';
 import Spinners from 'components/doc-components/Spinners';
@@ -144,13 +140,8 @@ import CookieNoticeExample from 'components/doc-components/CookieNoticeExample';
 import Scrollbar from 'components/doc-components/Scrollbar';
 import Scrollspy from 'components/doc-components/Scrollspy';
 import ReactIcons from 'components/doc-components/ReactIcons';
-import ReactPlayerExample from 'components/doc-components/ReactPlayerExample';
-import EmojiMartExample from 'components/doc-components/EmojiMart';
-import TreeviewExample from 'components/doc-components/TreeviewExample';
-import Timeline from 'components/doc-components/Timeline';
+
 import Widgets from 'widgets/Widgets';
-import Ecommerce from 'components/dashboards/e-commerce';
-import ProjectManagement from 'components/dashboards/project-management';
 
 import Error404 from 'components/errors/Error404';
 import Error500 from 'components/errors/Error500';
@@ -158,10 +149,8 @@ import Error500 from 'components/errors/Error500';
 import SimpleLogin from 'components/pages/Login';
 
 
-import Wizard from 'components/wizard/Wizard';
 import Dashboard from 'components/dashboards/default';
 import AppContext from 'context/Context';
-import Faq from 'components/documentation/Faq';
 
 import User from 'components/app/users/User';
 import Body from 'components/app/body_type/Body';
@@ -215,14 +204,7 @@ const Layout = () => {
          
         </Route>
 
-  
- 
-        <Route element={<WizardAuth />}>
-          <Route
-            path="authentication/wizard"
-            element={<Wizard validation={true} />}
-          />
-        </Route>
+
 
         {/* //--- MainLayout Starts  */}
 
@@ -232,11 +214,7 @@ const Layout = () => {
           <Route path="dashboard/analytics" element={<Analytics />} />
           <Route path="dashboard/crm" element={<Crm />} />
           <Route path="dashboard/saas" element={<Saas />} />
-          <Route path="dashboard/e-commerce" element={<Ecommerce />} />
-          <Route
-            path="dashboard/project-management"
-            element={<ProjectManagement />}
-          />
+        
           {/* E Commerce */}
           <Route
             path="e-commerce/orders/order-details"
@@ -355,18 +333,15 @@ const Layout = () => {
           <Route path="charts/echarts/how-to-use" element={<HowToUse />} />
 
           {/*Components*/}
-          <Route path="components/alerts" element={<Alerts />} />
-          <Route path="components/accordion" element={<Accordion />} />
+   
           <Route path="components/animated-icons" element={<AnimatedIcons />} />
           <Route path="components/badges" element={<Badges />} />
           <Route path="components/breadcrumb" element={<Breadcrumbs />} />
           <Route path="components/buttons" element={<Buttons />} />
-          <Route path="components/calendar" element={<CalendarExample />} />
           <Route path="components/cards" element={<Cards />} />
           <Route path="components/dropdowns" element={<Dropdowns />} />
           <Route path="components/list-group" element={<ListGroups />} />
           <Route path="components/modals" element={<Modals />} />
-          <Route path="components/offcanvas" element={<Offcanvas />} />
           <Route path="components/pagination" element={<Pagination />} />
           <Route
             path="components/progress-bar"
@@ -384,8 +359,6 @@ const Layout = () => {
           <Route path="components/popovers" element={<Popovers />} />
           <Route path="components/draggable" element={<DraggableExample />} />
           <Route path="components/scrollspy" element={<Scrollspy />} />
-          <Route path="components/timeline" element={<Timeline />} />
-          <Route path="components/treeview" element={<TreeviewExample />} />
           <Route
             path="components/carousel/bootstrap"
             element={<BootstrapCarousel />}
@@ -405,10 +378,7 @@ const Layout = () => {
           <Route path="forms/basic/layout" element={<FormLayout />} />
           <Route path="forms/advance/date-picker" element={<DatePicker />} />
           <Route path="forms/advance/editor" element={<Editor />} />
-          <Route
-            path="forms/advance/emoji-button"
-            element={<EmojiMartExample />}
-          />
+       
           <Route
             path="forms/advance/advance-select"
             element={<AdvanceSelect />}
@@ -430,10 +400,7 @@ const Layout = () => {
           />
           <Route path="components/countup" element={<CountUp />} />
           <Route path="components/videos/embed" element={<Embed />} />
-          <Route
-            path="components/videos/react-player"
-            element={<ReactPlayerExample />}
-          />
+      
           <Route path="components/background" element={<Background />} />
           <Route path="components/search" element={<Search />} />
           <Route path="components/typed-text" element={<TypedText />} />
@@ -486,7 +453,6 @@ const Layout = () => {
           <Route path="documentation/styling" element={<Styling />} />
           <Route path="documentation/dark-mode" element={<DarkMode />} />
           <Route path="documentation/plugin" element={<Plugins />} />
-          <Route path="documentation/faq" element={<Faq />} />
           <Route path="documentation/design-file" element={<DesignFile />} />
           <Route path="changelog" element={<Changelog />} />
           <Route path="authentication-modal" element={<ModalAuth />} />

@@ -17,7 +17,7 @@ const vimeoCode = `<ReactVimeoPlayer
   className="react-player"
 />`;
 
-const ReactPlayerExample = () => (
+const ReactPlayerExample = () => (  
   <>
     <PageHeader
       title="React Player"

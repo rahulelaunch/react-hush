@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import React from 'react';
 import { Col, Row } from 'react-bootstrap';
 import Flex from 'components/common/Flex';
-import WizardForm from 'components/wizard/Wizard';
+// import WizardForm from 'components/wizard/Wizard';
 
 const FormTitle = ({ icon, title }) => {
   return (
@@ -34,21 +34,21 @@ const WizardForms = () => {
       <Row className="my-5 g-4">
         <Col lg={6} xl={12} xxl={6} className="mt-0 h-100">
           <FormTitle icon="spinner" title="Progress Tab" />
-          <WizardForm />
+          {/* <WizardForm /> */}
         </Col>
         <Col lg={6} xl={12} xxl={6} className="mt-0 h-100">
           <FormTitle icon="check-double" title="With Validation" />
-          <WizardForm validation={true} />
+          {/* <WizardForm validation={true} /> */}
         </Col>
       </Row>
       <Row className="g-4">
         <Col lg={6} xl={12} xxl={6} className="h-100">
           <FormTitle icon="tasks" title="With Progressbar" />
-          <WizardForm variant="pills" progressBar={true} />
+          {/* <WizardForm variant="pills" progressBar={true} /> */}
         </Col>
         <Col lg={6} xl={12} xxl={6} className="h-100">
           <FormTitle icon="capsules" title="Pill Tab" />
-          <WizardForm variant="pills" />
+          {/* <WizardForm variant="pills" /> */}
         </Col>
       </Row>
     </>
