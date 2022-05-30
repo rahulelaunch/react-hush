@@ -26,8 +26,8 @@ import CalendarManagement from 'components/dashboards/project-management/calenda
 import DoMoreCard from 'components/dashboards/saas/DoMoreCard';
 import TeamProgress from 'components/dashboards/project-management/TeamProgress';
 import Discussion from 'components/dashboards/project-management/Discussion';
-import LogoutContent from 'components/authentication/LogoutContent';
-import ConfirmMailContent from 'components/authentication/ConfirmMailContent';
+// import LogoutContent from 'components/authentication/LogoutContent';
+// import ConfirmMailContent from 'components/authentication/ConfirmMailContent';
 
 const OthersWidgets = () => {
   return (
@@ -116,14 +116,14 @@ const OthersWidgets = () => {
         <Col lg={6}>
           <Card className="h-lg-100">
             <Card.Body className="p-4 p-sm-5 text-center">
-              <LogoutContent />
+              {/* <LogoutContent /> */}
             </Card.Body>
           </Card>
         </Col>
         <Col lg={6}>
           <Card className="h-lg-100">
             <Card.Body className="p-4 p-sm-5 text-center">
-              <ConfirmMailContent email="xyz@abc.com" />
+              {/* < email="xyz@abc.com" /> */}
             </Card.Body>
           </Card>
         </Col>

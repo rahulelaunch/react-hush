@@ -1,5 +1,5 @@
-import ForgetPassword from 'components/authentication/simple/ForgetPassword';
-import Registration from 'components/authentication/simple/Registration';
+// import ForgetPassword from 'components/authentication/simple/ForgetPassword';
+// import Registration from 'components/authentication/simple/Registration';
 import LoginForm from 'components/authentication/LoginForm';
 import ExperienceForm from 'components/pages/user/settings/ExperienceForm';
 import CreatePost from 'components/app/social/feed/CreatePost';
@@ -10,7 +10,7 @@ import { Card, Col, Row } from 'react-bootstrap';
 import WidgetSectionTitle from './WidgetSectionTitle';
 import Flex from 'components/common/Flex';
 import { Link } from 'react-router-dom';
-import PasswordReset from 'components/authentication/simple/PasswordReset';
+// import PasswordReset from 'components/authentication/simple/PasswordReset';
 import PersonalForm from 'components/wizard/PersonalForm';
 import { useForm } from 'react-hook-form';
 
@@ -39,14 +39,14 @@ const Forms = () => {
             <Col lg={12} className="mb-3">
               <Card className="h-lg-100">
                 <Card.Body className="p-4 p-sm-5">
-                  <Registration />
+                  {/* <Registration /> */}
                 </Card.Body>
               </Card>
             </Col>
             <Col lg={12} className="mb-3">
               <Card className="h-lg-100 text-center">
                 <Card.Body className="p-4 p-sm-5">
-                  <ForgetPassword />
+                  {/* <ForgetPassword /> */}
                 </Card.Body>
               </Card>
             </Col>
@@ -113,7 +113,7 @@ const Forms = () => {
         <Col lg={5}>
           <Card className="h-lg-100 text-center">
             <Card.Body className="p-4 p-sm-5">
-              <PasswordReset />
+              {/* <PasswordReset /> */}
             </Card.Body>
           </Card>
         </Col>

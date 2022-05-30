@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { CloseButton, Modal } from 'react-bootstrap';
 import { useNavigate, useLocation } from 'react-router';
-import RegistrationForm from 'components/authentication/RegistrationForm';
+// import RegistrationForm from 'components/authentication/RegistrationForm';
 
 export default function Example() {
   let {
@@ -34,7 +34,7 @@ export default function Example() {
         />
       </Modal.Header>
       <Modal.Body className="p-4">
-        <RegistrationForm layout="split" hasLabel />
+        {/* <RegistrationForm layout="split" hasLabel /> */}
       </Modal.Body>
     </Modal>
   );

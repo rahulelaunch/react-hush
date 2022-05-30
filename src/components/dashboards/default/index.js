@@ -15,6 +15,7 @@ import {
   runningProjects
 } from 'data/dashboard/default';
 
+import StatisticsCards from '../saas/stats-cards/StatisticsCards';
 import TotalOrder from './TotalOrder';
 import MarketShare from './MarketShare';
 import TotalSales from './TotalSales';
@@ -31,7 +32,7 @@ import Weather from './Weather';
 const Dashboard = () => {
   return (
     <>
-      <Row className="g-3 mb-3">
+      {/* <Row className="g-3 mb-3">
         <Col md={6} xxl={3}>
           <WeeklySales data={weeklySalesData} />
         </Col>
@@ -44,6 +45,12 @@ const Dashboard = () => {
         <Col md={6} xxl={3}>
           <Weather data={weather} />
         </Col>
+      </Row> */}
+
+      <Row className="g-3 mb-3">
+        <Col xxl={9}>
+          <StatisticsCards />
+          </Col>
       </Row>
 
       {/* <Row className="g-3 mb-3">

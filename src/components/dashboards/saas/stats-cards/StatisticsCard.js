@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { Card } from 'react-bootstrap';
 import classNames from 'classnames';
 import Background from 'components/common/Background';
-import SoftBadge from 'components/common/SoftBadge';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import CountUp from 'react-countup';
@@ -18,8 +17,6 @@ const StatisticsCard = ({ stat, ...rest }) => {
     valueClassName,
     linkText,
     link,
-    badgeText,
-    badgeBg,
     image,
     className
   } = stat;
@@ -29,11 +26,6 @@ const StatisticsCard = ({ stat, ...rest }) => {
       <Card.Body className="position-relative">
         <h6>
           {title}
-          {badgeText && (
-            <SoftBadge bg={badgeBg} pill className="ms-2">
-              {badgeText}
-            </SoftBadge>
-          )}
         </h6>
         <div
           className={classNames(

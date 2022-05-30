@@ -85,13 +85,13 @@ export const appRoutes = {
  
     {
       name: 'Mobile Plan',
-      icon: 'comments',
+      icon: ['fab', 'trello'],
       to: '/admin/plan/list',
       active: true
     },
     {
       name: 'Terms & Conditions',
-      icon: 'comments',
+      icon: 'question-circle',
       to: '/admin/terms_conditions/list',
       active: true
     },

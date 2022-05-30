@@ -156,28 +156,7 @@ import Error404 from 'components/errors/Error404';
 import Error500 from 'components/errors/Error500';
 
 import SimpleLogin from 'components/pages/Login';
-import SimpleLogout from 'components/authentication/simple/Logout';
-import SimpleRegistration from 'components/authentication/simple/Registration';
-import SimpleForgetPassword from 'components/authentication/simple/ForgetPassword';
-import SimplePasswordReset from 'components/authentication/simple/PasswordReset';
-import SimpleConfirmMail from 'components/authentication/simple/ConfirmMail';
-import SimpleLockScreen from 'components/authentication/simple/LockScreen';
 
-import CardLogin from 'components/authentication/card/Login';
-import Logout from 'components/authentication/card/Logout';
-import CardRegistration from 'components/authentication/card/Registration';
-import CardForgetPassword from 'components/authentication/card/ForgetPassword';
-import CardConfirmMail from 'components/authentication/card/ConfirmMail';
-import CardPasswordReset from 'components/authentication/card/PasswordReset';
-import CardLockScreen from 'components/authentication/card/LockScreen';
-
-import SplitLogin from 'components/authentication/split/Login';
-import SplitLogout from 'components/authentication/split/Logout';
-import SplitRegistration from 'components/authentication/split/Registration';
-import SplitForgetPassword from 'components/authentication/split/ForgetPassword';
-import SplitPasswordReset from 'components/authentication/split/PasswordReset';
-import SplitConfirmMail from 'components/authentication/split/ConfirmMail';
-import SplitLockScreen from 'components/authentication/split/LockScreen';
 
 import Wizard from 'components/wizard/Wizard';
 import Dashboard from 'components/dashboards/default';
@@ -233,82 +212,11 @@ const Layout = () => {
         {/*- ------------- simple ---------------------------  */}
         <Route element={<AuthSimpleLayout />}>
           <Route path="/admin/login" element={<SimpleLogin />} />
-          {/* <Route path="/" element={<SimpleLogin />} /> */}
-          <Route
-            path="authentication/simple/register"
-            element={<SimpleRegistration />}
-          />
-          <Route
-            path="authentication/simple/logout"
-            element={<SimpleLogout />}
-          />
-          <Route
-            path="authentication/simple/forgot-password"
-            element={<SimpleForgetPassword />}
-          />
-          <Route
-            path="authentication/simple/reset-password"
-            element={<SimplePasswordReset />}
-          />
-          <Route
-            path="authentication/simple/confirm-mail"
-            element={<SimpleConfirmMail />}
-          />
-          <Route
-            path="authentication/simple/lock-screen"
-            element={<SimpleLockScreen />}
-          />
+         
         </Route>
 
-        {/*- ------------- Card ---------------------------  */}
-        <Route path="authentication/card/login" element={<CardLogin />} />
-        <Route
-          path="authentication/card/register"
-          element={<CardRegistration />}
-        />
-        <Route path="authentication/card/logout" element={<Logout />} />
-        <Route
-          path="authentication/card/forgot-password"
-          element={<CardForgetPassword />}
-        />
-        <Route
-          path="authentication/card/reset-password"
-          element={<CardPasswordReset />}
-        />
-        <Route
-          path="authentication/card/confirm-mail"
-          element={<CardConfirmMail />}
-        />
-        <Route
-          path="authentication/card/lock-screen"
-          element={<CardLockScreen />}
-        />
-
-        {/*- ------------- Split ---------------------------  */}
-
-        <Route path="authentication/split/login" element={<SplitLogin />} />
-        <Route path="authentication/split/logout" element={<SplitLogout />} />
-        <Route
-          path="authentication/split/register"
-          element={<SplitRegistration />}
-        />
-        <Route
-          path="authentication/split/forgot-password"
-          element={<SplitForgetPassword />}
-        />
-        <Route
-          path="authentication/split/reset-password"
-          element={<SplitPasswordReset />}
-        />
-        <Route
-          path="authentication/split/confirm-mail"
-          element={<SplitConfirmMail />}
-        />
-        <Route
-          path="authentication/split/lock-screen"
-          element={<SplitLockScreen />}
-        />
-
+  
+ 
         <Route element={<WizardAuth />}>
           <Route
             path="authentication/wizard"

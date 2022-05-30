@@ -1,36 +1,65 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React, {useEffect} from 'react';
+import React, {useState,useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { Dropdown } from 'react-bootstrap';
 import team3 from 'assets/img/team/3.jpg';
 import Avatar from 'components/common/Avatar';
 import Http from '../../security/Http';
 import url from '../../../Development.json';
+import {
+  errorResponse,
+  successResponse,
+  isError,
+} from "../../helpers/response";
 
-
-const Logout = () => {
-    console.log(23232);
-    const isLogin = localStorage.getItem("access_token") || false;
-   
-      if (isLogin) {
-          const obj = {
-              access_token: localStorage.getItem('access_token')
-          };
-          Http.callApi(url.logout, JSON.stringify(obj))
-              .then((response) => {
-
-              })
-              .catch((error) => {
-                  if (error.response) {
-                      // errorResponse(error);
-                  }
-              });
-      }
-
-};
 
 
 const ProfileDropdown = () => {
+
+  const [name, setName] = useState('')
+  const [profile, setProfile] = useState('');
+
+  const Profile = () => {
+
+    Http.callApi(url.get_profile)
+        .then((response) => {
+            let data = response.data;
+            setName(data.username);
+            setProfile(data.profile)
+  
+        })
+        .catch((error) => {
+            if (error.response) {
+                errorResponse(error);
+            }
+        });
+  };
+  
+  const Logout = () => {
+  
+      const isLogin = localStorage.getItem("access_token") || false;
+     
+        if (isLogin) {
+            const obj = {
+                access_token: localStorage.getItem('access_token')
+            };
+            Http.callApi(url.logout, JSON.stringify(obj))
+                .then((response) => {
+  
+                })
+                .catch((error) => {
+                    if (error.response) {
+                        // errorResponse(error);
+                    }
+                });
+        }
+  
+  };
+
+  useEffect(() => {
+    Profile();
+});
+
 
 
   return (
@@ -38,10 +67,11 @@ const ProfileDropdown = () => {
       <Dropdown.Toggle
         bsPrefix="toggle"
         as={Link}
-        to="#!"
+        to="/admin/dashboard"
         className="pe-0 ps-2 nav-link"
       >
-        <Avatar src={team3} />
+        <Avatar src={profile} />{name}
+     
       </Dropdown.Toggle>
 
       <Dropdown.Menu className="dropdown-menu-card  dropdown-menu-end">

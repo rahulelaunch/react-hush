@@ -10,7 +10,7 @@ import {
   NavDropdown
 } from 'react-bootstrap';
 import Login from 'components/pages/Login';
-import Registration from 'components/authentication/simple/Registration';
+// import Registration from 'components/authentication/simple/Registration';
 
 const breakpoint = 'lg';
 
@@ -76,7 +76,7 @@ const LandingRightSideNavItem = () => {
           <Modal.Body className="p-0">
             <Card>
               <Card.Body className="fs--1 fw-normal p-4">
-                <Registration />
+                {/* <Registration /> */}
               </Card.Body>
             </Card>
           </Modal.Body>
