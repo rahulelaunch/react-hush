@@ -93,7 +93,7 @@ import Error500 from 'components/errors/Error500';
 
 import SimpleLogin from 'components/pages/Login';
 
-import Dashboard from 'components/dashboards';
+import Dashboard from 'components/dashboards/default';
 import AppContext from 'context/Context';
 
 import User from 'components/app/users/User';
