@@ -16,6 +16,7 @@ import {
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
 import BasicECharts from 'components/common/BasicEChart';
+import { Link } from 'react-router-dom';
 
 echarts.use([
   TitleComponent,
@@ -75,7 +76,7 @@ const TotalOrder = ({data,data1}) => {
 
   return (
     <Card className="h-md-100">
-       <Background image={bg3} className="bg-card" />
+       {/* <Background image={bg3} className="bg-card" /> */}
       <Card.Header className="pb-0">
         <h6 className="mb-0 mt-2">Total Users</h6>
       </Card.Header>
@@ -89,8 +90,7 @@ const TotalOrder = ({data,data1}) => {
         <div>
           <h2 className="fw-normal text-700 mb-1 lh-1">{data1}</h2>
           <Badge pill bg="200" className="text-primary fs--2">
-            <FontAwesomeIcon icon="caret-up" className="me-1" />
-            13.6%
+              <Link to="/admin/users" >See All</Link>
           </Badge>
         </div>
         <div className="ps-0">
@@ -107,7 +107,7 @@ const TotalOrder = ({data,data1}) => {
 
 TotalOrder.propTypes = { 
   data: PropTypes.array.isRequired,
-  data1: PropTypes.string.isRequired
+  data1: PropTypes.number.isRequired
 };
 
 export default TotalOrder;

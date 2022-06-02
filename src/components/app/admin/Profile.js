@@ -1,9 +1,7 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState, } from "react";
 import { useForm } from "react-hook-form";
 import Http from '../../security/Http';
 import url from '../../../Development.json';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import {
     errorResponse,
     successResponse,
@@ -11,9 +9,9 @@ import {
 } from "../../helpers/response";
 
 import ButtonSubmitReset from '../../layout/ButtonSubmitReset';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import dummy from '../../../assets/img/team/User.jpg';
-import { Button, Form, Row, Col, FormLabel, Container, Card } from 'react-bootstrap';
+import {Form, Col, FormLabel, Card } from 'react-bootstrap';
 
 
 
@@ -73,7 +71,7 @@ const PageForm = () => {
     });
 
     const onSubmit = (data) => {
-        // setbtnloader(true);
+        setBtnLoader(true);
 
         if (fileName) {
             data["profile"] = fileName;
@@ -83,12 +81,12 @@ const PageForm = () => {
 
         Http.callApi(url.admin_update_profile, JSON.stringify(data))
             .then((response) => {
-                // setbtnloader(false);
+                setBtnLoader(false);
                 successResponse(response);
                 navigate('/admin/dashboard');
             })
             .catch((error) => {
-                // setbtnloader(false);
+                setBtnLoader(false);
                 if (error.response) {
                     errorResponse(error);
                 }

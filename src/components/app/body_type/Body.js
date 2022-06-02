@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Form, FormLabel, Card, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
+import {Form, FormLabel, Card, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
-import { modal } from "bootstrap"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AdvanceTable from 'components/common/advance-table/AdvanceTable';
 import AdvanceTableFooter from 'components/common/advance-table/AdvanceTableFooter';
 import AdvanceTableSearchBox from 'components/common/advance-table/AdvanceTableSearchBox';
-import AdvanceTablePagination from 'components/common/advance-table/AdvanceTablePagination';
+// import AdvanceTablePagination from 'components/common/advance-table/AdvanceTablePagination';
 import AdvanceTableWrapper from 'components/common/advance-table/AdvanceTableWrapper';
 import Http from '../../security/Http';
 import url from '../../../Development.json';
@@ -99,8 +98,10 @@ const AdvanceTableExamples = () => {
 
     Http.callApi(url.image_upload, formData)
       .then(response => {
-        setIcon(response.data.path);
-        setFileName(response.data.image[0]);
+
+        setFileName(response.data.images);
+        setIcon(response.data.images);
+        // setFileName(response.data.image[0]);
       })
       .catch(error => {
         if (error.response) {
@@ -155,6 +156,7 @@ const AdvanceTableExamples = () => {
 
     } else {
       data["body_image"] = fileName;
+      console.log(data);
       Http.callApi(url.body_store, data)
         .then((response) => {
           setBtnLoader(false);
@@ -193,10 +195,6 @@ const AdvanceTableExamples = () => {
       </>
     )
     setModalText(TableModaldata);
-  };
-
-  const openImageInNewTab = (path) => {
-    window.open(path);
   };
 
   const deleteButtonClick = (id) => {
@@ -285,9 +283,8 @@ const AdvanceTableExamples = () => {
             })
         }
 
-        const data = rowData.row.original;
         return (
-          <img src={imageData} onClick={(id) => { openImageInNewTab(data.body_image) }} className="profile_pic_img" style={{ "height": "100px", "width": "100px", "borderRadius": "50" }} />
+          <img src={(imageData) ? imageData : dummy}   className="profile_pic_img" style={{ "height": "100px", "width": "100px", "borderRadius": "50" }} />
         )
       }
     },
@@ -460,7 +457,7 @@ const AdvanceTableExamples = () => {
                 </div>
                 {icon ? <div className="form-group">
                   <img
-                    src={icon}
+                    src={process.env.PUBLIC_URL+icon}
                     alt={iconAlt} width="150px" height="150px"
                     className="imgBox"
                   />

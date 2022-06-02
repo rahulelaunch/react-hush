@@ -17,6 +17,7 @@ import { CanvasRenderer } from 'echarts/renderers';
 import BasicECharts from 'components/common/BasicEChart';
 import SoftBadge from 'components/common/SoftBadge';
 import classNames from 'classnames';
+import { Link } from 'react-router-dom';
 
 echarts.use([
   TitleComponent,
@@ -73,13 +74,13 @@ const getOptions = data => ({
   grid: { right: 5, left: 10, top: 0, bottom: 0 }
 });
 
-const WeeklySales = ({ data, width, amountClassName }) => {
+const WeeklySales = ({ data, width, amountClassName ,data1}) => {
   return (
     <Card className="h-md-100">
-       <Background image={bg1} className="bg-card" />
+       {/* <Background image={bg1} className="bg-card" /> */}
       <Card.Header className="pb-0">
         <h6 className="mb-0 mt-2">
-          Weekly Sales
+          Total Plan
           <OverlayTrigger
             placement="top"
             overlay={
@@ -106,10 +107,10 @@ const WeeklySales = ({ data, width, amountClassName }) => {
               'mb-1 text-700 fw-normal lh-1'
             )}
           >
-            $47K
+           {data1}
           </h2>
           <SoftBadge pill bg="success" className="me-2 fs--2">
-            +3.5%
+          <Link to="/admin/plan/list" >See All</Link>
           </SoftBadge>
         </div>
         <BasicECharts
@@ -124,6 +125,7 @@ const WeeklySales = ({ data, width, amountClassName }) => {
 
 WeeklySales.propTypes = {
   data: PropTypes.array.isRequired,
+  data1: PropTypes.number.isRequired,
   width: PropTypes.string,
   amountClassName: PropTypes.string
 };

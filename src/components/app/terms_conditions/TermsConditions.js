@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, Col, Form, FormLabel, Row, Modal, Table as TableModal } from 'react-bootstrap';
-import { modal } from "bootstrap"
+import { Card, Col, Form, FormLabel, Row, Modal, Table as TableModal } from 'react-bootstrap';
 import { Editor } from "@tinymce/tinymce-react";
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AdvanceTable from 'components/common/advance-table/AdvanceTable';
 import AdvanceTableFooter from 'components/common/advance-table/AdvanceTableFooter';
 import AdvanceTableSearchBox from 'components/common/advance-table/AdvanceTableSearchBox';
-import AdvanceTablePagination from 'components/common/advance-table/AdvanceTablePagination';
+// import AdvanceTablePagination from 'components/common/advance-table/AdvanceTablePagination';
 import AdvanceTableWrapper from 'components/common/advance-table/AdvanceTableWrapper';
 import Http from '../../security/Http';
 import url from '../../../Development.json';
@@ -21,7 +20,6 @@ import {
   isError,
 
 } from "../../helpers/response";
-
 
 
 

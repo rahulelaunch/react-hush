@@ -1,15 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-import { modal } from "bootstrap"
-import PageHeader from 'components/common/PageHeader';
+import { Card, Col, Row, Table as TableModal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import FalconComponentCard from 'components/common/FalconComponentCard';
-import IconButton from 'components/common/IconButton';
 import AdvanceTable from 'components/common/advance-table/AdvanceTable';
 import AdvanceTableFooter from 'components/common/advance-table/AdvanceTableFooter';
 import AdvanceTableSearchBox from 'components/common/advance-table/AdvanceTableSearchBox';
-import AdvanceTablePagination from 'components/common/advance-table/AdvanceTablePagination';
+// import AdvanceTablePagination from 'components/common/advance-table/AdvanceTablePagination';
 import AdvanceTableWrapper from 'components/common/advance-table/AdvanceTableWrapper';
 import Http from '../../security/Http';
 import url from '../../../Development.json';
@@ -19,14 +14,9 @@ import {
   errorResponse,
   successResponse,
   isError,
-  configHeaderAxios
-
+ 
 } from "../../helpers/response";
-import Flex from 'components/common/Flex';
-import Typography from 'components/utilities/Typography';
 import { faEye, faToggleOff, faToggleOn, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import ActionButton from 'components/common/ActionButton';
-
 
 
 const AdvanceTableExamples = () => {
@@ -231,11 +221,52 @@ const AdvanceTableExamples = () => {
         className: 'py-2'
       },
       Cell: rowData => {
-        const { name, user_profile } = rowData.row.original;
+
+        const { name } = rowData.row.original;
+        const propsImage = rowData.row.original.user_profile;
+     
+        const [imageData,setImageData] = useState();
+        useEffect(() => {
+          if (propsImage) {
+            urlFetch("http://192.168.0.172:7000/user/uploads/" + propsImage)
+          }
+        }, [propsImage])
+  
+        const urlFetch = async (profileData) => {
+          console.log(profileData);
+          await fetch(profileData.toString(), {
+            method: "GET",
+            headers: new Headers({
+              'authorization': `Bearer ` + localStorage.getItem('access_token'),
+              'Content-Type': 'application/json',
+              'env': 'test'
+            })
+          })
+            .then(response => {
+              const reader = response.body.getReader();
+              return new ReadableStream({
+                start(controller) {
+                  return pump();
+                  function pump() {
+                    return reader.read().then(({ done, value }) => {
+                      if (done) {
+                        controller.close();
+                        return;
+                      }
+                      controller.enqueue(value);
+                      const data = `data:${"image/jpeg"};base64,${new Buffer(value).toString('base64')}`;
+                      setImageData(data)
+                      return pump();
+                    });
+                  }
+                }
+              })
+            })
+        }
         return (
           <>
             <div className='d-flex align-items-center'>
-              <img src={(user_profile) ? user_profile : dummy} className="profile_pic_img" style={{ "height": "32px", "width": "32px", borderRadius: "50%", "borderRadius": "50" }} />
+              <img src={(imageData) ? imageData : dummy} className="rounded-circle " style={{ "height": "32px", "width": "32px", borderRadius: "50%", "borderRadius": "50" }} />
               <div className="flex-1 ms-2">
                 <h5 className="mb-0 fs--1">{name}</h5>
               </div>
@@ -244,18 +275,6 @@ const AdvanceTableExamples = () => {
         )
       }
     },
-
-    // {
-    //   accessor: 'user_profile',
-    //   Header: 'Image',
-    // Cell: rowData => {
-    //   const data = rowData.row.original
-    //   return (
-    //     <img src={(data.user_profile) ? data.user_profile : dummy} className="profile_pic_img" style={{ "height": "32px", "width": "32px", borderRadius:"50%", "borderRadius": "50" }} />
-    //   )
-    // }
-
-    // },
 
     {
       accessor: 'email',

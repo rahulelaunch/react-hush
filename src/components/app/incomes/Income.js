@@ -1,36 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, Col, Form, FormLabel, Row, Modal, Table as TableModal } from 'react-bootstrap';
-import { modal } from "bootstrap"
-import PageHeader from 'components/common/PageHeader';
+import { Card, Col, Form, FormLabel, Row, Modal, Table as TableModal } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import FalconComponentCard from 'components/common/FalconComponentCard';
-import IconButton from 'components/common/IconButton';
 import AdvanceTable from 'components/common/advance-table/AdvanceTable';
 import AdvanceTableFooter from 'components/common/advance-table/AdvanceTableFooter';
 import AdvanceTableSearchBox from 'components/common/advance-table/AdvanceTableSearchBox';
-import AdvanceTablePagination from 'components/common/advance-table/AdvanceTablePagination';
+// import AdvanceTablePagination from 'components/common/advance-table/AdvanceTablePagination';
 import AdvanceTableWrapper from 'components/common/advance-table/AdvanceTableWrapper';
 import Http from '../../security/Http';
 import url from '../../../Development.json';
-import dummy from '../../../assets/img/team/User.jpg';
 import Swal from 'sweetalert2';
 import {
   errorResponse,
   successResponse,
   isError,
-  configHeaderAxios
 
 } from "../../helpers/response";
-import Flex from 'components/common/Flex';
-import Typography from 'components/utilities/Typography';
+
 import { faEye, faPencilAlt, faPlus, faToggleOff, faToggleOn, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import ActionButton from 'components/common/ActionButton';
-import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import FalconCloseButton from 'components/common/FalconCloseButton';
-import { SketchPicker } from 'react-color'
 import ButtonSubmitReset from '../../layout/ButtonSubmitReset';
-
 
 
 const AdvanceTableExamples = () => {
@@ -38,7 +27,6 @@ const AdvanceTableExamples = () => {
   const [dataTableData, setDataTableData] = useState([]);
   const [modalText, setModalText] = useState();
   const [totalRows, setTotalRows] = useState(0);
-  const navigate = useNavigate();
   const [id, setId] = useState('');
   const [show, setShow] = useState(false);
   const [btnloader, setBtnLoader] = useState(false);

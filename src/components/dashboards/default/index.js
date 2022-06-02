@@ -32,6 +32,7 @@ const Dashboard = () => {
   const dashboard = () => {
     Http.callApi(url.get_dashboard)
       .then((response) => {
+        console.log(response);
         setCutomerTotal(response.data.user);
         setPlanTotal(response.data.plan);
 
@@ -52,12 +53,13 @@ const Dashboard = () => {
   return (
     <>
       <Row className="g-3 mb-3">
-        <Col md={6} xxl={3}>
-          <WeeklySales data={weeklySalesData} />
-        </Col>
-        <Col md={6} xxl={3}>
+      <Col md={6} xxl={3}>
           <TotalOrder data={totalOrder} data1={customerTotal}/>
         </Col>
+        <Col md={6} xxl={3}>
+          <WeeklySales data={weeklySalesData} data1 = {planTotal}/>
+        </Col>
+       
         <Col md={6} xxl={3}>
           <MarketShare data={marketShare} radius={['100%', '87%']} />
         </Col>

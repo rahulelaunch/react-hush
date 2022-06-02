@@ -3,6 +3,7 @@ import NavbarDropdown from './NavbarDropdown';
 import routes from 'routes/routes'
 import {
   dashboardRoutes,
+  userRoutes,
   appRoutes,
   pagesRoutes,
   modulesRoutes,
@@ -46,10 +47,13 @@ const NavbarTopDropDownMenus = () => {
         ))}
       </NavbarDropdown>
 
-      <NavbarDropdown title="app">
-        <NavbarDropdownApp items={appRoutes.children} />
+      <NavbarDropdown title="User Option">
+        <NavbarDropdownApp items={userRoutes.children} />
       </NavbarDropdown>
 
+      <NavbarDropdown title="App">
+        <NavbarDropdownApp items={appRoutes.children} />
+      </NavbarDropdown>
   
 
      

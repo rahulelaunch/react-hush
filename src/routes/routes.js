@@ -12,8 +12,8 @@ export const dashboardRoutes = {
     }
   ]
 };
-export const appRoutes = {
-  label: 'app',
+export const userRoutes = {
+  label: 'User Option',
   children: [
     {
       name: 'User Profile',
@@ -62,7 +62,13 @@ export const appRoutes = {
           active: true
         },
       ]
-    },
+    }, 
+  ]
+};
+
+export const appRoutes = {
+  label: 'App',
+  children: [
     {
       name: 'Location',
       icon: 'map',
@@ -100,5 +106,6 @@ export const appRoutes = {
 
 export default [
   dashboardRoutes,
+  userRoutes,
   appRoutes,
 ];

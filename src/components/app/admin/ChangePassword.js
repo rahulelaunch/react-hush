@@ -2,8 +2,6 @@ import React, { useEffect, useState, useRef } from "react";
 import { useForm } from "react-hook-form";
 import Http from '../../security/Http';
 import url from '../../../Development.json';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faAngleLeft } from "@fortawesome/free-solid-svg-icons";
 import {
     errorResponse,
     successResponse,
@@ -11,9 +9,8 @@ import {
 } from "../../helpers/response";
 
 import ButtonSubmitReset from '../../layout/ButtonSubmitReset';
-import { useLocation, useNavigate } from 'react-router-dom';
-import dummy from '../../../assets/img/team/User.jpg';
-import { Button, Form, Row, Col, FormLabel, Container, Card } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+import { Form, Col, FormLabel, Card } from 'react-bootstrap';
 
 
 const PageForm = () => {
