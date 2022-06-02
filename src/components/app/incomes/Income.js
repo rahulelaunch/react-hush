@@ -143,7 +143,7 @@ const AdvanceTableExamples = () => {
 
     data["id"] = data.income_id;
 
-    Http.callApi(url.mobilePlan_update, data)
+    Http.callApi(url.income_update, data)
       .then((response) => {
         setBtnLoader(false);
         successResponse(response);
@@ -159,7 +159,7 @@ const AdvanceTableExamples = () => {
 
   } else {
 
-    Http.callApi(url.mobilePlan_store, data)
+    Http.callApi(url.income_store, data)
       .then((response) => {
         setBtnLoader(false);
         successResponse(response);

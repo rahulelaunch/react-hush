@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Card, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { modal } from "bootstrap"
 import PageHeader from 'components/common/PageHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -216,20 +217,38 @@ const AdvanceTableExamples = () => {
   const columns = [
     {
       accessor: 'name',
-      Header: 'Name'
-    },
-
-    {
-      accessor: 'user_profile',
-      Header: 'Image',
+      Header: 'Name',
+      headerProps: { className: 'pe-1' },
+      cellProps: {
+        className: 'py-2'
+      },
       Cell: rowData => {
-        const data = rowData.row.original
+        const { name, user_profile } = rowData.row.original;
         return (
-          <img src={(data.user_profile) ? data.user_profile : dummy} className="profile_pic_img" style={{ "height": "100px", "width": "100px", "borderRadius": "50" }} />
+          <>
+            <Link to="/e-commerce/customer-details" className='d-flex align-items-center'>
+            <img src={(user_profile) ? user_profile : dummy} className="profile_pic_img" style={{ "height": "32px", "width": "32px", borderRadius:"50%", "borderRadius": "50" }} />
+            <div className="flex-1 ms-2">
+              <h5 className="mb-0 fs--1">{name}</h5>
+            </div>
+            </Link>
+          </>
         )
       }
-
     },
+
+    // {
+    //   accessor: 'user_profile',
+    //   Header: 'Image',
+      // Cell: rowData => {
+      //   const data = rowData.row.original
+      //   return (
+      //     <img src={(data.user_profile) ? data.user_profile : dummy} className="profile_pic_img" style={{ "height": "32px", "width": "32px", borderRadius:"50%", "borderRadius": "50" }} />
+      //   )
+      // }
+
+    // },
+    
     {
       accessor: 'email',
       Header: 'Email'
@@ -281,7 +300,7 @@ const AdvanceTableExamples = () => {
       Cell: rowData => {
         const data = rowData.row.original
         return (
-          <span className={`btn-sm   ${data.status === 1 ? "btn-success" : "btn-danger"}`}>
+          <span className={`btn-sm   ${data.status === 1 ? "d-block badge badge-soft-success rounded-pill" : "d-block badge badge-soft-danger rounded-pill"}`}>
             {
               data.status === 1 ? "Active" : "Inactive"
             }

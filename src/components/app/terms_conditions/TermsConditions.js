@@ -268,7 +268,7 @@ const AdvanceTableExamples = () => {
                   initialValue={description}
                   init={{ plugins, toolbar, menubar }}
                   onEditorChange={handleEditorChange}
-                />
+                   />
                 <div className="form-group">
 
                   <input type="hidden" style={{ display: (!description) ? { ...register('content', { required: true }) } : "block" }} name="content" id="content" />
