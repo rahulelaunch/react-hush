@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Col, Form, FormLabel, Row, Modal, Table as TableModal } from 'react-bootstrap';
+import { modal } from "bootstrap"
 import { Editor } from "@tinymce/tinymce-react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AdvanceTable from 'components/common/advance-table/AdvanceTable';

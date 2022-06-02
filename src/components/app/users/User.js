@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Col, Row, Table as TableModal } from 'react-bootstrap';
+import { Button, Card, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
+import { modal } from "bootstrap"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AdvanceTable from 'components/common/advance-table/AdvanceTable';
 import AdvanceTableFooter from 'components/common/advance-table/AdvanceTableFooter';
@@ -26,10 +27,7 @@ const AdvanceTableExamples = () => {
   const [totalRows, setTotalRows] = useState(0);
 
   const getData = () => {
-    // let options = {
-    //   page: page,
-    //   per_page: perPage
-    // }
+
 
     Http.callApi(url.get_users)
       .then((response) => {
