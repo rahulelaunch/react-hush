@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, Col,Form, FormLabel, Row, Modal, Table as TableModal } from 'react-bootstrap';
+import { Button, Card, Col, Form, FormLabel, Row, Modal, Table as TableModal } from 'react-bootstrap';
 import { modal } from "bootstrap"
 import PageHeader from 'components/common/PageHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -25,7 +25,7 @@ import Flex from 'components/common/Flex';
 import Typography from 'components/utilities/Typography';
 import { faEye, faPencilAlt, faPlus, faToggleOff, faToggleOn, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import ActionButton from 'components/common/ActionButton';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import FalconCloseButton from 'components/common/FalconCloseButton';
 import { SketchPicker } from 'react-color'
@@ -41,9 +41,8 @@ const AdvanceTableExamples = () => {
   const navigate = useNavigate();
   const [id, setId] = useState('');
   const [show, setShow] = useState(false);
-  // const handleClose = () => setShow(false);  
   const [btnloader, setBtnLoader] = useState(false);
-  const [color, setColor] = useState();
+
 
   const {
     register,
@@ -54,13 +53,13 @@ const AdvanceTableExamples = () => {
   } = useForm();
 
   const handleClose = () => {
-		reset(
-			  { keepDirtyValues: true },
-			  { keepIsValid: true }
-		);
-		setShow(false)
-	};
-  
+    reset(
+      { keepDirtyValues: true },
+      { keepIsValid: true }
+    );
+    setShow(false)
+  };
+
   const getData = () => {
 
     Http.callApi(url.get_income)
@@ -131,49 +130,44 @@ const AdvanceTableExamples = () => {
     setModalText(TableModaldata);
   };
 
-
-  const editButtonClick = (row) => {
-    navigate('/admin/income/form', { state: { row } });
-  };
-
   const onSubmit = (data) => {
-  setBtnLoader(true);
+    setBtnLoader(true);
 
-  if (data.income_id) {
+    if (data.income_id) {
 
-    data["id"] = data.income_id;
+      data["id"] = data.income_id;
 
-    Http.callApi(url.income_update, data)
-      .then((response) => {
-        setBtnLoader(false);
-        successResponse(response);
-        getData();
-        setShow(false)
-      })
-      .catch((error) => {
-        setBtnLoader(false);
-        if (error.response) {
-          errorResponse(error);
-        }
-      });
+      Http.callApi(url.income_update, data)
+        .then((response) => {
+          setBtnLoader(false);
+          successResponse(response);
+          getData();
+          setShow(false)
+        })
+        .catch((error) => {
+          setBtnLoader(false);
+          if (error.response) {
+            errorResponse(error);
+          }
+        });
 
-  } else {
+    } else {
 
-    Http.callApi(url.income_store, data)
-      .then((response) => {
-        setBtnLoader(false);
-        successResponse(response);
-        getData();
-        setShow(false)
-      })
-      .catch((error) => {
-        setBtnLoader(false);
-        if (error) {
-          errorResponse(error);
-        }
-      });
-  }
-};
+      Http.callApi(url.income_store, data)
+        .then((response) => {
+          setBtnLoader(false);
+          successResponse(response);
+          getData();
+          setShow(false)
+        })
+        .catch((error) => {
+          setBtnLoader(false);
+          if (error) {
+            errorResponse(error);
+          }
+        });
+    }
+  };
 
   const deleteButtonClick = (id) => {
     Swal.fire({
@@ -208,6 +202,13 @@ const AdvanceTableExamples = () => {
 
   const columns = [
     {
+      accessor: 'no',
+      Header: 'NO',
+      Cell: rowData => {
+        return (parseInt(rowData.row.id) + 1)
+      }
+    },
+    {
       accessor: 'annual_income',
       Header: 'Name'
     },
@@ -218,7 +219,7 @@ const AdvanceTableExamples = () => {
       Cell: rowData => {
         const data = rowData.row.original
         return (
-          <span className={`btn-sm   ${data.status === 1 ? "btn-success" : "btn-danger"}`}>
+          <span className={`btn-sm   ${data.status === 1 ? "d-block badge badge-soft-success rounded-pill" : "d-block badge badge-soft-danger rounded-pill"}`}>
             {
               data.status === 1 ? "Active" : "Inactive"
             }
@@ -231,32 +232,29 @@ const AdvanceTableExamples = () => {
     {
       accessor: '_id',
       Header: 'Action',
-
+      headerProps: { className: 'text-center' },
+      cellProps: { className: 'text-end' },
       Cell: rowData => {
         const data = rowData.row.original
         return (
           <>
-            <td className="text-end">
+            <button className={`btn btn-sm me-2 ${data.status === 1 ? "btn-warning" : "btn-danger"} `} onClick={(id) => { changeStatusButtonClick(data._id) }} >
+              {
+                data.status === 1 ? <FontAwesomeIcon icon={faToggleOff} title="Change Status" /> : <FontAwesomeIcon icon={faToggleOn} title="Change Status" />
+              }
+            </button>
 
-              <button className={`btn btn-sm me-2 ${data.status === 1 ? "btn-warning" : "btn-danger"} `} onClick={(id) => { changeStatusButtonClick(data._id) }} >
-                {
-                  data.status === 1 ? <FontAwesomeIcon icon={faToggleOff} title="Change Status" /> : <FontAwesomeIcon icon={faToggleOn} title="Change Status" />
-                }
-              </button>
+            <button className="btn btn-sm btn-info me-2" data-bs-toggle="modal" data-bs-target="#incomeViewModal" onClick={(e) => showModal(data)}>
+              <FontAwesomeIcon icon={faEye} title="View" />
+            </button>
 
-              <button className="btn btn-sm btn-info me-2" data-bs-toggle="modal" data-bs-target="#incomeViewModal" onClick={(e) => showModal(data)}>
-                <FontAwesomeIcon icon={faEye} title="View" />
-              </button>
+            <button className="btn btn-sm btn-primary me-2 btn-xs" onClick={(e) => handleShow(data)}>
+              <FontAwesomeIcon icon={faPencilAlt} />
+            </button>
 
-              <button className="btn btn-sm btn-primary me-2 btn-xs" onClick={(e) => handleShow(data)}>
-                <FontAwesomeIcon icon={faPencilAlt} />
-              </button>
-
-              <button className="btn btn-sm btn-danger me-2" >
-                <FontAwesomeIcon icon={faTrashAlt} onClick={(id) => { deleteButtonClick(data._id) }} />
-              </button>
-
-            </td>
+            <button className="btn btn-sm btn-danger me-2" >
+              <FontAwesomeIcon icon={faTrashAlt} onClick={(id) => { deleteButtonClick(data._id) }} />
+            </button>
           </>
         );
       },
@@ -267,113 +265,112 @@ const AdvanceTableExamples = () => {
 
   return (
     <>
-    <AdvanceTableWrapper
-      columns={columns}
-      data={dataTableData}
-      pagination
-      perPage={10}
-    >
-      <div style={{ borderRadius: "0.375rem" }} className='py-4 bg-white mb-3 d-flex align-items-center px-3'>
-        <h5 className="hover-actions-trigger mb-0">
-         income List
-        </h5>
-      </div>
-      <Card className='mb-3'>
+      <AdvanceTableWrapper
+        columns={columns}
+        data={dataTableData}
+        pagination
+        perPage={10}
+      >
+        <div style={{ borderRadius: "0.375rem" }} className='py-4 bg-white mb-3 d-flex align-items-center px-3'>
+          <h5 className="hover-actions-trigger mb-0">
+            income List
+          </h5>
+        </div>
+        <Card className='mb-3'>
 
-        <Card.Header className="border-bottom border-200">
+          <Card.Header className="border-bottom border-200">
 
-          <Row className="flex-between-center mb-3">
-            <Col xs={8} sm="auto" className="ms-3 mt-2 text-end ps-0">
-              <div id="orders-actions">
-              <button className="btn btn-sm btn-success" onClick={(e) => handleShow()}>
-                    <FontAwesomeIcon icon={faPlus} />
-                </button>
-              </div>
+            <Row className="flex-between-center mb-3">
+              <Col xs={8} sm="auto" className="ms-3 mt-2 text-end ps-0">
+                <div id="orders-actions">
+                  <button className="btn btn-sm btn-success" onClick={(e) => handleShow()}>
+                    <FontAwesomeIcon icon={faPlus} />Add Income
+                  </button>
+                </div>
 
-            </Col>
-            <Col xs="auto" sm={2} lg={3}>
-              <AdvanceTableSearchBox table />
-            </Col>
+              </Col>
+              <Col xs="auto" sm={2} lg={3}>
+                <AdvanceTableSearchBox table />
+              </Col>
+            </Row>
+
+          </Card.Header>
+          <Row className="flex-end-center mb-3">
+
+            <AdvanceTable
+              table
+              headerClassName="bg-200 text-900 text-nowrap align-middle"
+              rowClassName="align-middle white-space-nowrap"
+              tableProps={{
+                bordered: true,
+                striped: true,
+                className: 'fs--1 mb-0 overflow-hidden'
+              }}
+            />
           </Row>
+          <div className="modal fade" id="incomeViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog ">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">income Details</h5>
+                  <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div className="modal-body">
+                  {modalText}
+                </div>
 
-        </Card.Header>
-        <Row className="flex-end-center mb-3">
-
-          <AdvanceTable
-            table
-            headerClassName="bg-200 text-900 text-nowrap align-middle"
-            rowClassName="align-middle white-space-nowrap"
-            tableProps={{
-              bordered: true,
-              striped: true,
-              className: 'fs--1 mb-0 overflow-hidden'
-            }}
-          />
-        </Row>
-        <div className="modal fade" id="incomeViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div className="modal-dialog ">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">income Details</h5>
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <div className="modal-body">
-                {modalText}
-              </div>
-
             </div>
           </div>
-        </div>
-      </Card>
+        </Card>
 
-      <div className="mt-3">
-        <AdvanceTableFooter
-          rowCount={totalRows}
-          table
-          rowInfo
-          navButtons
-          rowsPerPageSelection
-        />
-      </div>
-    </AdvanceTableWrapper>
-    <Modal show={show} onHide={handleClose} keyboard={false}>
-    <Modal.Header>
-      {/* <Modal.Title>Hair Color Add</Modal.Title>
-       */}
-        {id ? <div className="form-group">
-        <Modal.Title>Income  Update</Modal.Title>
-    </div> :  <Modal.Title>Income Add</Modal.Title>}
-      <FalconCloseButton onClick={handleClose} />
-    </Modal.Header>
-    <Form onSubmit={handleSubmit(onSubmit)}>
-    
-      <Modal.Body>
-          <Col md="12 mb-3">
-            
-            <FormLabel htmlFor="name">Income</FormLabel>
-            <input type="hidden"
-              className="form-control"
-              id="income_id"
-              name='income_id'
-              {...register('income_id')}
-            />
-            <input type="number"
-              className="form-control"
-              id="annual_income"
-              name='annual_income'
-              placeholder="Enter income"
-              {...register('annual_income', {
-                required: "Income is required",
-              })}
-            />
-          </Col>
-    
-        <ButtonSubmitReset btnloader={btnloader} onsubmitFun={() => {
-          reset();
-        }} />
-      </Modal.Body>
-    </Form>
-    </Modal>
+        <div className="mt-3">
+          <AdvanceTableFooter
+            rowCount={totalRows}
+            table
+            rowInfo
+            navButtons
+            rowsPerPageSelection
+          />
+        </div>
+      </AdvanceTableWrapper>
+      <Modal show={show} onHide={handleClose} keyboard={false}>
+        <Modal.Header>
+  
+          {id ? <div className="form-group">
+            <Modal.Title>Income  Update</Modal.Title>
+          </div> : <Modal.Title>Income Add</Modal.Title>}
+          <FalconCloseButton onClick={handleClose} />
+        </Modal.Header>
+        <Form onSubmit={handleSubmit(onSubmit)}>
+
+          <Modal.Body>
+            <Col md="12 mb-3">
+
+              <FormLabel htmlFor="name">Income</FormLabel>
+              <input type="hidden"
+                className="form-control"
+                id="income_id"
+                name='income_id'
+                {...register('income_id')}
+              />
+              <input type="number"
+                className="form-control"
+                id="annual_income"
+                name='annual_income'
+                placeholder="Enter income"
+                {...register('annual_income', {
+                  required: "Income is required",
+                })}
+              />
+            </Col>
+
+            <ButtonSubmitReset btnloader={btnloader} onsubmitFun={() => {
+              reset();
+            }} />
+          </Modal.Body>
+        </Form>
+      </Modal>
     </>
   );
 }

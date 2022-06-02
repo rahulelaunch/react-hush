@@ -99,14 +99,11 @@ import AppContext from 'context/Context';
 import User from 'components/app/users/User';
 import Body from 'components/app/body_type/Body';
 import Fashion from 'components/app/fashion/Fashion';
-import FashionForm from 'components/app/fashion/PageForm';
 import Desire from 'components/app/desires/Desire';
 import AdminProfile from 'components/app/admin/Profile';
 import ChangePassword from 'components/app/admin/ChangePassword';
 import Education from 'components/app/educations/Education';
-import EducationForm from 'components/app/educations/PageForm';
 import Income from 'components/app/incomes/Income';
-import IncomeForm from 'components/app/incomes/PageForm';
 import Hair from 'components/app/hair/Hair';
 import Eye from 'components/app/eye/Eye';
 import Country from 'components/app/country/Country';
@@ -165,19 +162,15 @@ const Layout = () => {
           <Route path="/admin/change_password" element={<ChangePassword />} />
           <Route path="/admin/body/list" element={<Body />} />
           <Route path="/admin/fashion/list" element={<Fashion />} />
-          <Route path="/admin/fashion/form" element={<FashionForm />} />
           <Route path="/admin/desire/list" element={<Desire />} />
           <Route path="/admin/education/list" element={<Education />} />
-          <Route path="/admin/education/form" element={<EducationForm />} />
           <Route path="/admin/income/list" element={<Income />} />
-          <Route path="/admin/income/form" element={<IncomeForm />} />
           <Route path="/admin/hair/list" element={<Hair />} />
           <Route path="/admin/eye/list" element={<Eye />} />
           <Route path="/admin/country/list" element={<Country />} />
           <Route path="/admin/state/list" element={<State />} />
           <Route path="/admin/plan/list" element={<Plan />} />
           <Route path="/admin/terms_conditions/list" element={<TermsConditions />} />
-
 
 
           {/*Components*/}

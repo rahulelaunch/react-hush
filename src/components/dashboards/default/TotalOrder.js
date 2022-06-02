@@ -107,7 +107,7 @@ const TotalOrder = ({data,data1}) => {
 
 TotalOrder.propTypes = { 
   data: PropTypes.array.isRequired,
-  data1: PropTypes.array.isRequired
+  data1: PropTypes.string.isRequired
 };
 
 export default TotalOrder;

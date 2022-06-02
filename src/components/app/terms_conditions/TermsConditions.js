@@ -141,6 +141,14 @@ const AdvanceTableExamples = () => {
   };
   const columns = [
     {
+      accessor: 'no',
+      Header: 'NO',
+
+      Cell: rowData => {
+        return (parseInt(rowData.row.id) + 1)
+      }
+    },
+    {
       accessor: 'title',
       Header: 'Title'
     },
@@ -185,7 +193,7 @@ const AdvanceTableExamples = () => {
               <Col xs={8} sm="auto" className="ms-3 mt-2 text-end ps-0">
                 <div id="orders-actions">
                   <button className="btn btn-sm btn-success" onClick={(e) => handleShow()}>
-                    <FontAwesomeIcon icon={faPlus} />
+                    <FontAwesomeIcon icon={faPlus} /> Add Term
                   </button>
                 </div>
 

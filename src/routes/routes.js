@@ -70,13 +70,11 @@ export const appRoutes = {
       children: [
         {
           name: 'Country',
-          icon: 'comments',
           to: '/admin/country/list',
           active: true
         },
         {
           name: 'State',
-          icon: 'comments',
           to: '/admin/state/list',
           active: true
         },

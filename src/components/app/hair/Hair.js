@@ -123,7 +123,12 @@ const AdvanceTableExamples = () => {
           <tbody>
             <tr>
               <th>Name</th>
-              <td>{data.name}</td>
+              <td>
+              <div className='d-flex align-items-center'>
+              <span style={{ height: 12, width: 12, marginRight: 2, boxShadow: '0px 1px 1px rgba(0,0,0,0.2)', backgroundColor: `${data.name}` }}></span>
+              <span>{data.name}</span>
+              </div>
+              </td>
             </tr>
 
           </tbody>
@@ -206,8 +211,26 @@ const AdvanceTableExamples = () => {
 
   const columns = [
     {
+      accessor: 'no',
+      Header: 'NO',
+      Cell: rowData => {
+        return (parseInt(rowData.row.id) + 1)
+      }
+    },
+    {
       accessor: 'name',
-      Header: 'Name'
+      Header: 'Name',
+      Cell: rowData => {
+        const { name } = rowData.row.original;
+        return (
+          <>
+            <div className='d-flex align-items-center'>
+              <span style={{ height: 12, width: 12, marginRight: 2, boxShadow: '0px 1px 1px rgba(0,0,0,0.2)', backgroundColor: `${name}` }}></span>
+              <span>{name}</span>
+            </div>
+          </>
+        )
+      }
     },
 
     {
@@ -217,7 +240,7 @@ const AdvanceTableExamples = () => {
       Cell: rowData => {
         const data = rowData.row.original
         return (
-          <span className={`btn-sm   ${data.status === 1 ? "btn-success" : "btn-danger"}`}>
+          <span className={`btn-sm   ${data.status === 1 ? "d-block badge badge-soft-success rounded-pill" : "d-block badge badge-soft-danger rounded-pill"}`}>
             {
               data.status === 1 ? "Active" : "Inactive"
             }
@@ -230,32 +253,29 @@ const AdvanceTableExamples = () => {
     {
       accessor: '_id',
       Header: 'Action',
-
+      headerProps: { className: 'text-center' },
+      cellProps: { className: 'text-end' },
       Cell: rowData => {
         const data = rowData.row.original
         return (
           <>
-            <td className="text-end">
+            <button className={`btn btn-sm me-2 ${data.status === 1 ? "btn-warning" : "btn-danger"} `} onClick={(id) => { changeStatusButtonClick(data._id) }} >
+              {
+                data.status === 1 ? <FontAwesomeIcon icon={faToggleOff} title="Change Status" /> : <FontAwesomeIcon icon={faToggleOn} title="Change Status" />
+              }
+            </button>
 
-              <button className={`btn btn-sm me-2 ${data.status === 1 ? "btn-warning" : "btn-danger"} `} onClick={(id) => { changeStatusButtonClick(data._id) }} >
-                {
-                  data.status === 1 ? <FontAwesomeIcon icon={faToggleOff} title="Change Status" /> : <FontAwesomeIcon icon={faToggleOn} title="Change Status" />
-                }
-              </button>
+            <button className="btn btn-sm btn-info me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={(e) => showModal(data)}>
+              <FontAwesomeIcon icon={faEye} title="View" />
+            </button>
 
-              <button className="btn btn-sm btn-info me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={(e) => showModal(data)}>
-                <FontAwesomeIcon icon={faEye} title="View" />
-              </button>
+            <button className="btn btn-sm btn-primary me-2 btn-xs" onClick={(e) => handleShow(data)}>
+              <FontAwesomeIcon icon={faPencilAlt} />
+            </button>
 
-              <button className="btn btn-sm btn-primary me-2 btn-xs" onClick={(e) => handleShow(data)}>
-                <FontAwesomeIcon icon={faPencilAlt} />
-              </button>
-
-              <button className="btn btn-sm btn-danger me-2" >
-                <FontAwesomeIcon icon={faTrashAlt} onClick={(id) => { deleteButtonClick(data._id) }} />
-              </button>
-
-            </td>
+            <button className="btn btn-sm btn-danger me-2" >
+              <FontAwesomeIcon icon={faTrashAlt} onClick={(id) => { deleteButtonClick(data._id) }} />
+            </button>
           </>
         );
       },
@@ -285,7 +305,7 @@ const AdvanceTableExamples = () => {
               <Col xs={8} sm="auto" className="ms-3 mt-2 text-end ps-0">
                 <div id="orders-actions">
                   <button className="btn btn-sm btn-success" onClick={(e) => handleShow()}>
-                    <FontAwesomeIcon icon={faPlus} />
+                    <FontAwesomeIcon icon={faPlus} /> Add Hair
                   </button>
                 </div>
 
@@ -337,40 +357,37 @@ const AdvanceTableExamples = () => {
       </AdvanceTableWrapper>
       <Modal show={show} onHide={handleClose} keyboard={false}>
         <Modal.Header>
-            {id ? <div className="form-group">
+          {id ? <div className="form-group">
             <Modal.Title>Hair Color Update</Modal.Title>
-        </div> :  <Modal.Title>Hair Color Add</Modal.Title>}
+          </div> : <Modal.Title>Hair Color Add</Modal.Title>}
           <FalconCloseButton onClick={handleClose} />
         </Modal.Header>
         <Form onSubmit={handleSubmit(onSubmit)}>
 
           <Modal.Body>
-              <Col md="12 mb-3">
-                <SketchPicker
-                  color={color}
-                  onChangeComplete={(colors) => { setColor(colors.hex) }}
-                />
-                <FormLabel htmlFor="name">Hair Color</FormLabel>
-                <input type="hidden"
-                  className="form-control"
-                  id="hair_id"
-                  name='hair_id'
-                  {...register('hair_id')}
-                />
-                <input type="text"
-                  disabled
-                  className="form-control"
-                  id="name"
-                  name="name"
-                  placeholder="Enter Hair Color Name"
-                  {...register('name', {
-                    required: "Hair Color Name is required",
-                  })}
-                />
-              </Col>
-
-        
-
+            <Col md="12 mb-3">
+              <SketchPicker
+                color={color}
+                onChangeComplete={(colors) => { setColor(colors.hex) }}
+              />
+              <FormLabel htmlFor="name">Hair Color</FormLabel>
+              <input type="hidden"
+                className="form-control"
+                id="hair_id"
+                name='hair_id'
+                {...register('hair_id')}
+              />
+              <input type="text"
+                disabled
+                className="form-control"
+                id="name"
+                name="name"
+                placeholder="Enter Hair Color Name"
+                {...register('name', {
+                  required: "Hair Color Name is required",
+                })}
+              />
+            </Col>
             <ButtonSubmitReset btnloader={btnloader} onsubmitFun={() => {
               reset();
             }} />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card,Form, FormLabel, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
+import { Button, Card, Form, FormLabel, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
 import { modal } from "bootstrap"
 import PageHeader from 'components/common/PageHeader';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -25,10 +25,9 @@ import Flex from 'components/common/Flex';
 import Typography from 'components/utilities/Typography';
 import { faEye, faPencilAlt, faPlus, faToggleOff, faToggleOn, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import ActionButton from 'components/common/ActionButton';
-import { Link,useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from "react-hook-form";
 import FalconCloseButton from 'components/common/FalconCloseButton';
-import { SketchPicker } from 'react-color'
 import ButtonSubmitReset from '../../layout/ButtonSubmitReset';
 
 
@@ -38,12 +37,10 @@ const AdvanceTableExamples = () => {
   const [dataTableData, setDataTableData] = useState([]);
   const [modalText, setModalText] = useState();
   const [totalRows, setTotalRows] = useState(0);
-  const navigate = useNavigate();
   const [id, setId] = useState('');
   const [show, setShow] = useState(false);
-  // const handleClose = () => setShow(false);
   const [btnloader, setBtnLoader] = useState(false);
-  const [color, setColor] = useState();
+
 
   const {
     register,
@@ -54,12 +51,12 @@ const AdvanceTableExamples = () => {
   } = useForm();
 
   const handleClose = () => {
-		reset(
-			  { keepDirtyValues: true },
-			  { keepIsValid: true }
-		);
-		setShow(false)
-	};
+    reset(
+      { keepDirtyValues: true },
+      { keepIsValid: true }
+    );
+    setShow(false)
+  };
 
   const getData = () => {
 
@@ -129,49 +126,44 @@ const AdvanceTableExamples = () => {
     setModalText(TableModaldata);
   };
 
+  const onSubmit = (data) => {
+    setBtnLoader(true);
 
-  const editButtonClick = (row) => {
-    navigate('/admin/education/form', { state: { row } });
-};
+    if (data.education_id) {
 
-const onSubmit = (data) => {
-  setBtnLoader(true);
+      data["id"] = data.education_id;
 
-  if (data.education_id) {
+      Http.callApi(url.education_update, data)
+        .then((response) => {
+          setBtnLoader(false);
+          successResponse(response);
+          getData();
+          setShow(false)
+        })
+        .catch((error) => {
+          setBtnLoader(false);
+          if (error.response) {
+            errorResponse(error);
+          }
+        });
 
-    data["id"] = data.education_id;
+    } else {
 
-    Http.callApi(url.education_update, data)
-      .then((response) => {
-        setBtnLoader(false);
-        successResponse(response);
-        getData();
-        setShow(false)
-      })
-      .catch((error) => {
-        setBtnLoader(false);
-        if (error.response) {
-          errorResponse(error);
-        }
-      });
-
-  } else {
-
-    Http.callApi(url.education_store, data)
-      .then((response) => {
-        setBtnLoader(false);
-        successResponse(response);
-        getData();
-        setShow(false)
-      })
-      .catch((error) => {
-        setBtnLoader(false);
-        if (error) {
-          errorResponse(error);
-        }
-      });
-  }
-};
+      Http.callApi(url.education_store, data)
+        .then((response) => {
+          setBtnLoader(false);
+          successResponse(response);
+          getData();
+          setShow(false)
+        })
+        .catch((error) => {
+          setBtnLoader(false);
+          if (error) {
+            errorResponse(error);
+          }
+        });
+    }
+  };
 
   const deleteButtonClick = (id) => {
     Swal.fire({
@@ -202,9 +194,14 @@ const onSubmit = (data) => {
     })
   };
 
-
-
   const columns = [
+    {
+      accessor: 'no',
+      Header: 'NO',
+      Cell: rowData => {
+        return (parseInt(rowData.row.id) + 1)
+      }
+    },
     {
       accessor: 'name',
       Header: 'Name'
@@ -216,7 +213,7 @@ const onSubmit = (data) => {
       Cell: rowData => {
         const data = rowData.row.original
         return (
-          <span className={`btn-sm   ${data.status === 1 ? "btn-success" : "btn-danger"}`}>
+          <span className={`btn-sm   ${data.status === 1 ? "d-block badge badge-soft-success rounded-pill" : "d-block badge badge-soft-danger rounded-pill"}`}>
             {
               data.status === 1 ? "Active" : "Inactive"
             }
@@ -229,32 +226,29 @@ const onSubmit = (data) => {
     {
       accessor: '_id',
       Header: 'Action',
-
+      headerProps: { className: 'text-center' },
+      cellProps: { className: 'text-end' },
       Cell: rowData => {
         const data = rowData.row.original
         return (
           <>
-            <td className="text-end">
+            <button className={`btn btn-sm me-2 ${data.status === 1 ? "btn-warning" : "btn-danger"} `} onClick={(id) => { changeStatusButtonClick(data._id) }} >
+              {
+                data.status === 1 ? <FontAwesomeIcon icon={faToggleOff} title="Change Status" /> : <FontAwesomeIcon icon={faToggleOn} title="Change Status" />
+              }
+            </button>
 
-              <button className={`btn btn-sm me-2 ${data.status === 1 ? "btn-warning" : "btn-danger"} `} onClick={(id) => { changeStatusButtonClick(data._id) }} >
-                {
-                  data.status === 1 ? <FontAwesomeIcon icon={faToggleOff} title="Change Status" /> : <FontAwesomeIcon icon={faToggleOn} title="Change Status" />
-                }
-              </button>
+            <button className="btn btn-sm btn-info me-2" data-bs-toggle="modal" data-bs-target="#educationViewModal" onClick={(e) => showModal(data)}>
+              <FontAwesomeIcon icon={faEye} title="View" />
+            </button>
 
-              <button className="btn btn-sm btn-info me-2" data-bs-toggle="modal" data-bs-target="#educationViewModal" onClick={(e) => showModal(data)}>
-                <FontAwesomeIcon icon={faEye} title="View" />
-              </button>
+            <button className="btn btn-sm btn-primary me-2 btn-xs" onClick={(e) => handleShow(data)}>
+              <FontAwesomeIcon icon={faPencilAlt} />
+            </button>
 
-              <button className="btn btn-sm btn-primary me-2 btn-xs" onClick={(e) => handleShow(data)}>
-                <FontAwesomeIcon icon={faPencilAlt} />
-              </button>
-
-              <button className="btn btn-sm btn-danger me-2" >
-                <FontAwesomeIcon icon={faTrashAlt} onClick={(id) => { deleteButtonClick(data._id) }} />
-              </button>
-
-            </td>
+            <button className="btn btn-sm btn-danger me-2" >
+              <FontAwesomeIcon icon={faTrashAlt} onClick={(id) => { deleteButtonClick(data._id) }} />
+            </button>
           </>
         );
       },
@@ -264,116 +258,115 @@ const onSubmit = (data) => {
 
 
   return (
-<>
-    <AdvanceTableWrapper
-      columns={columns}
-      data={dataTableData}
-      pagination
-      perPage={10}
-    >
-      <div style={{ borderRadius: "0.375rem" }} className='py-4 bg-white mb-3 d-flex align-items-center px-3'>
-        <h5 className="hover-actions-trigger mb-0">
-         Education List
-        </h5>
-      </div>
-      <Card className='mb-3'>
+    <>
+      <AdvanceTableWrapper
+        columns={columns}
+        data={dataTableData}
+        pagination
+        perPage={10}
+      >
+        <div style={{ borderRadius: "0.375rem" }} className='py-4 bg-white mb-3 d-flex align-items-center px-3'>
+          <h5 className="hover-actions-trigger mb-0">
+            Education List
+          </h5>
+        </div>
+        <Card className='mb-3'>
 
-        <Card.Header className="border-bottom border-200">
+          <Card.Header className="border-bottom border-200">
 
-          <Row className="flex-between-center mb-3">
-            <Col xs={8} sm="auto" className="ms-3 mt-2 text-end ps-0">
-              <div id="orders-actions">
-              <button className="btn btn-sm btn-success" onClick={(e) => handleShow()}>
-                    <FontAwesomeIcon icon={faPlus} />
+            <Row className="flex-between-center mb-3">
+              <Col xs={8} sm="auto" className="ms-3 mt-2 text-end ps-0">
+                <div id="orders-actions">
+                  <button className="btn btn-sm btn-success" onClick={(e) => handleShow()}>
+                    <FontAwesomeIcon icon={faPlus} /> Add Education
                   </button>
-              </div>
+                </div>
 
-            </Col>
-            <Col xs="auto" sm={2} lg={3}>
-              <AdvanceTableSearchBox table />
-            </Col>
+              </Col>
+              <Col xs="auto" sm={2} lg={3}>
+                <AdvanceTableSearchBox table />
+              </Col>
+            </Row>
+
+          </Card.Header>
+          <Row className="flex-end-center mb-3">
+
+            <AdvanceTable
+              table
+              headerClassName="bg-200 text-900 text-nowrap align-middle"
+              rowClassName="align-middle white-space-nowrap"
+              tableProps={{
+                bordered: true,
+                striped: true,
+                className: 'fs--1 mb-0 overflow-hidden'
+              }}
+            />
           </Row>
+          <div className="modal fade" id="educationViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div className="modal-dialog ">
+              <div className="modal-content">
+                <div className="modal-header">
+                  <h5 className="modal-title" id="exampleModalLabel">Education Details</h5>
+                  <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div className="modal-body">
+                  {modalText}
+                </div>
 
-        </Card.Header>
-        <Row className="flex-end-center mb-3">
-
-          <AdvanceTable
-            table
-            headerClassName="bg-200 text-900 text-nowrap align-middle"
-            rowClassName="align-middle white-space-nowrap"
-            tableProps={{
-              bordered: true,
-              striped: true,
-              className: 'fs--1 mb-0 overflow-hidden'
-            }}
-          />
-        </Row>
-        <div className="modal fade" id="educationViewModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div className="modal-dialog ">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">Education Details</h5>
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
-              <div className="modal-body">
-                {modalText}
-              </div>
-
             </div>
           </div>
+        </Card>
+
+        <div className="mt-3">
+          <AdvanceTableFooter
+            rowCount={totalRows}
+            table
+            rowInfo
+            navButtons
+            rowsPerPageSelection
+          />
         </div>
-      </Card>
+      </AdvanceTableWrapper>
 
-      <div className="mt-3">
-        <AdvanceTableFooter
-          rowCount={totalRows}
-          table
-          rowInfo
-          navButtons
-          rowsPerPageSelection
-        />
-      </div>
-    </AdvanceTableWrapper>
-
-    <Modal show={show} onHide={handleClose} keyboard={false}>
-    <Modal.Header>
-      {/* <Modal.Title>Hair Color Add</Modal.Title>
+      <Modal show={show} onHide={handleClose} keyboard={false}>
+        <Modal.Header>
+          {/* <Modal.Title>Hair Color Add</Modal.Title>
       */}
-        {id ? <div className="form-group">
-        <Modal.Title>Education  Update</Modal.Title>
-    </div> :  <Modal.Title>Education Add</Modal.Title>}
-      <FalconCloseButton onClick={handleClose} />
-    </Modal.Header>
-    <Form onSubmit={handleSubmit(onSubmit)}>
+          {id ? <div className="form-group">
+            <Modal.Title>Education  Update</Modal.Title>
+          </div> : <Modal.Title>Education Add</Modal.Title>}
+          <FalconCloseButton onClick={handleClose} />
+        </Modal.Header>
+        <Form onSubmit={handleSubmit(onSubmit)}>
 
-      <Modal.Body>
-          <Col md="12 mb-3">
-            
-            <FormLabel htmlFor="name">Education</FormLabel>
-            <input type="hidden"
-              className="form-control"
-              id="education_id"
-              name='education_id'
-              {...register('education_id')}
-            />
-            <input type="text"
-              className="form-control"
-              id="name"
-              name="name"
-              placeholder="Enter education  Name"
-              {...register('name', {
-                required: "Hair Color Name is required",
-              })}
-            />
-          </Col>
+          <Modal.Body>
+            <Col md="12 mb-3">
+              <FormLabel htmlFor="name">Education</FormLabel>
+              <input type="hidden"
+                className="form-control"
+                id="education_id"
+                name='education_id'
+                {...register('education_id')}
+              />
+              <input type="text"
+                className="form-control"
+                id="name"
+                name="name"
+                placeholder="Enter education  Name"
+                {...register('name', {
+                  required: "Hair Color Name is required",
+                })}
+              />
+            </Col>
 
-        <ButtonSubmitReset btnloader={btnloader} onsubmitFun={() => {
-          reset();
-        }} />
-      </Modal.Body>
-    </Form>
-    </Modal>
-</>
+            <ButtonSubmitReset btnloader={btnloader} onsubmitFun={() => {
+              reset();
+            }} />
+          </Modal.Body>
+        </Form>
+      </Modal>
+    </>
   );
 }
 export default AdvanceTableExamples;

@@ -43,7 +43,6 @@ const AdvanceTableExamples = () => {
 
     Http.callApi(url.get_users)
       .then((response) => {
-        console.log(response);
         // setLoading(false);
         setDataTableData(response.data);
         setTotalRows(response.data.length);
@@ -184,37 +183,46 @@ const AdvanceTableExamples = () => {
 
   const deleteButtonClick = (id) => {
     Swal.fire({
-        title: 'Are you sure?',
-        text: "You won't be able to revert this!",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonColor: '#3085d6',
-        cancelButtonColor: '#d33',
-        confirmButtonText: 'Yes, delete it!'
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!'
     }).then((result) => {
-        if (result.isConfirmed) {
-            // let obj = `?id=${id}`;
-            let data = {
-              id: id,
-            }
-        
-            Http.callApi(url.user_delete, data)
-                .then((response) => {
-                    getData();
-                    successResponse(response);
-                })
-                .catch((error) => {
-                    if (error.response) {
-                        errorResponse(error);
-                    }
-                });
+      if (result.isConfirmed) {
+        // let obj = `?id=${id}`;
+        let data = {
+          id: id,
         }
+
+        Http.callApi(url.user_delete, data)
+          .then((response) => {
+            getData();
+            successResponse(response);
+          })
+          .catch((error) => {
+            if (error.response) {
+              errorResponse(error);
+            }
+          });
+      }
     })
-};
+  };
 
 
 
   const columns = [
+    {
+      accessor: 'no',
+      Header: 'NO',
+
+      Cell: rowData => {
+        return (parseInt(rowData.row.id) + 1)
+      }
+    },
+
     {
       accessor: 'name',
       Header: 'Name',
@@ -226,12 +234,12 @@ const AdvanceTableExamples = () => {
         const { name, user_profile } = rowData.row.original;
         return (
           <>
-            <Link to="/e-commerce/customer-details" className='d-flex align-items-center'>
-            <img src={(user_profile) ? user_profile : dummy} className="profile_pic_img" style={{ "height": "32px", "width": "32px", borderRadius:"50%", "borderRadius": "50" }} />
-            <div className="flex-1 ms-2">
-              <h5 className="mb-0 fs--1">{name}</h5>
+            <div className='d-flex align-items-center'>
+              <img src={(user_profile) ? user_profile : dummy} className="profile_pic_img" style={{ "height": "32px", "width": "32px", borderRadius: "50%", "borderRadius": "50" }} />
+              <div className="flex-1 ms-2">
+                <h5 className="mb-0 fs--1">{name}</h5>
+              </div>
             </div>
-            </Link>
           </>
         )
       }
@@ -240,15 +248,15 @@ const AdvanceTableExamples = () => {
     // {
     //   accessor: 'user_profile',
     //   Header: 'Image',
-      // Cell: rowData => {
-      //   const data = rowData.row.original
-      //   return (
-      //     <img src={(data.user_profile) ? data.user_profile : dummy} className="profile_pic_img" style={{ "height": "32px", "width": "32px", borderRadius:"50%", "borderRadius": "50" }} />
-      //   )
-      // }
+    // Cell: rowData => {
+    //   const data = rowData.row.original
+    //   return (
+    //     <img src={(data.user_profile) ? data.user_profile : dummy} className="profile_pic_img" style={{ "height": "32px", "width": "32px", borderRadius:"50%", "borderRadius": "50" }} />
+    //   )
+    // }
 
     // },
-    
+
     {
       accessor: 'email',
       Header: 'Email'
@@ -313,28 +321,25 @@ const AdvanceTableExamples = () => {
     {
       accessor: '_id',
       Header: 'Action',
-
+      headerProps: { className: 'text-center' },
+      cellProps: { className: 'text-end' },
       Cell: rowData => {
         const data = rowData.row.original
         return (
           <>
-            <td className="text-end">
+            <button className={`btn btn-sm me-2 ${data.status === 1 ? "btn-warning" : "btn-danger"} `} onClick={(id) => { changeStatusButtonClick(data._id) }} >
+              {
+                data.status === 1 ? <FontAwesomeIcon icon={faToggleOff} title="Change Status" /> : <FontAwesomeIcon icon={faToggleOn} title="Change Status" />
+              }
+            </button>
 
-              <button className={`btn btn-sm me-2 ${data.status === 1 ? "btn-warning" : "btn-danger"} `} onClick={(id) => { changeStatusButtonClick(data._id) }} >
-                {
-                  data.status === 1 ? <FontAwesomeIcon icon={faToggleOff} title="Change Status" /> : <FontAwesomeIcon icon={faToggleOn} title="Change Status" />
-                }
-              </button>
+            <button className="btn btn-sm btn-info me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={(e) => showModal(data)}>
+              <FontAwesomeIcon icon={faEye} title="View" />
+            </button>
 
-              <button className="btn btn-sm btn-info me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={(e) => showModal(data)}>
-                <FontAwesomeIcon icon={faEye} title="View" />
-              </button>
-
-              <button className="btn btn-sm btn-danger me-2" >
-                <FontAwesomeIcon icon={faTrashAlt} onClick={(id) => { deleteButtonClick(data._id) }} />
-              </button>
-
-            </td>
+            <button className="btn btn-sm btn-danger me-2" >
+              <FontAwesomeIcon icon={faTrashAlt} onClick={(id) => { deleteButtonClick(data._id) }} />
+            </button>
           </>
         );
       },
@@ -346,68 +351,68 @@ const AdvanceTableExamples = () => {
   return (
 
     <AdvanceTableWrapper
-    columns={columns}
-    data={dataTableData}
-    sortable
-    pagination
-    perPage={5}
-  > 
-    <div style={{borderRadius: "0.375rem"}} className='py-4 bg-white mb-3 d-flex align-items-center px-3'>
-    <h5 className="hover-actions-trigger mb-0">
-                Users List
-              </h5>
-    </div>
-    <Card className='mb-3'>
+      columns={columns}
+      data={dataTableData}
+      sortable
+      pagination
+      perPage={5}
+    >
+      <div style={{ borderRadius: "0.375rem" }} className='py-4 bg-white mb-3 d-flex align-items-center px-3'>
+        <h5 className="hover-actions-trigger mb-0">
+          Users List
+        </h5>
+      </div>
+      <Card className='mb-3'>
 
-      <Card.Header className="border-bottom border-200">
-    
-        <Row className="flex-end-center mb-2">
-         
-          <Col xs="auto" sm={2} lg={3}>
+        <Card.Header className="border-bottom border-200">
+
+          <Row className="flex-end-center mb-2">
+
+            <Col xs="auto" sm={2} lg={3}>
               <AdvanceTableSearchBox table />
             </Col>
+          </Row>
+
+        </Card.Header>
+        <Row className="flex-end-center mb-3">
+
+          <AdvanceTable
+            table
+            headerClassName="bg-200 text-900 text-nowrap align-middle"
+            rowClassName="align-middle white-space-nowrap"
+            tableProps={{
+              bordered: true,
+              striped: true,
+              className: 'fs--1 mb-0 overflow-hidden'
+            }}
+          />
         </Row>
+        <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div className="modal-dialog ">
+            <div className="modal-content">
+              <div className="modal-header">
+                <h5 className="modal-title" id="exampleModalLabel">User Details</h5>
+                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div className="modal-body">
+                {modalText}
+              </div>
 
-      </Card.Header>
-      <Row className="flex-end-center mb-3">
-
-        <AdvanceTable
-          table
-          headerClassName="bg-200 text-900 text-nowrap align-middle"
-          rowClassName="align-middle white-space-nowrap"
-          tableProps={{
-            bordered: true,
-            striped: true,
-            className: 'fs--1 mb-0 overflow-hidden'
-          }}
-        />
-      </Row>
-      <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-        <div className="modal-dialog ">
-          <div className="modal-content">
-            <div className="modal-header">
-              <h5 className="modal-title" id="exampleModalLabel">User Details</h5>
-              <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <div className="modal-body">
-              {modalText}
-            </div>
-
           </div>
         </div>
-      </div>
-    </Card>
+      </Card>
 
-    <div className="mt-3">
-      <AdvanceTableFooter
-        rowCount={totalRows}
-        table
-        rowInfo
-        navButtons
-        rowsPerPageSelection
-      />
-    </div>
-  </AdvanceTableWrapper> 
+      <div className="mt-3">
+        <AdvanceTableFooter
+          rowCount={totalRows}
+          table
+          rowInfo
+          navButtons
+          rowsPerPageSelection
+        />
+      </div>
+    </AdvanceTableWrapper>
   );
 }
 export default AdvanceTableExamples;

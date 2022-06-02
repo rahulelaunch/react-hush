@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Card, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
-import { modal } from "bootstrap"
-import PageHeader from 'components/common/PageHeader';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import FalconComponentCard from 'components/common/FalconComponentCard';
-import IconButton from 'components/common/IconButton';
 import AdvanceTable from 'components/common/advance-table/AdvanceTable';
 import AdvanceTableFooter from 'components/common/advance-table/AdvanceTableFooter';
 import AdvanceTableSearchBox from 'components/common/advance-table/AdvanceTableSearchBox';
@@ -13,7 +8,6 @@ import AdvanceTableWrapper from 'components/common/advance-table/AdvanceTableWra
 import Http from '../../security/Http';
 import url from '../../../Development.json';
 import dummy from '../../../assets/img/team/User.jpg';
-import Swal from 'sweetalert2';
 import {
   errorResponse,
   successResponse,
@@ -21,20 +15,12 @@ import {
   configHeaderAxios
 
 } from "../../helpers/response";
-import Flex from 'components/common/Flex';
-import Typography from 'components/utilities/Typography';
-import { faEye, faPencilAlt, faPlus, faToggleOff, faToggleOn, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import ActionButton from 'components/common/ActionButton';
-import { Link,useNavigate } from 'react-router-dom';
-
 
 
 const AdvanceTableExamples = () => {
 
   const [dataTableData, setDataTableData] = useState([]);
-  const [modalText, setModalText] = useState();
   const [totalRows, setTotalRows] = useState(0);
-  const navigate = useNavigate();
 
 
   const getData = () => {
@@ -58,31 +44,37 @@ const AdvanceTableExamples = () => {
   }, []);
 
 
-  const openImageInNewTab = (path) => {
-    window.open(path);
-  };
 
   const columns = [
-    {
-        accessor: 'id',
-        Header: 'CountryCode'
-    },
+
+
     {
       accessor: 'country_name',
-      Header: 'Name'
+      Header: 'Name',
+      headerProps: { className: 'pe-1' },
+      cellProps: {
+        className: 'py-2'
+      },
+      Cell: rowData => {
+        const { country_name, flag } = rowData.row.original;
+        return (
+          <>
+            <div className='d-flex align-items-center'>
+              <img src={(flag) ? flag : dummy} className="profile_pic_img" style={{ "height": "32px", "width": "32px", borderRadius: "50%", "borderRadius": "50" }} />
+              <div className="flex-1 ms-2">
+                <h5 className="mb-0 fs--1">{country_name}</h5>
+              </div>
+            </div>
+          </>
+        )
+      }
     },
 
     {
-      accessor: 'flag',
-      Header: 'Image',
-      Cell: rowData => {
-        const data = rowData.row.original
-        return (
-          <img src={(data.flag) ? data.flag : dummy} onClick={(id) => { openImageInNewTab(data.flag) }} className="profile_pic_img" style={{ "height": "100px", "width": "100px", "borderRadius": "50" }} />
-        )
-      }
-
+      accessor: 'id',
+      Header: 'CountryCode'
     },
+
   ];
 
 
@@ -96,7 +88,7 @@ const AdvanceTableExamples = () => {
     >
       <div style={{ borderRadius: "0.375rem" }} className='py-4 bg-white mb-3 d-flex align-items-center px-3'>
         <h5 className="hover-actions-trigger mb-0">
-         Country List
+          Country List
         </h5>
       </div>
       <Card className='mb-3'>
@@ -105,7 +97,7 @@ const AdvanceTableExamples = () => {
 
           <Row className="flex-between-center mb-3">
             <Col xs={8} sm="auto" className="ms-3 mt-2 text-end ps-0">
-             
+
 
             </Col>
             <Col xs="auto" sm={2} lg={3}>
@@ -127,20 +119,6 @@ const AdvanceTableExamples = () => {
             }}
           />
         </Row>
-        <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div className="modal-dialog ">
-            <div className="modal-content">
-              <div className="modal-header">
-                <h5 className="modal-title" id="exampleModalLabel">Fashion Details</h5>
-                <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div className="modal-body">
-                {modalText}
-              </div>
-
-            </div>
-          </div>
-        </div>
       </Card>
 
       <div className="mt-3">

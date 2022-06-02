@@ -225,6 +225,14 @@ const AdvanceTableExamples = () => {
 
   const columns = [
     {
+      accessor: 'no',
+      Header: 'NO',
+
+      Cell: rowData => {
+        return (parseInt(rowData.row.id) + 1)
+      }
+    },
+    {
       accessor: 'plan_title',
       Header: 'Name'
     },
@@ -243,7 +251,7 @@ const AdvanceTableExamples = () => {
       Cell: rowData => {
         const data = rowData.row.original
         return (
-          <span className={`btn-sm   ${data.status === 1 ? "btn-success" : "btn-danger"}`}>
+          <span className={`btn-sm   ${data.status === 1 ? "d-block badge badge-soft-success rounded-pill" : "d-block badge badge-soft-danger rounded-pill"}`}>
             {
               data.status === 1 ? "Active" : "Inactive"
             }
@@ -256,32 +264,29 @@ const AdvanceTableExamples = () => {
     {
       accessor: '_id',
       Header: 'Action',
-
+      headerProps: { className: 'text-center' },
+      cellProps: { className: 'text-end' },
       Cell: rowData => {
         const data = rowData.row.original
         return (
           <>
-            <td className="text-end">
+            <button className={`btn btn-sm me-2 ${data.status === 1 ? "btn-warning" : "btn-danger"} `} onClick={(id) => { changeStatusButtonClick(data._id) }} >
+              {
+                data.status === 1 ? <FontAwesomeIcon icon={faToggleOff} title="Change Status" /> : <FontAwesomeIcon icon={faToggleOn} title="Change Status" />
+              }
+            </button>
 
-              <button className={`btn btn-sm me-2 ${data.status === 1 ? "btn-warning" : "btn-danger"} `} onClick={(id) => { changeStatusButtonClick(data._id) }} >
-                {
-                  data.status === 1 ? <FontAwesomeIcon icon={faToggleOff} title="Change Status" /> : <FontAwesomeIcon icon={faToggleOn} title="Change Status" />
-                }
-              </button>
+            <button className="btn btn-sm btn-info me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={(e) => showModal(data)}>
+              <FontAwesomeIcon icon={faEye} title="View" />
+            </button>
 
-              <button className="btn btn-sm btn-info me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={(e) => showModal(data)}>
-                <FontAwesomeIcon icon={faEye} title="View" />
-              </button>
+            <button className="btn btn-sm btn-primary  me-2 btn-xs" onClick={(e) => handleShow(data)}>
+              <FontAwesomeIcon icon={faPencilAlt} />
+            </button>
 
-              <button className="btn btn-sm btn-primary  me-2 btn-xs" onClick={(e) => handleShow(data)}>
-                <FontAwesomeIcon icon={faPencilAlt} />
-              </button>
-
-              <button className="btn btn-sm btn-danger me-2" >
-                <FontAwesomeIcon icon={faTrashAlt} onClick={(id) => { deleteButtonClick(data._id) }} />
-              </button>
-
-            </td>
+            <button className="btn btn-sm btn-danger me-2" >
+              <FontAwesomeIcon icon={faTrashAlt} onClick={(id) => { deleteButtonClick(data._id) }} />
+            </button>
           </>
         );
       },
@@ -311,7 +316,7 @@ const AdvanceTableExamples = () => {
               <Col xs={8} sm="auto" className="ms-3 mt-2 text-end ps-0">
                 <div id="orders-actions">
                   <button className="btn btn-sm btn-success" onClick={(e) => handleShow()}>
-                    <FontAwesomeIcon icon={faPlus} />
+                    <FontAwesomeIcon icon={faPlus} /> Add Plan
                   </button>
                 </div>
 
@@ -372,55 +377,55 @@ const AdvanceTableExamples = () => {
         <Form onSubmit={handleSubmit(onSubmit)}>
 
           <Modal.Body>
-          <div className="form-row">
-            <Col md="12 mb-3">
-              <FormLabel htmlFor="name">Title</FormLabel>
-              <input type="hidden"
-                className="form-control"
-                id="name_id"  
-                name='name_id'
-                {...register('name_id')}
-              />
-              <input type="text"
-                className="form-control"
-                id="plan_title"
-                name="plan_title"
-                placeholder="Enter plan title  Name"
-                {...register('plan_title', {
-                  required: "Plan title is required",
-                })}
-              />
+            <div className="form-row">
+              <Col md="12 mb-3">
+                <FormLabel htmlFor="name">Title</FormLabel>
+                <input type="hidden"
+                  className="form-control"
+                  id="name_id"
+                  name='name_id'
+                  {...register('name_id')}
+                />
+                <input type="text"
+                  className="form-control"
+                  id="plan_title"
+                  name="plan_title"
+                  placeholder="Enter plan title  Name"
+                  {...register('plan_title', {
+                    required: "Plan title is required",
+                  })}
+                />
 
-            </Col>
+              </Col>
             </div>
             <div className="form-row">
-            <Col md="12 mb-3">
-              <FormLabel htmlFor="name">Price</FormLabel>
-              <input type="text"
-                className="form-control"
-                id="plan_price"
-                name="plan_price"
-                placeholder="Enter plan price  Name"
-                {...register('plan_price', {
-                  required: "Plan price is required",
-                })}
-              />
+              <Col md="12 mb-3">
+                <FormLabel htmlFor="name">Price</FormLabel>
+                <input type="text"
+                  className="form-control"
+                  id="plan_price"
+                  name="plan_price"
+                  placeholder="Enter plan price  Name"
+                  {...register('plan_price', {
+                    required: "Plan price is required",
+                  })}
+                />
 
-            </Col>
+              </Col>
             </div>
             <div className="form-row">
-            <Col md="12 mb-3">
-              <FormLabel htmlFor="name">Days</FormLabel>
-              <input type="text"
-                className="form-control"
-                id="days"
-                name="days"
-                placeholder="Enter plan days"
-                {...register('days', {
-                  required: "Plan days is required",
-                })}
-              />
-            </Col>
+              <Col md="12 mb-3">
+                <FormLabel htmlFor="name">Days</FormLabel>
+                <input type="text"
+                  className="form-control"
+                  id="days"
+                  name="days"
+                  placeholder="Enter plan days"
+                  {...register('days', {
+                    required: "Plan days is required",
+                  })}
+                />
+              </Col>
             </div>
             <div className="form-row">
               <Col md="12 mb-3">
@@ -436,8 +441,8 @@ const AdvanceTableExamples = () => {
                   <input type="hidden" style={{ display: (!description) ? { ...register('plan_descreption', { required: true }) } : "block" }} name="plan_descreption" id="plan_descreption" />
                 </div>
               </Col>
-              </div>
-           
+            </div>
+
 
             <ButtonSubmitReset btnloader={btnloader} onsubmitFun={() => {
               reset();

@@ -20,7 +20,7 @@ import {
   successResponse,
   isError,
 } from "../../helpers/response";
-
+import { Buffer } from "buffer";
 
 const AdvanceTableExamples = () => {
 
@@ -228,6 +228,7 @@ const AdvanceTableExamples = () => {
     })
   };
 
+
   const columns = [
     {
       accessor: 'no',
@@ -238,15 +239,55 @@ const AdvanceTableExamples = () => {
     },
     {
       accessor: 'name',
-      Header: 'Name'
+      Header: 'Name',
+
     },
     {
       accessor: 'body_image',
       Header: 'Image',
       Cell: rowData => {
-        const data = rowData.row.original
+        const propsImage = rowData.row.original.body_image;
+        const [imageData,setImageData] = useState();
+        useEffect(() => {
+          if (propsImage) {
+            urlFetch("http://192.168.0.172:7000/user/uploads/" + propsImage)
+          }
+        }, [propsImage])
+
+        const urlFetch = async (profileData) => {
+          await fetch(profileData.toString(), {
+            method: "GET",
+            headers: new Headers({
+              'authorization': `Bearer ` + localStorage.getItem('access_token'),
+              'Content-Type': 'application/json',
+              'env': 'test'
+            })
+          })
+            .then(response => {
+              const reader = response.body.getReader();
+              return new ReadableStream({
+                start(controller) {
+                  return pump();
+                  function pump() {
+                    return reader.read().then(({ done, value }) => {
+                      if (done) {
+                        controller.close();
+                        return;
+                      }
+                      controller.enqueue(value);
+                      const data = `data:${"image/jpeg"};base64,${new Buffer(value).toString('base64')}`;
+                      setImageData(data)
+                      return pump();
+                    });
+                  }
+                }
+              })
+            })
+        }
+
+        const data = rowData.row.original;
         return (
-          <img src={(data.body_image) ? data.body_image : dummy} onClick={(id) => { openImageInNewTab(data.body_image) }} className="profile_pic_img" style={{ "height": "100px", "width": "100px", "borderRadius": "50" }} />
+          <img src={imageData} onClick={(id) => { openImageInNewTab(data.body_image) }} className="profile_pic_img" style={{ "height": "100px", "width": "100px", "borderRadius": "50" }} />
         )
       }
     },
@@ -257,7 +298,7 @@ const AdvanceTableExamples = () => {
       Cell: rowData => {
         const data = rowData.row.original
         return (
-          <span className={`btn-sm   ${data.status === 1 ? "btn-success" : "btn-danger"}`}>
+          <span className={`btn-sm   ${data.status === 1 ? "d-block badge badge-soft-success rounded-pill" : "d-block badge badge-soft-danger rounded-pill"}`}>
             {
               data.status === 1 ? "Active" : "Inactive"
             }
@@ -268,32 +309,29 @@ const AdvanceTableExamples = () => {
     {
       accessor: '_id',
       Header: 'Action',
-
+      headerProps: { className: 'text-center' },
+      cellProps: { className: 'text-end' },
       Cell: rowData => {
         const data = rowData.row.original
         return (
           <>
-            <td className="text-end">
+            <button className={`btn me-2 btn-sm ${data.status === 1 ? "btn-warning" : "btn-danger"} `} onClick={(id) => { changeStatusButtonClick(data._id) }} >
+              {
+                data.status === 1 ? <FontAwesomeIcon icon={faToggleOff} title="Change Status" /> : <FontAwesomeIcon icon={faToggleOn} title="Change Status" />
+              }
+            </button>
 
-              <button className={`btn me-2 btn-sm ${data.status === 1 ? "btn-warning" : "btn-danger"} `} onClick={(id) => { changeStatusButtonClick(data._id) }} >
-                {
-                  data.status === 1 ? <FontAwesomeIcon icon={faToggleOff} title="Change Status" /> : <FontAwesomeIcon icon={faToggleOn} title="Change Status" />
-                }
-              </button>
+            <button className="btn btn-sm btn-info me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={(e) => showModal(data)}>
+              <FontAwesomeIcon icon={faEye} title="View" />
+            </button>
 
-              <button className="btn btn-sm btn-info me-2" data-bs-toggle="modal" data-bs-target="#exampleModal" onClick={(e) => showModal(data)}>
-                <FontAwesomeIcon icon={faEye} title="View" />
-              </button>
+            <button className="btn btn-sm btn-primary me-2 btn-xs" onClick={(e) => handleShow(data)}>
+              <FontAwesomeIcon icon={faPencilAlt} />
+            </button>
 
-              <button className="btn btn-sm btn-primary me-2 btn-xs" onClick={(e) => handleShow(data)}>
-                <FontAwesomeIcon icon={faPencilAlt} />
-              </button>
-
-              <button className="btn btn-sm btn-danger me-2" >
-                <FontAwesomeIcon icon={faTrashAlt} onClick={(id) => { deleteButtonClick(data._id) }} />
-              </button>
-
-            </td>
+            <button className="btn btn-sm btn-danger me-2" >
+              <FontAwesomeIcon icon={faTrashAlt} onClick={(id) => { deleteButtonClick(data._id) }} />
+            </button>
           </>
         );
       },
@@ -322,7 +360,7 @@ const AdvanceTableExamples = () => {
               <Col xs={8} sm="auto" className="ms-3 mt-2 text-end ps-0">
                 <div id="orders-actions">
                   <button className="btn btn-sm btn-success" onClick={(e) => handleShow()}>
-                    <FontAwesomeIcon icon={faPlus} />
+                    <FontAwesomeIcon icon={faPlus} /> Add Body
                   </button>
                 </div>
               </Col>
