@@ -136,7 +136,7 @@ const AdvanceTableExamples = () => {
       if (fileName) {
         data["body_image"] = fileName;
       } else {
-        data["body_image"] = icon.slice(34);
+        data["body_image"] = icon;
       }
 
       data["id"] = data.name_id;
@@ -263,6 +263,7 @@ const AdvanceTableExamples = () => {
             })
           })
             .then(response => {
+              console.log(response);
               const reader = response.body.getReader();
               return new ReadableStream({
                 start(controller) {
@@ -458,7 +459,7 @@ const AdvanceTableExamples = () => {
                 </div>
                 {icon ? <div className="form-group">
                   <img
-                    src={process.env.PUBLIC_URL+icon}
+                    src={process.env.REACT_APP_IMAGE_URL+icon}
                     alt={iconAlt} width="150px" height="150px"
                     className="imgBox"
                   />

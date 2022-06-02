@@ -18,6 +18,7 @@ import {
  
 } from "../../helpers/response";
 import { faEye, faToggleOff, faToggleOn, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
+import ImageGet from '../ImageGet';
 
 
 const AdvanceTableExamples = () => {
@@ -222,6 +223,14 @@ const AdvanceTableExamples = () => {
 
         const { name } = rowData.row.original;
         const propsImage = rowData.row.original.user_profile;
+        // const [imgSrc, setImageSrc] = useState();
+ 
+        // const ImageUrl = (datas) => {
+        //     setImageSrc(datas);
+        // }
+        // useEffect(() => {
+        //     ImageUrl();
+        // }, [])
      
         const [imageData,setImageData] = useState();
         useEffect(() => {
@@ -263,6 +272,7 @@ const AdvanceTableExamples = () => {
         }
         return (
           <>
+           {/* <ImageGet im={image} ImageData={ImageUrl}/> */}
             <div className='d-flex align-items-center'>
               <img src={(imageData) ? imageData : dummy} className="rounded-circle " style={{ "height": "32px", "width": "32px", borderRadius: "50%", "borderRadius": "50" }} />
               <div className="flex-1 ms-2">

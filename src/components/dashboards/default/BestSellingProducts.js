@@ -107,22 +107,7 @@ const BestSellingProducts = ({ products }) => {
           </tbody>
         </Table>
       </Card.Body>
-      <Card.Footer className="bg-light py-2">
-        <Row className="flex-between-center">
-          <Col xs="auto">
-            <Form.Select size="sm" className="me-2">
-              <option>Last 7 days</option>
-              <option>Last Month</option>
-              <option>Last Year</option>
-            </Form.Select>
-          </Col>
-          <Col xs="auto">
-            <Button variant="falcon-default" size="sm" as={Link} to="#!">
-              View All
-            </Button>
-          </Col>
-        </Row>
-      </Card.Footer>
+   
     </Card>
   );
 };

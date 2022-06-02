@@ -5,11 +5,11 @@ const ImageGet = (props) => {
     console.log('props');
     console.log(props);
     const [imgSrc, setImageSrc] = useState("");
-    props.ImageData(imgSrc);
+    // props.ImageData(imgSrc);
     let propsImage = props.im;
     useEffect(() => {
         if (propsImage) {
-            urlFetch("https://1afc-136-232-118-126.in.ngrok.io/user/uploads/images/" + propsImage)
+            urlFetch("http://192.168.0.172:7000/user/uploads/" + propsImage)
         }
     },[propsImage])
 
@@ -23,8 +23,7 @@ const ImageGet = (props) => {
             })
         })
             .then(response => {
-                console.log('response');
-                console.log(response);
+            
                 const reader = response.body.getReader();
                 return new ReadableStream({
                     start(controller) {

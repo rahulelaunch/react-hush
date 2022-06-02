@@ -26,8 +26,8 @@ const PageForm = () => {
 
     const [btnloader, setBtnLoader] = useState(false);
     const [icon, setIcon] = useState(dummy);
-    const navigate = useNavigate();
     const [fileName, setFileName] = useState('');
+    const navigate = useNavigate();
 
     const onFileChange = (e) => {
         onFileUpload(e.target.files[0]);
@@ -39,8 +39,9 @@ const PageForm = () => {
 
         Http.callApi(url.image_upload, formData)
             .then(response => {
-                setIcon(response.data.path);
-                setFileName(response.data.image[0]);
+                console.log(response);
+                setFileName(response.data.images);
+                setIcon(response.data.images);
             })
             .catch(error => {
                 if (error.response) {
@@ -56,7 +57,7 @@ const PageForm = () => {
                 let data = response.data;
                 setValue("name", data.username);
                 setValue("email", data.email);
-                setIcon(data.profile);
+                // setIcon(data.profile);
 
             })
             .catch((error) => {
@@ -76,7 +77,7 @@ const PageForm = () => {
         if (fileName) {
             data["profile"] = fileName;
         } else {
-            data["profile"] = icon.slice(34);
+            data["profile"] = icon;
         }
 
         Http.callApi(url.admin_update_profile, JSON.stringify(data))
@@ -159,7 +160,7 @@ const PageForm = () => {
                             />
                             <div className="form-group">
                                 <img
-                                    src={icon}
+                                    src={process.env.REACT_APP_IMAGE_URL+icon}
                                     alt='' width="100" height="100"
                                     className="imgBox"
                                 />

@@ -30,7 +30,6 @@ const AdvanceTableExamples = () => {
   const [modalText, setModalText] = useState();
   const [totalRows, setTotalRows] = useState(0);
   const [show, setShow] = useState(false);
-  // const handleClose = () => setShow(false);
   const [btnloader, setBtnLoader] = useState(false);
   const [icon, setIcon] = useState('');
   const [iconAlt, setIconAlt] = useState('');
@@ -98,8 +97,8 @@ const AdvanceTableExamples = () => {
 
     Http.callApi(url.image_upload, formData)
       .then(response => {
-        setIcon(response.data.path);
-        setFileName(response.data.image[0]);
+        setIcon(response.data.images);
+        setFileName(response.data.images);
       })
       .catch(error => {
         if (error.response) {
@@ -433,7 +432,7 @@ const AdvanceTableExamples = () => {
                 </div>
                 {icon ? <div className="form-group">
                   <img
-                    src={icon}
+                     src={process.env.REACT_APP_IMAGE_URL+icon}
                     alt={iconAlt} width="150px" height="150px"
                     className="imgBox"
                   />
