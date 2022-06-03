@@ -68,29 +68,13 @@ const SettingsPanel = () => {
               <FontAwesomeIcon icon="palette" className="me-2 fs-0" />
               Settings
             </h5>
-            <Button
-              variant="primary"
-              size="sm"
-              className="rounded-pill mt-0 mb-0"
-              style={{ fontSize: '12px' }}
-              onClick={() => {
-                configDispatch({ type: 'RESET' });
-              }}
-            >
-              <FontAwesomeIcon
-                icon="redo-alt"
-                style={{ fontSize: '10px' }}
-                className="me-1"
-              />
-              Reset
-            </Button>
+        
           </div>
           <p className="mb-0 fs--1 text-white opacity-75">
             Set your own customized style
           </p>
         </Offcanvas.Title>
       </Offcanvas.Header>
-      {/* <ScrollBarCustom> */}
       <Offcanvas.Body className="scrollbar">
         <h5 className="fs-0">Color Scheme</h5>
         <p className="fs--1">Choose the perfect color mode for your app.</p>
@@ -149,47 +133,6 @@ const SettingsPanel = () => {
         </Flex>
         <hr />
 
-        <Flex>
-          <img src={paragraph} alt="" width={20} className="me-2 h-100" />
-          <div>
-            <Flex alignItems="center" tag="h5" className="fs-0">
-              Navigation Position
-              <SoftBadge bg="success" pill className="fs--2 ms-2">
-                New
-              </SoftBadge>
-            </Flex>
-            <p className="fs--1 mb-2">
-              Select a suitable navigation system for your web application
-            </p>
-            <Form.Check
-              type="radio"
-              id="verticalNav-radio"
-              label="Vertical"
-              name="NavBarPositionRadioButton"
-              checked={navbarPosition === 'vertical'}
-              onChange={() => setConfig('navbarPosition', 'vertical')}
-              inline
-            />
-            <Form.Check
-              type="radio"
-              id="topNav-radio"
-              label="Top"
-              name="NavBarPositionRadioButton"
-              checked={navbarPosition === 'top'}
-              onChange={() => setConfig('navbarPosition', 'top')}
-              inline
-            />
-            <Form.Check
-              type="radio"
-              id="combo-radio"
-              label="Combo"
-              name="NavBarPositionRadioButton"
-              checked={navbarPosition === 'combo'}
-              onChange={() => setConfig('navbarPosition', 'combo')}
-              inline
-            />
-          </div>
-        </Flex>
 
         <hr />
         <h5 className="fs-0 d-flex align-items-center">
@@ -221,22 +164,9 @@ const SettingsPanel = () => {
           ))}
         </ButtonGroup>
         <hr />
-        <div className="text-center mt-5">
-          <img src={settings} alt="settings" width={120} className="mb-4" />
-          <h5>Like What You See?</h5>
-          <p className="fs--1">
-            Get Falcon now and create beautiful dashboards with hundreds of
-            widgets.
-          </p>
-          <Button
-            color="primary"
-            href="https://themes.getbootstrap.com/product/falcon-admin-dashboard-webapp-template-react/"
-          >
-            Purchase
-          </Button>
-        </div>
+  
       </Offcanvas.Body>
-      {/* </ScrollBarCustom> */}
+
     </Offcanvas>
   );
 };
