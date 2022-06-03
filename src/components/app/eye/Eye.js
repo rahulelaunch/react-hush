@@ -112,7 +112,7 @@ const AdvanceTableExamples = () => {
               <th>Name</th>
               <td>
                 <div className='d-flex align-items-center'>
-                  <span style={{ height: 12, width: 12, marginRight: 2, boxShadow: '0px 1px 1px rgba(0,0,0,0.2)', backgroundColor: `${data.name}` }}></span>
+                  <span style={{ height: 20, width: 20, marginRight: 2, boxShadow: '0px 2px 1px rgba(0,0,0,0.2)', backgroundColor: `${data.name}` }}></span>
                   <span>{data.name}</span>
                 </div>
               </td>
@@ -210,7 +210,7 @@ const AdvanceTableExamples = () => {
         return (
           <>
             <div className='d-flex align-items-center'>
-              <span style={{ height: 12, width: 12, marginRight: 2, boxShadow: '0px 1px 1px rgba(0,0,0,0.2)', backgroundColor: `${name}` }}></span>
+              <span style={{ height: 20, width: 20, marginRight: 2, boxShadow: '0px 2px 1px rgba(0,0,0,0.2)', backgroundColor: `${name}` }}></span>
               <span>{name}</span>
             </div>
           </>
