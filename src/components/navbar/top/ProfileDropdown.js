@@ -11,6 +11,8 @@ import {
   successResponse,
   isError,
 } from "../../helpers/response";
+import dummy from '../../../assets/img/team/User.jpg';
+import ImageGet from '../../app/ImageGet';
 
 
 
@@ -23,10 +25,11 @@ const ProfileDropdown = () => {
 
     Http.callApi(url.get_profile)
         .then((response) => {
-            let data = response.data;
+          let data = response.data;
             setName(data.username);
             setProfile(data.profile)
-  
+            
+          
         })
         .catch((error) => {
             if (error.response) {
@@ -62,7 +65,58 @@ const ProfileDropdown = () => {
 
 
 
+// const [imgSrc, setImageSrc] = useState();
+// const ImageUrl = (datas) => {
+//     setImageSrc(datas);
+// }
+// useEffect(() => {
+//     ImageUrl();
+// }, [])
+
+
+  // const [imageData,setImageData] = useState();
+  // useEffect(() => {
+  //   if (abc) {
+  //     urlFetch("http://192.168.0.172:7000/user/uploads/" + abc)
+  //   }
+  // }, [abc])
+
+  // const urlFetch = async (profileData) => {
+  //   console.log(12121);
+  //   console.log(profileData);
+  //   await fetch(profileData.toString(), {
+  //     method: "GET",
+  //     headers: new Headers({
+  //       'authorization': `Bearer ` + localStorage.getItem('access_token'),
+  //       'Content-Type': 'application/json',
+  //       'env': 'test'
+  //     })
+  //   })
+  //     .then(response => {
+  //       const reader = response.body.getReader();
+  //       return new ReadableStream({
+  //         start(controller) {
+  //           return pump();
+  //           function pump() {
+  //             return reader.read().then(({ done, value }) => {
+  //               if (done) {
+  //                 controller.close();
+  //                 return;
+  //               }
+  //               controller.enqueue(value);
+  //               const data = `data:${"image/jpeg"};base64,${new Buffer(value).toString('base64')}`;
+  //               setImageData(data)
+  //               return pump();
+  //             });
+  //           }
+  //         }
+  //       })
+  //     })
+  // }
+
   return (
+<>
+    {/* <ImageGet im={abc} /> */}
     <Dropdown navbar={true} as="li">
       <Dropdown.Toggle
         bsPrefix="toggle"
@@ -70,7 +124,7 @@ const ProfileDropdown = () => {
         to="/admin/dashboard"
         className="pe-0 ps-2 nav-link"
       >
-        <div className='d-flex align-items-center'><Avatar src={profile} /> <span className='ms-2'>{name}</span></div>
+        <div className='d-flex align-items-center'><Avatar src={(profile) ? process.env.REACT_APP_IMAGE_URL+profile : dummy} /> <span className='ms-2'>{name}</span></div>
      
       </Dropdown.Toggle>
 
@@ -90,6 +144,7 @@ const ProfileDropdown = () => {
         </div>
       </Dropdown.Menu>
     </Dropdown>
+    </>
   );
 };
 

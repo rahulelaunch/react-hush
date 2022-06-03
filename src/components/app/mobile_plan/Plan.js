@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Col, Form, FormLabel, Row, Modal, Table as TableModal } from 'react-bootstrap';
+import { Card, Col, Form, FormLabel, Row, Modal, Table as TableModal, Button } from 'react-bootstrap';
 import { modal } from "bootstrap"
 import { Editor } from "@tinymce/tinymce-react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -20,6 +20,9 @@ import {
   successResponse,
   isError,
 } from "../../helpers/response";
+import { Link } from 'react-router-dom';
+import SoftBadge from 'components/common/SoftBadge';
+
 
 const AdvanceTableExamples = () => {
 
@@ -127,26 +130,46 @@ const AdvanceTableExamples = () => {
 
 
   const showModal = (data) => {
+    const regex = /(<([^>]+)>)/ig;
+    const result = data.plan_descreption.replace(regex, '');
+    const month = 'Month';
+    const year = 'Year';
 
     let TableModaldata = (
       <>
-        <TableModal striped bordered hover className="cr-table">
-          <tbody>
-            <tr>
-              <th>Title</th>
-              <td>{data.plan_title}</td>
-            </tr>
-            <tr>
-              <th>Price</th>
-              <td>{data.plan_price}</td>
-            </tr>
-            <tr>
-              <th>Days</th>
-              <td>{data.days}</td>
-            </tr>
+        <Card className="mb-6">
+          <Card.Body>
+            <Row className="g-0">
+              <Col>
+                <div className="h100">
+                  <div className="text-center p-4">
+                    <SoftBadge bg="primary">
+                      <h3 className="fw-normal my-0" >{data.plan_title.charAt(0).toUpperCase() + data.plan_title.slice(1)}</h3>
+                    </SoftBadge>
+                    <p className="mt-3">For teams that need to create project plans with confidence.</p>
+                    <h2 className="fw-medium my-4">
+                      <sup className="fw-normal fs-2 me-1">$</sup>
+                      {data.plan_price}
+                      <small className="fs--1 text-700">/( {data.days == 30 ? month : year}) </small>
+                    </h2>
+                    <Button variant='primary'>
+                      Get Plan
+                    </Button>
+                  </div>
+                  <hr className="border-bottom-0 m-0" />
+                  <div className="text-start px-sm-4 py-4">
 
-          </tbody>
-        </TableModal>
+                    <h5 className="fw-medium fs-0">Everything in Premium</h5>
+
+                    <div className="list-unstyled mt-3" style={{ whiteSpace: 'pre-wrap' }}>
+                      {result}
+                    </div>
+                  </div>
+                </div>
+              </Col>
+            </Row>
+          </Card.Body>
+        </Card>
       </>
     )
     setModalText(TableModaldata);
@@ -234,15 +257,33 @@ const AdvanceTableExamples = () => {
     },
     {
       accessor: 'plan_title',
-      Header: 'Name'
+      Header: 'Name',
+      Cell: rowData => {
+        const data = rowData.row.original
+        return (
+          data.plan_title.charAt(0).toUpperCase() + data.plan_title.slice(1)
+        );
+      }
     },
     {
       accessor: 'plan_price',
-      Header: 'Price'
+      Header: 'Price',
+      Cell: rowData => {
+        const data = rowData.row.original
+        return (
+          `$ ` + data.plan_price
+        );
+      }
     },
     {
       accessor: 'days',
-      Header: 'Days'
+      Header: 'Days',
+      Cell: rowData => {
+        const data = rowData.row.original
+        return (
+          data.days + ` days`
+        );
+      }
     },
     {
       accessor: 'status',
@@ -437,13 +478,10 @@ const AdvanceTableExamples = () => {
                   onEditorChange={handleEditorChange}
                 />
                 <div className="form-group">
-
                   <input type="hidden" style={{ display: (!description) ? { ...register('plan_descreption', { required: true }) } : "block" }} name="plan_descreption" id="plan_descreption" />
                 </div>
               </Col>
             </div>
-
-
             <ButtonSubmitReset btnloader={btnloader} onsubmitFun={() => {
               reset();
             }} />

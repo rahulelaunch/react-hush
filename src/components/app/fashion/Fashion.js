@@ -132,7 +132,7 @@ const AdvanceTableExamples = () => {
       if (fileName) {
         data["fashion_image"] = fileName;
       } else {
-        data["fashion_image"] = icon.slice(34);
+        data["fashion_image"] = icon;
       }
 
       data["id"] = data.name_id;
@@ -183,7 +183,7 @@ const AdvanceTableExamples = () => {
             <tr>
               <th>Image</th>
               <td>
-                <img src={(data.fashion_image) ? data.fashion_image : dummy} alt={data.name} className="profile_pic_img" style={{ "height": "70px", "width": "70px" }} />
+                <img src={(data.fashion_image) ? process.env.REACT_APP_IMAGE_URL+data.fashion_image : dummy} alt={data.name} className="profile_pic_img" style={{ "height": "70px", "width": "70px" }} />
               </td>
             </tr>
           </tbody>
@@ -247,7 +247,7 @@ const AdvanceTableExamples = () => {
       Cell: rowData => {
         const data = rowData.row.original
         return (
-          <img src={(data.fashion_image) ? data.fashion_image : dummy} onClick={(id) => { openImageInNewTab(data.fashion_image) }} className="profile_pic_img" style={{ "height": "100px", "width": "100px", "borderRadius": "50" }} />
+          <img src={(data.fashion_image) ? process.env.REACT_APP_IMAGE_URL+data.fashion_image : dummy} onClick={(id) => { openImageInNewTab(data.fashion_image) }} className="profile_pic_img" style={{ "height": "100px", "width": "100px", "borderRadius": "50" }} />
         )
       }
 

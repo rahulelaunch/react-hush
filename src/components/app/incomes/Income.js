@@ -199,7 +199,13 @@ const AdvanceTableExamples = () => {
     },
     {
       accessor: 'annual_income',
-      Header: 'Name'
+      Header: 'Name',
+      Cell: rowData => {
+        const data = rowData.row.original
+        return (
+          `$ `+data.annual_income
+        );
+      }
     },
     {
       accessor: 'status',

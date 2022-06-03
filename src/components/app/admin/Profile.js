@@ -54,10 +54,12 @@ const PageForm = () => {
 
         Http.callApi(url.get_profile)
             .then((response) => {
+                
                 let data = response.data;
+                console.log(data);
                 setValue("name", data.username);
                 setValue("email", data.email);
-                // setIcon(data.profile);
+                setIcon(data.profile);
 
             })
             .catch((error) => {
@@ -68,7 +70,10 @@ const PageForm = () => {
     };
     useEffect(() => {
         fetchData();
-        isError(errors);
+    },[]);
+
+    useEffect(() => {
+       isError(errors);    
     });
 
     const onSubmit = (data) => {

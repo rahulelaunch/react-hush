@@ -96,7 +96,7 @@ const AdvanceTableExamples = () => {
             </tr>
             <tr>
               <th>Body Type</th>
-              <td>{data.body_type ? data.body_type.name : ''}  <img src={(data.body_type) ? data.body_type.body_image : dummy} className="profile_pic_img" style={{ "height": "50px", "width": "50px" }} /></td>
+              <td>{data.body_type ? data.body_type.name : ''}  <img src={(data.body_type) ? process.env.REACT_APP_IMAGE_URL+data.body_type.body_image : dummy} className="profile_pic_img" style={{ "height": "50px", "width": "50px" }} /></td>
 
             </tr>
             <tr>
@@ -109,7 +109,7 @@ const AdvanceTableExamples = () => {
             </tr>
             <tr>
               <th>Fashion Type</th>
-              <td>{data.fashion_type ? data.fashion_type.name : ''} <img src={(data.fashion_type) ? data.fashion_type.fashion_image : dummy} className="profile_pic_img" style={{ "height": "50px", "width": "50px" }} /></td>
+              <td>{data.fashion_type ? data.fashion_type.name : ''} <img src={(data.fashion_type) ? process.env.REACT_APP_IMAGE_URL+data.fashion_type.fashion_image : dummy} className="profile_pic_img" style={{ "height": "50px", "width": "50px" }} /></td>
             </tr>
             <tr>
               <th>Education</th>
@@ -155,7 +155,7 @@ const AdvanceTableExamples = () => {
                 <ul className='d-flex flex-wrap'>
                   {data.bio_image.map((data1, index) => {
                     return (
-                      <li className='mr-2' key={index}><img src={(data1) ? data1 : dummy} className="profile_pic_img" style={{ "height": "70px", "width": "70px" }} /></li>
+                      <li className='mr-2' key={index}><img src={(data1) ? process.env.REACT_APP_IMAGE_URL+data1 : dummy} className="profile_pic_img" style={{ "height": "70px", "width": "70px" }} /></li>
                     )
                   })
                   }
@@ -232,49 +232,49 @@ const AdvanceTableExamples = () => {
         //     ImageUrl();
         // }, [])
      
-        const [imageData,setImageData] = useState();
-        useEffect(() => {
-          if (propsImage) {
-            urlFetch("http://192.168.0.172:7000/user/uploads/" + propsImage)
-          }
-        }, [propsImage])
+        // const [imageData,setImageData] = useState();
+        // useEffect(() => {
+        //   if (propsImage) {
+        //     urlFetch("http://192.168.0.172:7000/user/uploads/" + propsImage)
+        //   }
+        // }, [propsImage])
   
-        const urlFetch = async (profileData) => {
-          console.log(profileData);
-          await fetch(profileData.toString(), {
-            method: "GET",
-            headers: new Headers({
-              'authorization': `Bearer ` + localStorage.getItem('access_token'),
-              'Content-Type': 'application/json',
-              'env': 'test'
-            })
-          })
-            .then(response => {
-              const reader = response.body.getReader();
-              return new ReadableStream({
-                start(controller) {
-                  return pump();
-                  function pump() {
-                    return reader.read().then(({ done, value }) => {
-                      if (done) {
-                        controller.close();
-                        return;
-                      }
-                      controller.enqueue(value);
-                      const data = `data:${"image/jpeg"};base64,${new Buffer(value).toString('base64')}`;
-                      setImageData(data)
-                      return pump();
-                    });
-                  }
-                }
-              })
-            })
-        }
+        // const urlFetch = async (profileData) => {
+        //   console.log(profileData);
+        //   await fetch(profileData.toString(), {
+        //     method: "GET",
+        //     headers: new Headers({
+        //       'authorization': `Bearer ` + localStorage.getItem('access_token'),
+        //       'Content-Type': 'application/json',
+        //       'env': 'test'
+        //     })
+        //   })
+        //     .then(response => {
+        //       const reader = response.body.getReader();
+        //       return new ReadableStream({
+        //         start(controller) {
+        //           return pump();
+        //           function pump() {
+        //             return reader.read().then(({ done, value }) => {
+        //               if (done) {
+        //                 controller.close();
+        //                 return;
+        //               }
+        //               controller.enqueue(value);
+        //               const data = `data:${"image/jpeg"};base64,${new Buffer(value).toString('base64')}`;
+        //               setImageData(data)
+        //               return pump();
+        //             });
+        //           }
+        //         }
+        //       })
+        //     })
+        // }
         return (
           <>
            {/* <ImageGet im={image} ImageData={ImageUrl}/> */}
             <div className='d-flex align-items-center'>
-              <img src={(imageData) ? imageData : dummy} className="rounded-circle " style={{ "height": "32px", "width": "32px", borderRadius: "50%", "borderRadius": "50" }} />
+              <img src={(propsImage) ? process.env.REACT_APP_IMAGE_URL+propsImage : dummy} className="rounded-circle " style={{ "height": "32px", "width": "32px", borderRadius: "50%", "borderRadius": "50" }} />
               <div className="flex-1 ms-2">
                 <h5 className="mb-0 fs--1">{name}</h5>
               </div>

@@ -28,6 +28,7 @@ const Dashboard = () => {
 
   const [customerTotal, setCutomerTotal] = useState(0);
   const [planTotal, setPlanTotal] = useState(0);
+  const [PlanData, setPlanData] = useState([]);
 
   const dashboard = () => {
     Http.callApi(url.get_dashboard)
@@ -44,8 +45,23 @@ const Dashboard = () => {
       });
   }
 
+  const getPlan = () => {
+    Http.callApi(url.get_mobilePlan)
+      .then((response) => {
+        // setLoading(false);
+        setPlanData(response.data);
+
+      })
+      .catch((error) => {
+        if (error.response) {
+          errorResponse(error);
+        }
+      });
+  }
+
   useEffect(() => {
     dashboard();
+    getPlan();
   }, []);
 
 
@@ -77,7 +93,7 @@ const Dashboard = () => {
 
       <Row className="g-3 mb-3">
         <Col lg={9} xl={12}>
-          <BestSellingProducts products={products} />
+          <BestSellingProducts products={PlanData} />
         </Col>
      
       </Row>

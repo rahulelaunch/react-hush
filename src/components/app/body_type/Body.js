@@ -188,7 +188,7 @@ const AdvanceTableExamples = () => {
             <tr>
               <th>Image</th>
               <td>
-                <img src={(data.body_image) ? data.body_image : dummy} alt={data.name} className="profile_pic_img" style={{ "height": "70px", "width": "70px" }} />
+                <img src={(data.body_image) ? process.env.REACT_APP_IMAGE_URL+data.body_image : dummy} alt={data.name} className="profile_pic_img" style={{ "height": "70px", "width": "70px" }} />
               </td>
             </tr>
           </tbody>
@@ -245,50 +245,56 @@ const AdvanceTableExamples = () => {
       accessor: 'body_image',
       Header: 'Image',
       Cell: rowData => {
-        const propsImage = rowData.row.original.body_image;
-        const [imageData,setImageData] = useState();
-        useEffect(() => {
-          if (propsImage) {
-            urlFetch("http://192.168.0.172:7000/user/uploads/" + propsImage)
-          }
-        }, [propsImage])
-
-        const urlFetch = async (profileData) => {
-          await fetch(profileData.toString(), {
-            method: "GET",
-            headers: new Headers({
-              'authorization': `Bearer ` + localStorage.getItem('access_token'),
-              'Content-Type': 'application/json',
-              'env': 'test'
-            })
-          })
-            .then(response => {
-              console.log(response);
-              const reader = response.body.getReader();
-              return new ReadableStream({
-                start(controller) {
-                  return pump();
-                  function pump() {
-                    return reader.read().then(({ done, value }) => {
-                      if (done) {
-                        controller.close();
-                        return;
-                      }
-                      controller.enqueue(value);
-                      const data = `data:${"image/jpeg"};base64,${new Buffer(value).toString('base64')}`;
-                      setImageData(data)
-                      return pump();
-                    });
-                  }
-                }
-              })
-            })
-        }
-
+        const data = rowData.row.original
         return (
-          <img src={(imageData) ? imageData : dummy}   className="profile_pic_img" style={{ "height": "100px", "width": "100px", "borderRadius": "50" }} />
+          <img src={(data.body_image) ? process.env.REACT_APP_IMAGE_URL+data.body_image : dummy}  className="profile_pic_img" style={{ "height": "100px", "width": "100px", "borderRadius": "50" }} />
         )
       }
+      // Cell: rowData => {
+      //   const propsImage = rowData.row.original.body_image;
+      //   const [imageData,setImageData] = useState();
+      //   useEffect(() => {
+      //     if (propsImage) {
+      //       urlFetch("http://192.168.0.172:7000/user/uploads/" + propsImage)
+      //     }
+      //   }, [propsImage])
+
+      //   const urlFetch = async (profileData) => {
+      //     await fetch(profileData.toString(), {
+      //       method: "GET",
+      //       headers: new Headers({
+      //         'authorization': `Bearer ` + localStorage.getItem('access_token'),
+      //         'Content-Type': 'application/json',
+      //         'env': 'test'
+      //       })
+      //     })
+      //       .then(response => {
+      //         console.log(response);
+      //         const reader = response.body.getReader();
+      //         return new ReadableStream({
+      //           start(controller) {
+      //             return pump();
+      //             function pump() {
+      //               return reader.read().then(({ done, value }) => {
+      //                 if (done) {
+      //                   controller.close();
+      //                   return;
+      //                 }
+      //                 controller.enqueue(value);
+      //                 const data = `data:${"image/jpeg"};base64,${new Buffer(value).toString('base64')}`;
+      //                 setImageData(data)
+      //                 return pump();
+      //               });
+      //             }
+      //           }
+      //         })
+      //       })
+      //   }
+
+      //   return (
+      //     <img src={(imageData) ? imageData : dummy}   className="profile_pic_img" style={{ "height": "100px", "width": "100px", "borderRadius": "50" }} />
+      //   )
+      // }
     },
     {
       accessor: 'status',

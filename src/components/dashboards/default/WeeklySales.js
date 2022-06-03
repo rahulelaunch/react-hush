@@ -28,16 +28,16 @@ echarts.use([
 ]);
 
 const getOptions = data => ({
-  tooltip: {
-    trigger: 'axis',
-    padding: [7, 10],
-    formatter: '{b0} : {c0}',
-    transitionDuration: 0,
-    backgroundColor: getColor('100'),
-    borderColor: getColor('300'),
-    textStyle: { color: getColor('dark') },
-    borderWidth: 1
-  },
+  // tooltip: {
+  //   trigger: 'axis',
+  //   padding: [7, 10],
+  //   formatter: '{b0} : {c0}',
+  //   transitionDuration: 0,
+  //   backgroundColor: getColor('100'),
+  //   borderColor: getColor('300'),
+  //   textStyle: { color: getColor('dark') },
+  //   borderWidth: 1
+  // },
   xAxis: {
     type: 'category',
     data: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
