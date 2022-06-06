@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Badge, Card, Col, Row } from 'react-bootstrap';
 import Flex from 'components/common/Flex';
 import { getColor } from 'helpers/utils';
 import * as echarts from 'echarts/core';
@@ -88,7 +88,10 @@ const TotalGender = ({ data1, data, radius }) => {
                 />
                 Male
               </p>
-              <div className="d-xxl-none">{data1.male}-users</div>
+              <Badge pill bg="200" className="text-primary fs--2">
+              <div className="d-xxl-none">{data1.male} -users</div>
+             </Badge>
+              
             </Flex>
             <Flex
               alignItems="center"
@@ -102,7 +105,9 @@ const TotalGender = ({ data1, data, radius }) => {
                 />
                 Female
               </p>
-              <div className="d-xxl-none">{data1.female}-users</div>
+              <Badge pill bg="200" className="text-primary fs--2">
+              <div className="d-xxl-none">{data1.female} -users</div>
+             </Badge>
             </Flex>
           </Col>
           <Col xs="auto">

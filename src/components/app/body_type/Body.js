@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {Form, FormLabel, Card, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
+import { Form, FormLabel, Card, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
 import { modal } from "bootstrap"
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -187,7 +187,7 @@ const AdvanceTableExamples = () => {
             <tr>
               <th>Image</th>
               <td>
-                <img src={(data.body_image) ? process.env.REACT_APP_IMAGE_URL+data.body_image : dummy} alt={data.name} className="profile_pic_img" style={{ "height": "70px", "width": "70px" }} />
+                <img src={(data.body_image) ? process.env.REACT_APP_IMAGE_URL + data.body_image : dummy} alt={data.name} className="profile_pic_img" style={{ "height": "70px", "width": "70px" }} />
               </td>
             </tr>
           </tbody>
@@ -246,7 +246,7 @@ const AdvanceTableExamples = () => {
       Cell: rowData => {
         const data = rowData.row.original
         return (
-          <img src={(data.body_image) ? process.env.REACT_APP_IMAGE_URL+data.body_image : dummy}  className="profile_pic_img" style={{ "height": "100px", "width": "100px", "borderRadius": "50" }} />
+          <img src={(data.body_image) ? process.env.REACT_APP_IMAGE_URL + data.body_image : dummy} className="profile_pic_img" style={{ "height": "100px", "width": "100px", "borderRadius": "50" }} />
         )
       }
       // Cell: rowData => {
@@ -362,8 +362,8 @@ const AdvanceTableExamples = () => {
             <Row className="flex-between-center mb-3">
               <Col xs={8} sm="auto" className="ms-3 mt-2 text-end ps-0">
                 <div id="orders-actions">
-                  <button className="btn btn-sm btn-success" onClick={(e) => handleShow()}>
-                    <FontAwesomeIcon icon={faPlus} /> Add Body
+                  <button className="btn btn-sm btn-falcon-default" onClick={(e) => handleShow()}>
+                    <FontAwesomeIcon icon={faPlus} /> New
                   </button>
                 </div>
               </Col>
@@ -378,7 +378,6 @@ const AdvanceTableExamples = () => {
               headerClassName="bg-200 text-900 text-nowrap align-middle"
               rowClassName="align-middle white-space-nowrap"
               tableProps={{
-                bordered: true,
                 striped: true,
                 className: 'fs--1 mb-0 overflow-hidden'
               }}
@@ -463,7 +462,7 @@ const AdvanceTableExamples = () => {
                 </div>
                 {icon ? <div className="form-group">
                   <img
-                    src={process.env.REACT_APP_IMAGE_URL+icon}
+                    src={process.env.REACT_APP_IMAGE_URL + icon}
                     alt={iconAlt} width="150px" height="150px"
                     className="imgBox"
                   />

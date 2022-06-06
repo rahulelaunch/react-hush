@@ -278,8 +278,8 @@ const AdvanceTableExamples = () => {
             <Row className="flex-between-center mb-3">
               <Col xs={8} sm="auto" className="ms-3 mt-2 text-end ps-0">
                 <div id="orders-actions">
-                  <button className="btn btn-sm btn-success" onClick={(e) => handleShow()}>
-                    <FontAwesomeIcon icon={faPlus} />Add Income
+                  <button className="btn btn-sm btn-falcon-default" onClick={(e) => handleShow()}>
+                    <FontAwesomeIcon icon={faPlus} /> New
                   </button>
                 </div>
 
@@ -292,12 +292,11 @@ const AdvanceTableExamples = () => {
           </Card.Header>
           <Row className="flex-end-center mb-3">
 
-            <AdvanceTable
+          <AdvanceTable
               table
               headerClassName="bg-200 text-900 text-nowrap align-middle"
               rowClassName="align-middle white-space-nowrap"
               tableProps={{
-                bordered: true,
                 striped: true,
                 className: 'fs--1 mb-0 overflow-hidden'
               }}

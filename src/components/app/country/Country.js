@@ -162,15 +162,14 @@ const AdvanceTableExamples = () => {
         <Row className="flex-end-center mb-3">
 
           <AdvanceTable
-            table
-            headerClassName="bg-200 text-900 text-nowrap align-middle"
-            rowClassName="align-middle white-space-nowrap"
-            tableProps={{
-              bordered: true,
-              striped: true,
-              className: 'fs--1 mb-0 overflow-hidden'
-            }}
-          />
+              table
+              headerClassName="bg-200 text-900 text-nowrap align-middle"
+              rowClassName="align-middle white-space-nowrap"
+              tableProps={{
+                striped: true,
+                className: 'fs--1 mb-0 overflow-hidden'
+              }}
+            />
         </Row>
       </Card>
 

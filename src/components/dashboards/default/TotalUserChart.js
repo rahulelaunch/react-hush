@@ -6,7 +6,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Bar } from 'react-chartjs-2';
 
-const TotalUserChat = ({ data1 }) => {
+const TotalUserChart = ({ data1 }) => {
   const data = {
     labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec'],
     datasets: [
@@ -68,9 +68,9 @@ const TotalUserChat = ({ data1 }) => {
   );
 }
 
-TotalUserChat.propTypes = {
+TotalUserChart.propTypes = {
   data1: PropTypes.number.isRequired,
 };
 
-export default TotalUserChat;
+export default TotalUserChart;
 

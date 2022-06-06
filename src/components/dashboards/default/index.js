@@ -13,7 +13,7 @@ import {
 import TotalPlan from './TotalPlan';
 import TotalUser from './TotalUser';
 import TotalGender from './TotalGender';
-import TotalUserChat from './TotalUserChat';
+import TotalUserChart from './TotalUserChart';
 import BestSellingProducts from './BestSellingProducts';
 import Weather from './Weather';
 import TopProducts from './TopProducts';
@@ -92,7 +92,7 @@ const Dashboard = () => {
 
       <Row className="g-3 mb-3">
         <Col lg={6}>
-          <TotalUserChat data={totalSales} />
+          <TotalUserChart data={totalSales} />
         </Col>
 
         <Col lg={6}>

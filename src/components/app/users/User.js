@@ -15,7 +15,7 @@ import {
   errorResponse,
   successResponse,
   isError,
- 
+
 } from "../../helpers/response";
 import { faEye, faToggleOff, faToggleOn, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
 import ImageGet from '../ImageGet';
@@ -94,7 +94,7 @@ const AdvanceTableExamples = () => {
             </tr>
             <tr>
               <th>Body Type</th>
-              <td>{data.body_type ? data.body_type.name : ''}  <img src={(data.body_type) ? process.env.REACT_APP_IMAGE_URL+data.body_type.body_image : dummy} className="profile_pic_img" style={{ "height": "50px", "width": "50px" }} /></td>
+              <td>{data.body_type ? data.body_type.name : ''}  <img src={(data.body_type) ? process.env.REACT_APP_IMAGE_URL + data.body_type.body_image : dummy} className="profile_pic_img" style={{ "height": "50px", "width": "50px" }} /></td>
 
             </tr>
             <tr>
@@ -107,7 +107,7 @@ const AdvanceTableExamples = () => {
             </tr>
             <tr>
               <th>Fashion Type</th>
-              <td>{data.fashion_type ? data.fashion_type.name : ''} <img src={(data.fashion_type) ? process.env.REACT_APP_IMAGE_URL+data.fashion_type.fashion_image : dummy} className="profile_pic_img" style={{ "height": "50px", "width": "50px" }} /></td>
+              <td>{data.fashion_type ? data.fashion_type.name : ''} <img src={(data.fashion_type) ? process.env.REACT_APP_IMAGE_URL + data.fashion_type.fashion_image : dummy} className="profile_pic_img" style={{ "height": "50px", "width": "50px" }} /></td>
             </tr>
             <tr>
               <th>Education</th>
@@ -153,7 +153,7 @@ const AdvanceTableExamples = () => {
                 <ul className='d-flex flex-wrap'>
                   {data.bio_image.map((data1, index) => {
                     return (
-                      <li className='mr-2' key={index}><img src={(data1) ? process.env.REACT_APP_IMAGE_URL+data1 : dummy} className="profile_pic_img" style={{ "height": "70px", "width": "70px" }} /></li>
+                      <li className='mr-2' key={index}><img src={(data1) ? process.env.REACT_APP_IMAGE_URL + data1 : dummy} className="profile_pic_img" style={{ "height": "70px", "width": "70px" }} /></li>
                     )
                   })
                   }
@@ -222,21 +222,21 @@ const AdvanceTableExamples = () => {
         const { name } = rowData.row.original;
         const propsImage = rowData.row.original.user_profile;
         // const [imgSrc, setImageSrc] = useState();
- 
+
         // const ImageUrl = (datas) => {
         //     setImageSrc(datas);
         // }
         // useEffect(() => {
         //     ImageUrl();
         // }, [])
-     
+
         // const [imageData,setImageData] = useState();
         // useEffect(() => {
         //   if (propsImage) {
         //     urlFetch("http://192.168.0.172:7000/user/uploads/" + propsImage)
         //   }
         // }, [propsImage])
-  
+
         // const urlFetch = async (profileData) => {
         //   await fetch(profileData.toString(), {
         //     method: "GET",
@@ -269,9 +269,9 @@ const AdvanceTableExamples = () => {
         // }
         return (
           <>
-           {/* <ImageGet im={image} ImageData={ImageUrl}/> */}
+            {/* <ImageGet im={image} ImageData={ImageUrl}/> */}
             <div className='d-flex align-items-center'>
-              <img src={(propsImage) ? process.env.REACT_APP_IMAGE_URL+propsImage : dummy} className="rounded-circle " style={{ "height": "32px", "width": "32px", borderRadius: "50%", "borderRadius": "50" }} />
+              <img src={(propsImage) ? process.env.REACT_APP_IMAGE_URL + propsImage : dummy} className="rounded-circle " style={{ "height": "40px", "width": "40px", borderRadius: "50%", "borderRadius": "50" }} />
               <div className="flex-1 ms-2">
                 <h5 className="mb-0 fs--1">{name}</h5>
               </div>
@@ -284,19 +284,6 @@ const AdvanceTableExamples = () => {
     {
       accessor: 'email',
       Header: 'Email'
-    },
-
-    {
-      accessor: 'dob',
-      Header: 'Birth Date',
-      Cell: rowData => {
-        const data = rowData.row.original
-        return (
-          <>
-            {data.dob.slice(0, -14)}
-          </>
-        );
-      },
     },
 
     {
@@ -377,7 +364,6 @@ const AdvanceTableExamples = () => {
     <AdvanceTableWrapper
       columns={columns}
       data={dataTableData}
-      sortable
       pagination
       perPage={5}
     >
@@ -405,7 +391,6 @@ const AdvanceTableExamples = () => {
             headerClassName="bg-200 text-900 text-nowrap align-middle"
             rowClassName="align-middle white-space-nowrap"
             tableProps={{
-              bordered: true,
               striped: true,
               className: 'fs--1 mb-0 overflow-hidden'
             }}
