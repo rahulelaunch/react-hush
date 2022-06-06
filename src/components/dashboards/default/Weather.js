@@ -20,13 +20,12 @@ const Weather = ({
   ...rest
 }) => (
   <Card {...rest} className="h-100">
-           <Background image={bg2} className="bg-card" />
+    <Background image={bg2} className="bg-card" />
     <FalconCardHeader
       title="Weather"
       light={false}
       titleTag="h6"
       className="pb-0"
-      endEl={<CardDropdown />}
     />
     <Card.Body className="pt-2">
       <Row className="g-0 h-100 align-items-center">

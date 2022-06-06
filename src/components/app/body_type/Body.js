@@ -157,7 +157,6 @@ const AdvanceTableExamples = () => {
 
     } else {
       data["body_image"] = fileName;
-      console.log(data);
       Http.callApi(url.body_store, data)
         .then((response) => {
           setBtnLoader(false);
@@ -269,7 +268,6 @@ const AdvanceTableExamples = () => {
       //       })
       //     })
       //       .then(response => {
-      //         console.log(response);
       //         const reader = response.body.getReader();
       //         return new ReadableStream({
       //           start(controller) {

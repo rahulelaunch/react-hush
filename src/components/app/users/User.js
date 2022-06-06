@@ -68,8 +68,6 @@ const AdvanceTableExamples = () => {
 
 
   const showModal = (data) => {
-    console.log('data');
-    console.log(data);
     let TableModaldata = (
       <>
         <TableModal striped bordered hover>
@@ -240,7 +238,6 @@ const AdvanceTableExamples = () => {
         // }, [propsImage])
   
         // const urlFetch = async (profileData) => {
-        //   console.log(profileData);
         //   await fetch(profileData.toString(), {
         //     method: "GET",
         //     headers: new Headers({

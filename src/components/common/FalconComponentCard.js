@@ -76,11 +76,11 @@ const FalconComponentCardHeader = ({
           )}
           {children}
         </Col>
-        {!noPreview && (
+        {/* {!noPreview && (
           <Col xs={'auto'}>
             <PreviewCode />
           </Col>
-        )}
+        )} */}
       </Row>
     </Card.Header>
   );

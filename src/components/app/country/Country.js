@@ -54,12 +54,66 @@ const AdvanceTableExamples = () => {
       cellProps: {
         className: 'py-2'
       },
+
+      // Cell: rowData => {
+      //   const { country_name } = rowData.row.original;
+      //   const propsImage = rowData.row.original.flag;
+      //   const [imageData,setImageData] = useState();
+      //   useEffect(() => {
+      //     if (propsImage) {
+      //       urlFetch("http://192.168.0.172:7000/user/uploads/flag/" + propsImage)
+      //     }
+      //   }, [propsImage])
+
+      //   const urlFetch = async (profileData) => {
+      //     await fetch(profileData.toString(), {
+      //       method: "GET",
+      //       headers: new Headers({
+      //         'authorization': `Bearer ` + localStorage.getItem('access_token'),
+      //         'Content-Type': 'application/json',
+      //         'env': 'test'
+      //       })
+      //     })
+      //       .then(response => {
+      //         const reader = response.body.getReader();
+      //         return new ReadableStream({
+      //           start(controller) {
+      //             return pump();
+      //             function pump() {
+      //               return reader.read().then(({ done, value }) => {
+      //                 if (done) {
+      //                   controller.close();
+      //                   return;
+      //                 }
+      //                 controller.enqueue(value);
+      //                 const data = `data:${"image/jpeg"};base64,${new Buffer(value).toString('base64')}`;
+      //                 setImageData(data)
+      //                 return pump();
+      //               });
+      //             }
+      //           }
+      //         })
+      //       })
+      //   }
+
+      //   return (
+      //  <>
+      //       <div className='d-flex align-items-center'>
+      //         <img src={(imageData) ? imageData : dummy} className="rounded-circle " style={{ "height": "32px", "width": "32px"}} />
+      //         <div className="flex-1 ms-2">
+      //           <h5 className="mb-0 fs--1">{country_name}</h5>
+      //         </div>
+      //       </div>
+      //     </>
+      //   )
+      // }
+
       Cell: rowData => {
         const { country_name, flag } = rowData.row.original;
         return (
           <>
             <div className='d-flex align-items-center'>
-              <img src={(flag) ? flag : dummy} className="profile_pic_img" style={{ "height": "32px", "width": "32px", borderRadius: "50%", "borderRadius": "50" }} />
+              <img src={(flag) ? "http://192.168.0.172:7005/uploads/flag/"+flag : dummy} className="profile_pic_img" style={{ "height": "32px", "width": "32px", borderRadius: "50%", "borderRadius": "50" }} />
               <div className="flex-1 ms-2">
                 <h5 className="mb-0 fs--1">{country_name}</h5>
               </div>

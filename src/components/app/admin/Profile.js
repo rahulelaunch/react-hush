@@ -39,7 +39,6 @@ const PageForm = () => {
 
         Http.callApi(url.image_upload, formData)
             .then(response => {
-                console.log(response);
                 setFileName(response.data.images);
                 setIcon(response.data.images);
             })
@@ -56,7 +55,7 @@ const PageForm = () => {
             .then((response) => {
                 
                 let data = response.data;
-                console.log(data);
+            
                 setValue("name", data.username);
                 setValue("email", data.email);
                 setIcon(data.profile);

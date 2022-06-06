@@ -28,8 +28,7 @@ echarts.use([
 const getOptions = (data, radius) => ({
   color: [
     getColor(data[0].color),
-    getColor(data[1].color),
-    getColor(data[2].color)
+    getColor(data[1].color)
   ],
 
   tooltip: {
@@ -44,7 +43,7 @@ const getOptions = (data, radius) => ({
   },
   series: [
     {
-      name: '26M',
+      name: 'Users',
       type: 'pie',
       radius,
       avoidLabelOverlap: false,
@@ -67,29 +66,9 @@ const getOptions = (data, radius) => ({
   ]
 });
 
-const MarketShareItem = ({ item, index, total }) => {
-  const { name, color, value } = item;
 
-  const percentage = ((value * 100) / total).toFixed(0);
-  return (
-    <Flex
-      alignItems="center"
-      justifyContent="between"
-      className={`fw-semi-bold fs--2 ${index == 0 && 'mt-3'}`}
-    >
-      <p className="mb-1">
-        <FontAwesomeIcon
-          icon="circle"
-          className={`me-2 text-${color || 'text-info'}`}
-        />
-        {name}
-      </p>
-      <div className="d-xxl-none">{percentage}%</div>
-    </Flex>
-  );
-};
+const TotalGender = ({ data1, data, radius }) => {
 
-const MarketShare = ({ data, radius }) => {
   const total = data.reduce((acc, val) => val.value + acc, 0);
   return (
     <Card className="h-md-100">
@@ -97,16 +76,34 @@ const MarketShare = ({ data, radius }) => {
       <Card.Body>
         <Row className="justify-content-between g-0">
           <Col xs={5} sm={6} xxl className="pe-2">
-            <h6 className="mt-1">Market Share</h6>
-
-            {data.map((item, index) => (
-              <MarketShareItem
-                item={item}
-                index={index}
-                key={index}
-                total={total}
-              />
-            ))}
+            <h6 className="mt-1">User Gender</h6>
+            <Flex
+              alignItems="center"
+              justifyContent="between"
+              className="fw-semi-bold fs--2 mt-3">
+              <p className="mb-1">
+                <FontAwesomeIcon
+                  icon="circle"
+                  className="me-2 text-primary"
+                />
+                Male
+              </p>
+              <div className="d-xxl-none">{data1.male}-users</div>
+            </Flex>
+            <Flex
+              alignItems="center"
+              justifyContent="between"
+              className="fw-semi-bold fs--2"
+            >
+              <p className="mb-1">
+                <FontAwesomeIcon
+                  icon="circle"
+                  className="me-2 text-info"
+                />
+                Female
+              </p>
+              <div className="d-xxl-none">{data1.female}-users</div>
+            </Flex>
           </Col>
           <Col xs="auto">
             <div className="ps-0">
@@ -123,7 +120,7 @@ const MarketShare = ({ data, radius }) => {
   );
 };
 
-MarketShareItem.propTypes = {
+TotalGender.propTypes = {
   item: PropTypes.shape({
     name: PropTypes.string.isRequired,
     color: PropTypes.string.isRequired,
@@ -133,9 +130,10 @@ MarketShareItem.propTypes = {
   total: PropTypes.number.isRequired
 };
 
-MarketShare.propTypes = {
+TotalGender.propTypes = {
+  data1: PropTypes.array.isRequired,
   data: PropTypes.array.isRequired,
   radius: PropTypes.array.isRequired
 };
 
-export default MarketShare;
+export default TotalGender;

@@ -82,8 +82,6 @@ const ProfileDropdown = () => {
   // }, [abc])
 
   // const urlFetch = async (profileData) => {
-  //   console.log(12121);
-  //   console.log(profileData);
   //   await fetch(profileData.toString(), {
   //     method: "GET",
   //     headers: new Headers({

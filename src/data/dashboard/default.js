@@ -23,17 +23,16 @@ export const weeklySalesData = [6000, 9000, 8500, 4000, 4500, 6500, 7000];
 export const totalOrder = [20, 40, 100, 120];
 
 export const marketShare = [
-  { id: 1, value: 53000000, name: 'Samsung', color: 'primary' },
-  { id: 2, value: 19000000, name: 'Huawei', color: 'info' },
-  { id: 3, value: 20000000, name: 'Apple', color: '300' }
+  { id: 1, value: 53000000, name: 'Male', color: 'primary' },
+  { id: 2, value: 19000000, name: 'Female', color: 'info' },
 ];
 export const weather = {
-  city: 'New York City',
+  city: 'Sydney NSW, Australia',
   condition: 'Sunny',
-  precipitation: '50%',
-  temperature: 31,
-  highestTemperature: 32,
-  lowestTemperature: 25
+  precipitation: '10%',
+  temperature: 11,
+  highestTemperature: 13,
+  lowestTemperature: -23
 };
 
 export const totalSales = [

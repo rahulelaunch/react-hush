@@ -49,16 +49,16 @@ const AdvanceTableExamples = () => {
       }
     },
     {
-      accessor: 'state_name',
+      accessor: 'stateName',
       Header: 'Name'
     },
     {
-        accessor: 'id',
-        Header: 'StateCode'
+        accessor: 'stateId',
+        Header: 'State Code'
     },
     {
-        accessor: 'country_code',
-        Header: 'CountryCode'
+        accessor: 'CountryName',
+        Header: 'Country Name'
     },
   
 

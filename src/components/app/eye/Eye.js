@@ -75,7 +75,6 @@ const AdvanceTableExamples = () => {
     setId('');
 
     if (data) {
-      console.log(data);
       setValue("name", data.name);
       setValue("name_id", data._id);
       setId("name_id", data._id);

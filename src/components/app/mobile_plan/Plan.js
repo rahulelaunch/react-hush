@@ -185,7 +185,6 @@ const AdvanceTableExamples = () => {
 
       Http.callApi(url.mobilePlan_update, data)
         .then((response) => {
-          console.log(response);
           setBtnLoader(false);
           successResponse(response);
           getData();

@@ -28,16 +28,6 @@ echarts.use([
 ]);
 
 const getOptions = data => ({
-  // tooltip: {
-  //   trigger: 'axis',
-  //   padding: [7, 10],
-  //   formatter: '{b0} : {c0}',
-  //   transitionDuration: 0,
-  //   backgroundColor: getColor('100'),
-  //   borderColor: getColor('300'),
-  //   textStyle: { color: getColor('dark') },
-  //   borderWidth: 1
-  // },
   xAxis: {
     type: 'category',
     data: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
@@ -74,28 +64,13 @@ const getOptions = data => ({
   grid: { right: 5, left: 10, top: 0, bottom: 0 }
 });
 
-const WeeklySales = ({ data, width, amountClassName ,data1}) => {
+const TotalPlan = ({ data, width, amountClassName, data1 }) => {
   return (
     <Card className="h-md-100">
-       {/* <Background image={bg1} className="bg-card" /> */}
+      {/* <Background image={bg1} className="bg-card" /> */}
       <Card.Header className="pb-0">
         <h6 className="mb-0 mt-2">
           Total Plan
-          <OverlayTrigger
-            placement="top"
-            overlay={
-              <Tooltip>Calculated according to last week's sales</Tooltip>
-            }
-          >
-            <span>
-              <FontAwesomeIcon
-                icon={['far', 'question-circle']}
-                transform="shrink-1"
-                className="ms-1 text-400"
-                id="weeklySalesTooltip"
-              />
-            </span>
-          </OverlayTrigger>
         </h6>
       </Card.Header>
 
@@ -107,10 +82,10 @@ const WeeklySales = ({ data, width, amountClassName ,data1}) => {
               'mb-1 text-700 fw-normal lh-1'
             )}
           >
-           {data1}
+            {data1}
           </h2>
           <SoftBadge pill bg="success" className="me-2 fs--2">
-          <Link to="/admin/plan/list" >See All</Link>
+            <Link to="/admin/plan/list" >See All</Link>
           </SoftBadge>
         </div>
         <BasicECharts
@@ -123,11 +98,11 @@ const WeeklySales = ({ data, width, amountClassName ,data1}) => {
   );
 };
 
-WeeklySales.propTypes = {
+TotalPlan.propTypes = {
   data: PropTypes.array.isRequired,
   data1: PropTypes.number.isRequired,
   width: PropTypes.string,
   amountClassName: PropTypes.string
 };
 
-export default WeeklySales;
+export default TotalPlan;

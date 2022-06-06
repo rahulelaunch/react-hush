@@ -32,12 +32,12 @@ export const userRoutes = {
           active: true
         },
         {
-          name: 'Hair',
+          name: 'Hair Color',
           to: '/admin/hair/list',
           active: true
         },
         {
-          name: 'Eye',
+          name: 'Eye Color',
           to: '/admin/eye/list',
           active: true
         },
@@ -57,7 +57,7 @@ export const userRoutes = {
           active: true
         },
         {
-          name: 'Annul Income',
+          name: 'Annual Income',
           to: '/admin/income/list',
           active: true
         },
