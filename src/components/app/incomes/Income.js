@@ -210,7 +210,8 @@ const AdvanceTableExamples = () => {
     {
       accessor: 'status',
       Header: 'Status',
-
+      headerProps: { className: 'text-center' },
+      
       Cell: rowData => {
         const data = rowData.row.original
         return (
