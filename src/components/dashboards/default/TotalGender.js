@@ -80,7 +80,7 @@ const TotalGender = ({ data1, data, radius }) => {
             <Flex
               alignItems="center"
               justifyContent="between"
-              className="fw-semi-bold fs--2 mt-3">
+              className="fw-semi-bold fs--1 mt-3">
               <p className="mb-1">
                 <FontAwesomeIcon
                   icon="circle"
@@ -88,15 +88,15 @@ const TotalGender = ({ data1, data, radius }) => {
                 />
                 Male
               </p>
-              <Badge pill bg="200" className="text-primary fs--2">
-              <div className="d-xxl-none">{data1.male} -users</div>
+              <Badge pill bg="200" className="text-primary fs--1">
+              <div className="d-xxl-none"> { data1.male } </div>
              </Badge>
               
             </Flex>
             <Flex
               alignItems="center"
               justifyContent="between"
-              className="fw-semi-bold fs--2"
+              className="fw-semi-bold fs--1"
             >
               <p className="mb-1">
                 <FontAwesomeIcon
@@ -105,8 +105,8 @@ const TotalGender = ({ data1, data, radius }) => {
                 />
                 Female
               </p>
-              <Badge pill bg="200" className="text-primary fs--2">
-              <div className="d-xxl-none">{data1.female} -users</div>
+              <Badge pill bg="200" className="text-primary fs--1">
+              <div className="d-xxl-none">{data1.female}</div>
              </Badge>
             </Flex>
           </Col>

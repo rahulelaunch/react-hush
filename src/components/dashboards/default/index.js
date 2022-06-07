@@ -33,16 +33,15 @@ const Dashboard = () => {
   const [planTotal, setPlanTotal] = useState(0);
   const [PlanData, setPlanData] = useState([]);
   const [Gender, setGender] = useState([]);
+  const [Users, setUser] = useState([]);
 
   const dashboard = () => {
     Http.callApi(url.get_dashboard)
       .then((response) => {
-        console.log('response');
-        console.log(response);
         setCutomerTotal(response.data.user);
         setPlanTotal(response.data.plan);
         setGender(response.data);
-
+        setUser(response.data.users);
       })
       .catch((error) => {
         if (error.response) {
@@ -92,7 +91,7 @@ const Dashboard = () => {
 
       <Row className="g-3 mb-3">
         <Col lg={6}>
-          <TotalUserChart data={totalSales} />
+          <TotalUserChart data1 ={Users}/>
         </Col>
 
         <Col lg={6}>
