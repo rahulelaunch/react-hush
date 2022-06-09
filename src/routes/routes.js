@@ -4,7 +4,6 @@ export const dashboardRoutes = {
   children: [
     {
       name: 'Dashboard',
-      active: true,
       icon: 'chart-pie',
       to: '/admin/dashboard',
       exact: true,

@@ -1,19 +1,14 @@
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, {useState,useEffect} from 'react';
 import { Link } from 'react-router-dom';
 import { Dropdown } from 'react-bootstrap';
-import team3 from 'assets/img/team/3.jpg';
 import Avatar from 'components/common/Avatar';
 import Http from '../../security/Http';
 import url from '../../../Development.json';
 import {
   errorResponse,
-  successResponse,
-  isError,
 } from "../../helpers/response";
 import dummy from '../../../assets/img/team/User.jpg';
-import ImageGet from '../../app/ImageGet';
-
+// import ImageGet from '../../app/ImageGet';
 
 
 const ProfileDropdown = () => {
@@ -27,9 +22,7 @@ const ProfileDropdown = () => {
         .then((response) => {
           let data = response.data;
             setName(data.username);
-            setProfile(data.profile)
-            
-          
+            setProfile(data.profile) 
         })
         .catch((error) => {
             if (error.response) {
@@ -52,7 +45,7 @@ const ProfileDropdown = () => {
                 })
                 .catch((error) => {
                     if (error.response) {
-                        // errorResponse(error);
+                        errorResponse(error);
                     }
                 });
         }

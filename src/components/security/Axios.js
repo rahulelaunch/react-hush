@@ -31,7 +31,7 @@ axios.interceptors.response.use(
 
     (response) => {
         if (response.data.mac !== undefined) {
-            response.data = (new Security).decrypt(response.data);
+            response.data = new Security.decrypt(response.data);
         }
 
         if (response.status === 204) {
@@ -45,7 +45,7 @@ axios.interceptors.response.use(
         let errorData = error.response.data;
 
         if (errorData.mac !== undefined) {
-            errorData = (new Security).decrypt(errorData);
+            errorData = new Security.decrypt(errorData);
         }
         return Promise.reject(error);
     }

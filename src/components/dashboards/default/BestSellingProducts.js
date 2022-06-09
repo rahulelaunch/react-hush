@@ -1,6 +1,5 @@
 import React from 'react';
 import { Table } from 'react-bootstrap';
-import PropTypes from 'prop-types';
 import FalconComponentCard from 'components/common/FalconComponentCard';
 import { Link } from 'react-router-dom';
 import Flex from 'components/common/Flex';
@@ -25,7 +24,7 @@ const BestSellingProducts = ({ products }) => {
             </tr>
           </thead>
           <tbody>
-            {products.map((product, index) => (
+            {products.map((product) => (
 
               <tr className="border-bottom border-200" >
                 <td>
@@ -59,9 +58,5 @@ const BestSellingProducts = ({ products }) => {
 
   );
 };
-
-// BestSellingProducts.propTypes = {
-//   products: PropTypes.arrayOf(BestSellingProduct.propTypes.product).isRequired
-// };
 
 export default BestSellingProducts;

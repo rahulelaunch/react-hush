@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Card, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
+import { Card, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
+// import { Button, Card, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
 import { modal } from "bootstrap"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AdvanceTable from 'components/common/advance-table/AdvanceTable';
@@ -14,11 +15,9 @@ import Swal from 'sweetalert2';
 import {
   errorResponse,
   successResponse,
-  isError,
-
 } from "../../helpers/response";
 import { faEye, faToggleOff, faToggleOn, faTrashAlt } from '@fortawesome/free-solid-svg-icons';
-import ImageGet from '../ImageGet';
+// import ImageGet from '../ImageGet';
 
 
 const AdvanceTableExamples = () => {
@@ -153,7 +152,7 @@ const AdvanceTableExamples = () => {
                 <ul className='d-flex flex-wrap'>
                   {data.bio_image.map((data1, index) => {
                     return (
-                      <li className='mr-2' key={index}><img src={(data1) ? process.env.REACT_APP_IMAGE_URL + data1 : dummy} className="profile_pic_img" style={{ "height": "70px", "width": "70px" }} /></li>
+                      <li className='mr-2' key={index}><img src={(data1) ? process.env.REACT_APP_IMAGE_URL + data1 : dummy} className="rounded-circle" style={{ "height": "70px", "width": "70px" }} /></li>
                     )
                   })
                   }
@@ -271,7 +270,7 @@ const AdvanceTableExamples = () => {
           <>
             {/* <ImageGet im={image} ImageData={ImageUrl}/> */}
             <div className='d-flex align-items-center'>
-              <img src={(propsImage) ? process.env.REACT_APP_IMAGE_URL + propsImage : dummy} className="rounded-circle " style={{ "height": "40px", "width": "40px", borderRadius: "50%", "borderRadius": "50" }} />
+              <img src={(propsImage) ? process.env.REACT_APP_IMAGE_URL + propsImage : dummy} className="rounded-circle" style={{ "height": "40px", "width": "40px"}} />
               <div className="flex-1 ms-2">
                 <h5 className="mb-0 fs--1">{name}</h5>
               </div>

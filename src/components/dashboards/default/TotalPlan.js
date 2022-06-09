@@ -1,13 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Card, Tooltip, OverlayTrigger } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import Flex from 'components/common/Flex';
 import { getColor } from 'helpers/utils';
 import * as echarts from 'echarts/core';
 import { BarChart } from 'echarts/charts';
-import Background from 'components/common/Background';
-import bg1 from 'assets/img/icons/spot-illustrations/corner-1.png';
 import {
   GridComponent,
   TooltipComponent,
@@ -67,7 +63,6 @@ const getOptions = data => ({
 const TotalPlan = ({ data, width, amountClassName, data1 }) => {
   return (
     <Card className="h-md-100">
-      {/* <Background image={bg1} className="bg-card" /> */}
       <Card.Header className="pb-0">
         <h6 className="mb-0 mt-2">
           Total Plan
@@ -98,11 +93,5 @@ const TotalPlan = ({ data, width, amountClassName, data1 }) => {
   );
 };
 
-TotalPlan.propTypes = {
-  data: PropTypes.array.isRequired,
-  data1: PropTypes.number.isRequired,
-  width: PropTypes.string,
-  amountClassName: PropTypes.string
-};
 
 export default TotalPlan;

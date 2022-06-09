@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import {  Card, Col, Row, Table as TableModal } from 'react-bootstrap';
+import {  Card, Col, Row } from 'react-bootstrap';
 import AdvanceTable from 'components/common/advance-table/AdvanceTable';
 import AdvanceTableFooter from 'components/common/advance-table/AdvanceTableFooter';
 import AdvanceTableSearchBox from 'components/common/advance-table/AdvanceTableSearchBox';
@@ -9,8 +9,6 @@ import Http from '../../security/Http';
 import url from '../../../Development.json';
 import {
   errorResponse,
-  successResponse,
-  isError,
 } from "../../helpers/response";
 
 
@@ -49,15 +47,15 @@ const AdvanceTableExamples = () => {
       }
     },
     {
-      accessor: 'stateName',
+      accessor: 'state_name',
       Header: 'Name'
     },
     {
-        accessor: 'stateId',
+        accessor: 'state_id',
         Header: 'State Code'
     },
     {
-        accessor: 'CountryName',
+        accessor: 'country_name',
         Header: 'Country Name'
     },
   

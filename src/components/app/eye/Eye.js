@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Form, FormLabel, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
-import { modal } from "bootstrap"
+// import { modal } from "bootstrap"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AdvanceTable from 'components/common/advance-table/AdvanceTable';
 import AdvanceTableFooter from 'components/common/advance-table/AdvanceTableFooter';
@@ -60,8 +60,11 @@ const AdvanceTableExamples = () => {
 
   useEffect(() => {
     getData();
-
   }, []);
+
+  useEffect(() => {
+    isError(errors);
+  });
 
   if (color) {
     setValue("name", color);

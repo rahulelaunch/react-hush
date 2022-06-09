@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Form, FormLabel, Card, Col, Row, Modal, Table as TableModal } from 'react-bootstrap';
-import { modal } from "bootstrap"
+// import { modal } from "bootstrap"
 import { useForm } from "react-hook-form";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AdvanceTable from 'components/common/advance-table/AdvanceTable';
@@ -20,7 +20,7 @@ import {
   successResponse,
   isError,
 } from "../../helpers/response";
-import { Buffer } from "buffer";
+// import { Buffer } from "buffer";
 
 const AdvanceTableExamples = () => {
 
@@ -99,10 +99,8 @@ const AdvanceTableExamples = () => {
 
     Http.callApi(url.image_upload, formData)
       .then(response => {
-
         setFileName(response.data.images);
         setIcon(response.data.images);
-        // setFileName(response.data.image[0]);
       })
       .catch(error => {
         if (error.response) {

@@ -228,7 +228,6 @@ import FalconComponentCard from 'components/common/FalconComponentCard';
 import { chartJsDefaultTooltip } from 'helpers/chartjs-utils';
 import { getColor, rgbaColor } from 'helpers/utils';
 import React from 'react';
-import PropTypes from 'prop-types';
 import { Bar } from 'react-chartjs-2';
 
 const TotalSales = ( {data1} ) =>{
@@ -312,9 +311,7 @@ const TotalSales = ( {data1} ) =>{
     );
   }
 
-  TotalSales.propTypes = { 
-    data1: PropTypes.number.isRequired,
-  };
+
 
 export default TotalSales;
 

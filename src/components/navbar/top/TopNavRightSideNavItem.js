@@ -3,7 +3,6 @@ import { Nav, Tooltip, OverlayTrigger } from 'react-bootstrap';
 import ProfileDropdown from 'components/navbar/top/ProfileDropdown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AppContext from 'context/Context';
-import NineDotMenu from './NineDotMenu';
 
 const TopNavRightSideNavItem = () => {
   const {

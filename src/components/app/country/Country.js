@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Col, Row, Table as TableModal } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import AdvanceTable from 'components/common/advance-table/AdvanceTable';
 import AdvanceTableFooter from 'components/common/advance-table/AdvanceTableFooter';
 import AdvanceTableSearchBox from 'components/common/advance-table/AdvanceTableSearchBox';
-import AdvanceTablePagination from 'components/common/advance-table/AdvanceTablePagination';
+// import AdvanceTablePagination from 'components/common/advance-table/AdvanceTablePagination';
 import AdvanceTableWrapper from 'components/common/advance-table/AdvanceTableWrapper';
 import Http from '../../security/Http';
 import url from '../../../Development.json';
 import dummy from '../../../assets/img/team/User.jpg';
 import {
   errorResponse,
-  successResponse,
-  isError,
-
 } from "../../helpers/response";
 
 
@@ -39,13 +36,9 @@ const AdvanceTableExamples = () => {
 
   useEffect(() => {
     getData();
-
   }, []);
 
-
-
   const columns = [
-
 
     {
       accessor: 'country_name',
@@ -113,7 +106,7 @@ const AdvanceTableExamples = () => {
         return (
           <>
             <div className='d-flex align-items-center'>
-              <img src={(flag) ? "http://192.168.0.172:7005/uploads/flag/"+flag : dummy} className="profile_pic_img" style={{ "height": "32px", "width": "32px", borderRadius: "50%", "borderRadius": "50" }} />
+              <img src={(flag) ? "http://192.168.0.172:7005/uploads/flag/"+flag : dummy} className="rounded-circle" style={{ "height": "32px", "width": "32px"}} />
               <div className="flex-1 ms-2">
                 <h5 className="mb-0 fs--1">{country_name}</h5>
               </div>

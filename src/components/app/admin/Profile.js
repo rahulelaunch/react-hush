@@ -16,6 +16,7 @@ import {Form, Col, FormLabel, Card } from 'react-bootstrap';
 
 
 const PageForm = () => {
+
     const {
         register,
         setValue,
@@ -55,7 +56,6 @@ const PageForm = () => {
             .then((response) => {
                 
                 let data = response.data;
-            
                 setValue("name", data.username);
                 setValue("email", data.email);
                 setIcon(data.profile);

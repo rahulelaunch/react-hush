@@ -3,11 +3,8 @@ import { Row, Col } from 'react-bootstrap';
 import {
   marketShare,
   totalOrder,
-  totalSales,
   weeklySalesData,
-  topProducts,
   weather,
-  products,
 } from 'data/dashboard/default';
 
 import TotalPlan from './TotalPlan';
@@ -16,15 +13,11 @@ import TotalGender from './TotalGender';
 import TotalUserChart from './TotalUserChart';
 import BestSellingProducts from './BestSellingProducts';
 import Weather from './Weather';
-import TopProducts from './TopProducts';
-
 import Http from '../../security/Http';
 import url from '../../../Development.json';
 
 import {
   errorResponse,
-  successResponse,
-  isError,
 } from "../../helpers/response";
 
 const Dashboard = () => {
@@ -98,13 +91,6 @@ const Dashboard = () => {
         <BestSellingProducts products={PlanData} />
         </Col>
       </Row>
-
-      {/* <Row className="g-3 mb-3">
-        <Col lg={9} xl={12}>
-          <BestSellingProducts products={PlanData} />
-        </Col>
-     
-      </Row> */}
     </>
   );
 };

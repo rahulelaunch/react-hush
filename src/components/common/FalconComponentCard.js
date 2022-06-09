@@ -9,27 +9,6 @@ import { useLocation } from 'react-router';
 import { camelize } from '../../helpers/utils';
 import AppContext from 'context/Context';
 
-const PreviewCode = () => {
-  return (
-    <Row>
-      <Col>
-        <Nav variant="pills" className="nav-pills-falcon m-0">
-          <Nav.Item>
-            <Nav.Link as={Button} size="sm" eventKey="preview">
-              Preview
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link as={Button} size="sm" eventKey="code">
-              Code
-            </Nav.Link>
-          </Nav.Item>
-        </Nav>
-      </Col>
-    </Row>
-  );
-};
-
 const FalconComponentCardHeader = ({
   light,
   className,

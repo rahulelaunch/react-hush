@@ -1,17 +1,11 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Badge, Card } from 'react-bootstrap';
 import Flex from 'components/common/Flex';
 import { getColor, rgbaColor } from 'helpers/utils';
 import * as echarts from 'echarts/core';
 import { LineChart } from 'echarts/charts';
-import bg3 from 'assets/img/icons/spot-illustrations/corner-3.png';
-import Background from 'components/common/Background';
 
 import {
-  GridComponent,
-  TooltipComponent,
   TitleComponent
 } from 'echarts/components';
 import { CanvasRenderer } from 'echarts/renderers';
@@ -20,8 +14,6 @@ import { Link } from 'react-router-dom';
 
 echarts.use([
   TitleComponent,
-  TooltipComponent,
-  GridComponent,
   LineChart,
   CanvasRenderer
 ]);
@@ -75,7 +67,6 @@ const getOptions = data => ({
 const TotalUser = ({ data, data1 }) => {
   return (
     <Card className="h-md-100">
-      {/* <Background image={bg3} className="bg-card" /> */}
       <Card.Header className="pb-0">
         <h6 className="mb-0 mt-2">Total Users</h6>
       </Card.Header>
@@ -104,9 +95,5 @@ const TotalUser = ({ data, data1 }) => {
   );
 };
 
-TotalUser.propTypes = {
-  data: PropTypes.array.isRequired,
-  data1: PropTypes.number.isRequired
-};
 
 export default TotalUser;

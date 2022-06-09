@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Badge, Card, Col, Row } from 'react-bootstrap';
 import Flex from 'components/common/Flex';
@@ -69,7 +68,6 @@ const getOptions = (data, radius) => ({
 
 const TotalGender = ({ data1, data, radius }) => {
 
-  const total = data.reduce((acc, val) => val.value + acc, 0);
   return (
     <Card className="h-md-100">
       <Background image={bg3} className="bg-card" />
@@ -123,22 +121,6 @@ const TotalGender = ({ data1, data, radius }) => {
       </Card.Body>
     </Card>
   );
-};
-
-TotalGender.propTypes = {
-  item: PropTypes.shape({
-    name: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
-    value: PropTypes.number.isRequired
-  }),
-  index: PropTypes.number.isRequired,
-  total: PropTypes.number.isRequired
-};
-
-TotalGender.propTypes = {
-  data1: PropTypes.array.isRequired,
-  data: PropTypes.array.isRequired,
-  radius: PropTypes.array.isRequired
 };
 
 export default TotalGender;

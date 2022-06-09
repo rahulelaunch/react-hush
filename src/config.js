@@ -1,5 +1,3 @@
-import { faBullseye } from "@fortawesome/free-solid-svg-icons";
-
 export const version = '3.4.0';
 export const navbarBreakPoint = 'xl'; // Vertical navbar breakpoint
 export const topNavbarBreakpoint = 'lg';

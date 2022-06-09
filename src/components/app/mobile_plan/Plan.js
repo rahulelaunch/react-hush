@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Card, Col, Form, FormLabel, Row, Modal, Table as TableModal, Button } from 'react-bootstrap';
-import { modal } from "bootstrap"
+import { Card, Col, Form, FormLabel, Row, Modal, Button } from 'react-bootstrap';
+// import { modal } from "bootstrap"
 import { Editor } from "@tinymce/tinymce-react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import AdvanceTable from 'components/common/advance-table/AdvanceTable';
@@ -20,7 +20,6 @@ import {
   successResponse,
   isError,
 } from "../../helpers/response";
-import { Link } from 'react-router-dom';
 import SoftBadge from 'components/common/SoftBadge';
 
 
@@ -150,7 +149,7 @@ const AdvanceTableExamples = () => {
                     <h2 className="fw-medium my-4">
                       <sup className="fw-normal fs-2 me-1">$</sup>
                       {data.plan_price}
-                      <small className="fs--1 text-700">/( {data.days == 30 ? month : year}) </small>
+                      <small className="fs--1 text-700">/( {data.days === 30 ? month : year}) </small>
                     </h2>
                     <Button variant='primary'>
                       Get Plan
